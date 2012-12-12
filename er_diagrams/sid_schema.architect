@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<architect-project version="1.0" appversion="1.0.6">
+ <project-name>sid_schema</project-name>
+ <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
+ <project-data-sources>
+  <data-source id="DS0">
+   <property key="Logical" value="PlayPen Database" />
+  </data-source>
+ </project-data-sources>
+ <source-databases>
+ </source-databases>
+ <target-database id="ppdb" dbcs-ref="DS0">
+  <table id="TAB1" populated="true" UUID="e69b72aa-7a49-48d6-9f92-41f511dc5daa" name="sid_users" objectType="TABLE" physicalName="sid_users" >
+   <remarks></remarks>
+   <folder id="FOLTAB11" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL2" populated="true" UUID="b223ae8f-bcfa-410f-9d85-785751b638b4" autoIncrement="false" autoIncrementSequenceName="sid_users_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL3" populated="true" UUID="377f1381-f4ab-4267-8cca-1f2562d6a611" autoIncrement="false" autoIncrementSequenceName="sid_users_baseRoleId_seq" defaultValue="" name="baseRoleId" nullable="0" physicalName="baseRoleId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL4" populated="true" UUID="478c95d4-0bfb-40fe-ac9b-2a02152e4d77" autoIncrement="false" autoIncrementSequenceName="sid_users_userTypeId_seq" defaultValue="" name="userTypeId" nullable="0" physicalName="userTypeId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL5" populated="true" UUID="884cecce-efe4-47ba-8998-b9ef28cf2d5c" autoIncrement="false" autoIncrementSequenceName="sid_users_statusId_seq" defaultValue="" name="statusId" nullable="0" physicalName="statusId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL6" populated="true" UUID="7f780d96-93a8-4701-bdea-1826efc923eb" autoIncrement="false" autoIncrementSequenceName="sid_users_sourceId_seq" defaultValue="" name="sourceId" nullable="0" physicalName="sourceId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL7" populated="true" UUID="cab59efe-0d40-45b3-94dd-136a1aac2c5e" autoIncrement="false" autoIncrementSequenceName="sid_users_iid_seq" defaultValue="" name="iid" nullable="0" physicalName="iid" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL8" populated="true" UUID="21c87a15-bd6f-490c-9a06-3267d5b9bc3c" autoIncrement="false" autoIncrementSequenceName="sid_users_username_seq" defaultValue="" name="username" nullable="0" physicalName="username" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL9" populated="true" UUID="54fe2d96-39d2-49d5-b7cf-8299e6152815" autoIncrement="false" autoIncrementSequenceName="sid_users_firstName_seq" defaultValue="" name="firstName" nullable="0" physicalName="firstName" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL10" populated="true" UUID="7ce567d5-8d27-4724-9d22-d557e09ad2ef" autoIncrement="false" autoIncrementSequenceName="sid_users_lastName_seq" defaultValue="" name="lastName" nullable="0" physicalName="lastName" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL11" populated="true" UUID="5b921f0b-2106-42c2-ac33-ada508fdc83b" autoIncrement="false" autoIncrementSequenceName="sid_users_affiliation_seq" defaultValue="" name="affiliation" nullable="0" physicalName="affiliation" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL12" populated="true" UUID="bbcc58f6-d205-4864-b3f7-6b29a696ee49" autoIncrement="false" autoIncrementSequenceName="sid_users_password_seq" defaultValue="" name="password" nullable="1" physicalName="password" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL13" populated="true" UUID="461cf32e-8868-4ab6-b644-4ff94d104853" autoIncrement="false" autoIncrementSequenceName="sid_users_multiLdap_seq" defaultValue="" name="multiLdap" nullable="0" physicalName="multiLdap" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL14" populated="true" UUID="e9ccb101-8e2a-4e3d-873b-7cbca710a09b" autoIncrement="false" autoIncrementSequenceName="sid_users_lockId_seq" defaultValue="" name="lockId" nullable="0" physicalName="lockId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL15" populated="true" UUID="f69ac2e7-8a4e-477b-aa88-7621cfbc8506" autoIncrement="false" autoIncrementSequenceName="sid_users_owner_seq" defaultValue="" name="owner" nullable="1" physicalName="owner" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL16" populated="true" UUID="faef43bf-31f9-4b50-aa9c-18b125a75808" autoIncrement="false" autoIncrementSequenceName="sid_users_emplid_seq" defaultValue="" name="emplid" nullable="0" physicalName="emplid" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL17" populated="true" UUID="7936d5f3-1ada-4be8-8186-823d3fee0680" autoIncrement="false" autoIncrementSequenceName="sid_users_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL18" populated="true" UUID="de1329a1-cead-4564-a954-4e4a32f92b0b" autoIncrement="false" autoIncrementSequenceName="sid_users_modifyDate_seq" defaultValue="" name="modifyDate" nullable="1" physicalName="modifyDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL19" populated="true" UUID="e883af96-02d5-4be2-b369-e1752f95d481" autoIncrement="false" autoIncrementSequenceName="sid_users_userType_seq" defaultValue="" name="userType" nullable="0" physicalName="userType" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL20" populated="true" UUID="bded3028-6645-4434-ba4c-13556540e549" autoIncrement="false" autoIncrementSequenceName="sid_users_middleName_seq" defaultValue="" name="middleName" nullable="1" physicalName="middleName" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL21" populated="true" UUID="da136826-72dc-4dd1-b996-36f08e3bf409" autoIncrement="false" autoIncrementSequenceName="sid_users_namePrefix_seq" defaultValue="" name="namePrefix" nullable="1" physicalName="namePrefix" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL22" populated="true" UUID="b32ab93e-0a20-4a62-9995-39f27205a44e" autoIncrement="false" autoIncrementSequenceName="sid_users_nameSuffix_seq" defaultValue="" name="nameSuffix" nullable="1" physicalName="nameSuffix" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL23" populated="true" UUID="c2d0b866-5e65-4007-8039-16bd0f014bb2" autoIncrement="false" autoIncrementSequenceName="sid_users_displayName_seq" defaultValue="" name="displayName" nullable="0" physicalName="displayName" precision="2000" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB13" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB12" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB14" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX24" populated="true" UUID="afc99fde-4afb-4c4c-b12f-b17afd7c8823" clustered="false" name="sid_users_pk" physicalName="sid_users_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC25" populated="true" UUID="3687a569-01f8-400f-9585-7e137cf0b4ae" ascendingOrDescending="UNSPECIFIED" column-ref="COL2" name="id" physicalName="id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB26" populated="true" UUID="57034298-c26e-4c7f-b9e6-92e8671f7dbc" name="OSU_DEPARTMENT" objectType="TABLE" physicalName="OSU_DEPARTMENT" >
+   <remarks></remarks>
+   <folder id="FOLTAB261" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL27" populated="true" UUID="e5c15123-4e09-46e6-9b80-da0a4e4de63a" autoIncrement="false" autoIncrementSequenceName="OSU_DEPARTMENT_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL28" populated="true" UUID="58814e89-fe26-4575-b675-310aba6ef0a5" autoIncrement="false" autoIncrementSequenceName="OSU_DEPARTMENT_abbreviation_seq" defaultValue="" name="abbreviation" nullable="0" physicalName="abbreviation" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL29" populated="true" UUID="193ddfa9-2ad8-4715-9ce8-2ff7de9cf170" autoIncrement="false" autoIncrementSequenceName="OSU_DEPARTMENT_odsDepartmentNumber_seq" defaultValue="" name="odsDepartmentNumber" nullable="0" physicalName="odsDepartmentNumber" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL30" populated="true" UUID="8596ba35-775f-4db8-81dd-b654b51c5052" autoIncrement="false" autoIncrementSequenceName="OSU_DEPARTMENT_fiscalNumber_seq" defaultValue="" name="fiscalNumber" nullable="1" physicalName="fiscalNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL31" populated="true" UUID="dc69575d-4deb-40bb-98fe-c446bee749db" autoIncrement="false" autoIncrementSequenceName="OSU_DEPARTMENT_Defunct_seq" defaultValue="" name="Defunct" nullable="0" physicalName="Defunct" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB263" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB262" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB264" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX32" populated="true" UUID="826228c2-b3f8-4d0a-922d-b9c765d11024" clustered="false" name="OSU_DEPARTMENT_PK" physicalName="osu_department_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC33" populated="true" UUID="699b6819-040e-4f22-945d-666ebe6b212d" ascendingOrDescending="UNSPECIFIED" column-ref="COL27" name="id" physicalName="id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB34" populated="true" UUID="7e6b1207-99fb-4ce2-954d-5e2e65d3abaf" name="PS_BLDG_TBL" objectType="TABLE" physicalName="PS_BLDG_TBL" >
+   <remarks></remarks>
+   <folder id="FOLTAB341" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL35" populated="true" UUID="bab00979-e828-4798-9f19-d82191fbb771" autoIncrement="false" autoIncrementSequenceName="PS_BLDG_TBL_BLDG_CD_seq" defaultValue="" name="BLDG_CD" nullable="0" physicalName="BLDG_CD" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL36" populated="true" UUID="cbc70d55-2a91-4b68-911b-b0a0ab78d0aa" autoIncrement="false" autoIncrementSequenceName="PS_BLDG_TBL_EFFDT_seq" defaultValue="" name="EFFDT" nullable="0" physicalName="EFFDT" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL37" populated="true" UUID="5ebcdeab-be1a-4372-a28a-3ece007deb4f" autoIncrement="false" autoIncrementSequenceName="PS_BLDG_TBL_EFF_STATUS_seq" defaultValue="" name="EFF_STATUS" nullable="0" physicalName="EFF_STATUS" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL38" populated="true" UUID="41603928-99c7-4900-b8f1-b6c7be484207" autoIncrement="false" autoIncrementSequenceName="PS_BLDG_TBL_DESCR_seq" defaultValue="" name="DESCR" nullable="0" physicalName="DESCR" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL39" populated="true" UUID="d270d28c-9e4d-427c-b400-5a131d768e7c" autoIncrement="false" autoIncrementSequenceName="PS_BLDG_TBL_DESCRSHORT_seq" defaultValue="" name="DESCRSHORT" nullable="0" physicalName="DESCRSHORT" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB343" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB342" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB344" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX40" populated="true" UUID="44f23716-8c47-4c73-bc68-8431de3fb9c4" clustered="false" name="PS_BLDG_TBL_PK" physicalName="PS_BLDG_TBL_PK" primaryKeyIndex="true" unique="false" >
+    </index>
+   </folder>
+  </table>
+  <table id="TAB41" populated="true" UUID="da122142-98d2-4e98-b048-c61318e470d3" name="OSU_COURSE" objectType="TABLE" physicalName="OSU_COURSE" >
+   <remarks></remarks>
+   <folder id="FOLTAB411" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL42" populated="true" UUID="c9d20c7f-21af-4ca6-8af8-2f1745feede7" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL43" populated="true" UUID="cfcefb79-6860-4d56-9f30-6df67894ad82" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_departmentNumber_seq" defaultValue="" name="departmentNumber" nullable="0" physicalName="departmentNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL44" populated="true" UUID="e8718f48-1326-4f2d-8418-d7e4ca742b77" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_courseNumber_seq" defaultValue="" name="courseNumber" nullable="0" physicalName="courseNumber" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL45" populated="true" UUID="c8a35feb-d07a-4777-b37a-96ee773ebadf" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_yearQuarterCode_seq" defaultValue="" name="yearQuarterCode" nullable="0" physicalName="yearQuarterCode" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL46" populated="true" UUID="2165f4b9-4b2d-4dbb-8b4d-97047162c332" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_path_seq" defaultValue="" name="path" nullable="0" physicalName="path" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL47" populated="true" UUID="93a56f07-390a-4cb8-9fed-3ca891d0692d" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_descr_seq" defaultValue="" name="descr" nullable="1" physicalName="descr" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL48" populated="true" UUID="0578f6bf-ae1d-4b84-9b69-7f461ed674f7" autoIncrement="false" autoIncrementSequenceName="OSU_COURSE_course_title_long_seq" defaultValue="" name="course_title_long" nullable="1" physicalName="course_title_long" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB413" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB412" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB414" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX49" populated="true" UUID="29a99125-036d-45a3-927c-3659792d7e0b" clustered="false" name="OSU_COURSE_PK" physicalName="osu_course_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC50" populated="true" UUID="edaac50f-7e02-4fe7-9127-950568e8d3a6" ascendingOrDescending="UNSPECIFIED" column-ref="COL42" name="id" physicalName="id" />
+    </index>
+    <index id="IDX51" populated="true" UUID="342a9f60-ccdb-4fe1-9444-8e455714172c" clustered="false" name="OSU_COURSE_altkey_idx" physicalName="osu_course_altkey_idx" primaryKeyIndex="false" unique="false" >
+     <index-column id="IDC52" populated="true" UUID="08701373-81b1-411c-b414-979e86528e6f" ascendingOrDescending="UNSPECIFIED" column-ref="COL43" name="departmentNumber" physicalName="departmentNumber" />
+     <index-column id="IDC53" populated="true" UUID="9b83aa4c-6810-4f84-9d74-a5d76749c698" ascendingOrDescending="UNSPECIFIED" column-ref="COL44" name="courseNumber" physicalName="courseNumber" />
+     <index-column id="IDC54" populated="true" UUID="9fbad187-cc5d-4af0-9522-c119dea3591f" ascendingOrDescending="UNSPECIFIED" column-ref="COL45" name="yearQuarterCode" physicalName="yearQuarterCode" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB55" populated="true" UUID="51d1dd2d-1cca-4ea2-b508-a546784dd7ab" name="OSU_UNIT_ENROLLMENT" objectType="TABLE" physicalName="OSU_UNIT_ENROLLMENT" >
+   <remarks></remarks>
+   <folder id="FOLTAB551" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL56" populated="true" UUID="3295697c-f930-47df-b565-b7b5e4692a80" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_userId_seq" defaultValue="" name="userId" nullable="0" physicalName="userId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL57" populated="true" UUID="3464c95a-319f-46e0-aec7-065f6fbd91a4" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_yearQuarterCode_seq" defaultValue="" name="yearQuarterCode" nullable="1" physicalName="yearQuarterCode" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL58" populated="true" UUID="7c02353f-3cc2-43cb-b6eb-bc82a26a4101" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_callNumber_seq" defaultValue="" name="callNumber" nullable="1" physicalName="callNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL59" populated="true" UUID="103f8d61-7496-4a88-9c93-b967a7ef0412" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_campusId_seq" defaultValue="" name="campusId" nullable="1" physicalName="campusId" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL60" populated="true" UUID="5f4f27e3-1968-4513-86fe-a2fead01e14c" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_departmentNumber_seq" defaultValue="" name="departmentNumber" nullable="1" physicalName="departmentNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL61" populated="true" UUID="e5856067-a20b-4ccd-8d5d-955e6b747458" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_courseNumber_seq" defaultValue="" name="courseNumber" nullable="1" physicalName="courseNumber" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL62" populated="true" UUID="73f77ab0-0432-43c6-ba4f-376876740ca5" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_session_code_seq" defaultValue="" name="session_code" nullable="1" physicalName="session_code" precision="3" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL63" populated="true" UUID="7c08e041-be04-4553-b012-86b063126b78" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_acad_group_seq" defaultValue="" name="acad_group" nullable="1" physicalName="acad_group" precision="5" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL64" populated="true" UUID="19e1ada8-ddb3-40f8-9239-e5db64113adf" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_acad_org_seq" defaultValue="" name="acad_org" nullable="1" physicalName="acad_org" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL65" populated="true" UUID="52c80b8d-4b30-43a2-8dc0-4982aacbaab6" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_emplid_seq" defaultValue="" name="emplid" nullable="1" physicalName="emplid" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL66" populated="true" UUID="5de5b8f5-2d0e-4972-8dcc-de643dc478fd" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ENROLLMENT_instr_role_seq" defaultValue="" name="instr_role" nullable="1" physicalName="instr_role" precision="4" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB553" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB552" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB554" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX67" populated="true" UUID="0468d9d1-77e0-45cc-91c8-b8041d018276" clustered="false" name="OSU_UNIT_ENROLLMENT_PK" physicalName="osu_unit_enrollment_pk" primaryKeyIndex="true" unique="false" >
+    </index>
+    <index id="IDX68" populated="true" UUID="6e975c74-9a77-4dde-bd08-c67216c153bf" clustered="false" name="OSU_UNIT_ENROLLMENT_sect_idx" physicalName="osu_unit_enrollment_sect_idx" primaryKeyIndex="false" unique="false" >
+     <index-column id="IDC69" populated="true" UUID="3eef207d-37cd-4fd3-8c8a-c4823c217353" ascendingOrDescending="UNSPECIFIED" column-ref="COL57" name="yearQuarterCode" physicalName="yearQuarterCode" />
+     <index-column id="IDC70" populated="true" UUID="52e883c1-5eca-4402-8d51-dba54935ed3e" ascendingOrDescending="UNSPECIFIED" column-ref="COL58" name="callNumber" physicalName="callNumber" />
+     <index-column id="IDC71" populated="true" UUID="34dc0bdb-af68-4182-b1a9-c11dda625f62" ascendingOrDescending="UNSPECIFIED" column-ref="COL59" name="campusId" physicalName="campusId" />
+     <index-column id="IDC72" populated="true" UUID="3a4f264b-d1dd-469d-95e9-24bb75d0305a" ascendingOrDescending="UNSPECIFIED" column-ref="COL60" name="departmentNumber" physicalName="departmentNumber" />
+     <index-column id="IDC73" populated="true" UUID="edbce867-a03b-4536-aea8-4a3c5ff2f927" ascendingOrDescending="UNSPECIFIED" column-ref="COL61" name="courseNumber" physicalName="courseNumber" />
+     <index-column id="IDC74" populated="true" UUID="9537d922-847e-48d7-9856-8b7ce3f94cf6" ascendingOrDescending="UNSPECIFIED" column-ref="COL62" name="session_code" physicalName="session_code" />
+     <index-column id="IDC75" populated="true" UUID="bb767438-68fb-496d-ad4b-b00c231aea7c" ascendingOrDescending="UNSPECIFIED" column-ref="COL63" name="acad_group" physicalName="acad_group" />
+     <index-column id="IDC76" populated="true" UUID="9addbecd-6fdf-4e59-94d6-742759e50740" ascendingOrDescending="UNSPECIFIED" column-ref="COL64" name="acad_org" physicalName="acad_org" />
+     <index-column id="IDC77" populated="true" UUID="f3f8cc98-a373-484d-b549-48c4a5d1ad65" ascendingOrDescending="UNSPECIFIED" column-ref="COL65" name="emplid" physicalName="emplid" />
+     <index-column id="IDC78" populated="true" UUID="5eae65e4-9170-4280-ad78-916d1ee95777" ascendingOrDescending="UNSPECIFIED" column-ref="COL66" name="instr_role" physicalName="instr_role" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB79" populated="true" UUID="e0413669-85d8-41a4-b664-b0fd29a14139" name="OSU_OFFERING" objectType="TABLE" physicalName="OSU_OFFERING" >
+   <remarks></remarks>
+   <folder id="FOLTAB791" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL80" populated="true" UUID="ed08d282-6880-4dc7-b532-d059f8cc34d0" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_yearQuarterCode_seq" defaultValue="" name="yearQuarterCode" nullable="0" physicalName="yearQuarterCode" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL81" populated="true" UUID="4efe3d3f-ebb6-40f0-8446-d8cb36903729" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_campusId_seq" defaultValue="" name="campusId" nullable="0" physicalName="campusId" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL82" populated="true" UUID="5881dc1e-f0c5-4baf-b57a-96bb975e9984" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_courseNumber_seq" defaultValue="" name="courseNumber" nullable="0" physicalName="courseNumber" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL83" populated="true" UUID="755a46ad-47ef-48c3-818e-f41a9eca92b4" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_departmentNumber_seq" defaultValue="" name="departmentNumber" nullable="0" physicalName="departmentNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL84" populated="true" UUID="26ca14fc-8dd1-4dc5-afe0-f45ba54606e1" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_session_code_seq" defaultValue="" name="session_code" nullable="1" physicalName="session_code" precision="3" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL85" populated="true" UUID="d6e07980-d106-47be-afaa-3fce3633d8ba" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_acad_group_seq" defaultValue="" name="acad_group" nullable="1" physicalName="acad_group" precision="5" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL86" populated="true" UUID="c3197d15-6ec9-444e-a9e7-c05beaee6e1e" autoIncrement="false" autoIncrementSequenceName="OSU_OFFERING_acad_org_seq" defaultValue="" name="acad_org" nullable="1" physicalName="acad_org" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB793" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB792" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB794" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX87" populated="true" UUID="494e924c-efa6-4e4c-b1f5-77af97fe708c" clustered="false" name="OSU_OFFERING_PK" physicalName="osu_offering_pk" primaryKeyIndex="true" unique="false" >
+    </index>
+   </folder>
+  </table>
+  <table id="TAB88" populated="true" UUID="8ed80ff8-c584-4d7b-ba54-f7ba5e70bac6" name="OSU_TERM_CODE" objectType="TABLE" physicalName="OSU_TERM_CODE" >
+   <remarks></remarks>
+   <folder id="FOLTAB881" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL89" populated="true" UUID="54c82667-d08c-4233-9913-36d250ef2900" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_termCode_seq" defaultValue="" name="termCode" nullable="0" physicalName="termCode" precision="50" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL90" populated="true" UUID="5288a00a-fd91-4684-a0d4-d5050a2bf562" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_unitClassificationId_seq" defaultValue="" name="unitClassificationId" nullable="0" physicalName="unitClassificationId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL91" populated="true" UUID="92c3c48f-1715-4de1-aac4-0404002ab88a" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_cmsUnitCode_seq" defaultValue="" name="cmsUnitCode" nullable="0" physicalName="cmsUnitCode" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL92" populated="true" UUID="deaf9773-3438-4164-8079-a3c10967e8aa" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_shortTitle_seq" defaultValue="" name="shortTitle" nullable="0" physicalName="shortTitle" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL93" populated="true" UUID="a72f1e7e-987e-44b3-9284-f89c00d0f215" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_description_seq" defaultValue="" name="description" nullable="1" physicalName="description" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL94" populated="true" UUID="014875bd-9769-454c-a5e3-1819adf3f4a8" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_active_seq" defaultValue="" name="active" nullable="0" physicalName="active" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL95" populated="true" UUID="b23be2b2-d5e9-4e93-aeb3-b3de03eaeac6" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL96" populated="true" UUID="b2b27d32-2477-4373-8642-bbd3a2a94078" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_modifyDate_seq" defaultValue="" name="modifyDate" nullable="1" physicalName="modifyDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL97" populated="true" UUID="0678e5fb-c6de-4226-8637-4c157f8e8638" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_startDate_seq" defaultValue="" name="startDate" nullable="1" physicalName="startDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL98" populated="true" UUID="bf10dcbc-eeee-4a9a-9118-638760f1ea12" autoIncrement="false" autoIncrementSequenceName="OSU_TERM_CODE_endDate_seq" defaultValue="" name="endDate" nullable="1" physicalName="endDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB883" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB882" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB884" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX99" populated="true" UUID="f4159c93-5a7b-4087-a42e-1b24ed6c95f0" clustered="false" name="OSU_TERM_CODE_PK" physicalName="osu_term_code_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC100" populated="true" UUID="54b2cd3b-754e-4f5d-8ae5-aa27179e6bf2" ascendingOrDescending="UNSPECIFIED" column-ref="COL89" name="termCode" physicalName="termCode" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB101" populated="true" UUID="34d5af0a-8976-4b51-8b42-06eedad99060" name="OSU_SECTION" objectType="TABLE" physicalName="OSU_SECTION" >
+   <remarks></remarks>
+   <folder id="FOLTAB1011" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL102" populated="true" UUID="84492444-7543-4af3-a4fd-65fb8b0ba761" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_yearQuarterCode_seq" defaultValue="" name="yearQuarterCode" nullable="0" physicalName="yearQuarterCode" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL103" populated="true" UUID="fef2dfe6-b83a-4db2-ab00-326678b69d5a" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_checkDigit_seq" defaultValue="" name="checkDigit" nullable="0" physicalName="checkDigit" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    <column id="COL104" populated="true" UUID="c6a6cf9d-de8f-405b-9d4c-2fd826463d71" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_callNumber_seq" defaultValue="" name="callNumber" nullable="0" physicalName="callNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL105" populated="true" UUID="e5318eb0-3441-4aae-9c11-35a94b637825" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_gradeAuthority_seq" defaultValue="" name="gradeAuthority" nullable="0" physicalName="gradeAuthority" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL106" populated="true" UUID="0f6e7ac8-4286-4beb-8578-ef21323518f1" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_instructor_seq" defaultValue="" name="instructor" nullable="1" physicalName="instructor" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL107" populated="true" UUID="56f9c8e8-0aad-455b-9352-4ef4a21e1373" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_building_seq" defaultValue="" name="building" nullable="1" physicalName="building" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL108" populated="true" UUID="ccc507af-2a4d-4962-8e7f-608a0fbea249" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_room_seq" defaultValue="" name="room" nullable="1" physicalName="room" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL109" populated="true" UUID="568fad89-c3db-4757-9c86-7c51a9b8a042" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_startTime_seq" defaultValue="" name="startTime" nullable="1" physicalName="startTime" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL110" populated="true" UUID="89892213-642d-4c6b-981e-90b8219c7017" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_endTime_seq" defaultValue="" name="endTime" nullable="1" physicalName="endTime" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL111" populated="true" UUID="c36db8eb-587d-4b3d-a2cc-16fe0cd3204b" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_offeringYearQuarterCode_seq" defaultValue="" name="offeringYearQuarterCode" nullable="1" physicalName="offeringYearQuarterCode" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL112" populated="true" UUID="426cf6f7-5a5d-4b9b-aefe-0c3dceea1e30" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_offeringCallNumber_seq" defaultValue="" name="offeringCallNumber" nullable="1" physicalName="offeringCallNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL113" populated="true" UUID="2aea1a01-e29d-4649-9f8c-0039a686f6ae" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_campusId_seq" defaultValue="" name="campusId" nullable="1" physicalName="campusId" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL114" populated="true" UUID="99f5c420-8c5b-493a-8558-74ce1b7e578a" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_departmentNumber_seq" defaultValue="" name="departmentNumber" nullable="1" physicalName="departmentNumber" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL115" populated="true" UUID="74e968a8-d03f-4954-9494-003e9603bb47" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_courseNumber_seq" defaultValue="" name="courseNumber" nullable="1" physicalName="courseNumber" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL116" populated="true" UUID="8d4f59d8-0e7a-48a9-bbc6-d25b3f5e2e18" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_session_code_seq" defaultValue="" name="session_code" nullable="1" physicalName="session_code" precision="3" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL117" populated="true" UUID="bae4fb78-5fb8-40fd-bb99-7acaf3ba36be" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_acad_group_seq" defaultValue="" name="acad_group" nullable="1" physicalName="acad_group" precision="5" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL118" populated="true" UUID="1cbb8a12-537e-43b4-ab6e-2a28b5178d26" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_acad_org_seq" defaultValue="" name="acad_org" nullable="1" physicalName="acad_org" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL119" populated="true" UUID="63cbf51c-2344-4730-b07d-7aefd1ef4971" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_mon_seq" defaultValue="" name="mon" nullable="1" physicalName="mon" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL120" populated="true" UUID="ad5abad5-d17b-4251-87e4-5e9632277eec" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_tues_seq" defaultValue="" name="tues" nullable="1" physicalName="tues" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL121" populated="true" UUID="560bedfe-7350-49cb-b8ab-5bc808a9f113" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_wed_seq" defaultValue="" name="wed" nullable="1" physicalName="wed" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL122" populated="true" UUID="8293a18f-c722-431b-98ba-0caadf70778a" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_thurs_seq" defaultValue="" name="thurs" nullable="1" physicalName="thurs" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL123" populated="true" UUID="0afacbe0-7916-4a53-8c36-37beac42004f" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_fri_seq" defaultValue="" name="fri" nullable="1" physicalName="fri" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL124" populated="true" UUID="742021b4-3d78-4260-9994-1364fb998d6c" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_sat_seq" defaultValue="" name="sat" nullable="1" physicalName="sat" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL125" populated="true" UUID="b964a1f9-e875-44ab-80c3-7c4cd2f98452" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_sun_seq" defaultValue="" name="sun" nullable="1" physicalName="sun" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL126" populated="true" UUID="5fb2d5c5-5b82-41c0-995d-c709bf71a596" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_start_dt_seq" defaultValue="" name="start_dt" nullable="1" physicalName="start_dt" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL127" populated="true" UUID="16ff6666-22d9-483c-a3a8-75624c623674" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_end_dt_seq" defaultValue="" name="end_dt" nullable="1" physicalName="end_dt" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL128" populated="true" UUID="28fe501b-02e5-4f6e-b20c-d32f9f569039" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_meeting_time_start_seq" defaultValue="" name="meeting_time_start" nullable="1" physicalName="meeting_time_start" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL129" populated="true" UUID="233d052f-cc91-4b12-8cd8-fd8640eed989" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_meeting_time_end_seq" defaultValue="" name="meeting_time_end" nullable="1" physicalName="meeting_time_end" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL130" populated="true" UUID="d0f62287-daaf-41b1-a512-2e45da6bf992" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_facility_id_seq" defaultValue="" name="facility_id" nullable="1" physicalName="facility_id" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL131" populated="true" UUID="b2a42fc3-6eea-4cc5-99ec-5be27c3b9ee4" autoIncrement="false" autoIncrementSequenceName="OSU_SECTION_mtg_pat_crse_id_seq" defaultValue="" name="mtg_pat_crse_id" nullable="1" physicalName="mtg_pat_crse_id" precision="6" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks>If this is null then there is no meeting pattern.</remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1013" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1012" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1014" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX132" populated="true" UUID="5464ca24-bcaa-4bd3-b5a0-9c5a5102294b" clustered="false" name="OSU_SECTION_PK" physicalName="osu_section_pk" primaryKeyIndex="true" unique="false" >
+    </index>
+    <index id="IDX133" populated="true" UUID="b1a74e78-45ab-4ac1-8110-9add91674e49" clustered="false" name="OSU_SECTION_altkey1_idx" physicalName="osu_section_altkey1_idx" primaryKeyIndex="false" unique="false" >
+     <index-column id="IDC134" populated="true" UUID="7a97a0b1-f132-4fec-a8b6-42b75857c6a7" ascendingOrDescending="UNSPECIFIED" column-ref="COL102" name="yearQuarterCode" physicalName="yearQuarterCode" />
+     <index-column id="IDC135" populated="true" UUID="9b6ee5d7-f2cd-46f5-b478-8a449d852756" ascendingOrDescending="UNSPECIFIED" column-ref="COL104" name="callNumber" physicalName="callNumber" />
+     <index-column id="IDC136" populated="true" UUID="61d00b7b-bc86-4923-9d3c-b6622f575635" ascendingOrDescending="UNSPECIFIED" column-ref="COL113" name="campusId" physicalName="campusId" />
+     <index-column id="IDC137" populated="true" UUID="d9a13523-24f8-478e-94d0-083d99316134" ascendingOrDescending="UNSPECIFIED" column-ref="COL114" name="departmentNumber" physicalName="departmentNumber" />
+     <index-column id="IDC138" populated="true" UUID="b384ac31-53bb-4930-a581-a263c7e3a6ad" ascendingOrDescending="UNSPECIFIED" column-ref="COL115" name="courseNumber" physicalName="courseNumber" />
+     <index-column id="IDC139" populated="true" UUID="e968035d-1267-41ed-8b70-5dd583c30bd3" ascendingOrDescending="UNSPECIFIED" column-ref="COL116" name="session_code" physicalName="session_code" />
+     <index-column id="IDC140" populated="true" UUID="023f696d-728f-4a60-99e4-ad24aae1b82e" ascendingOrDescending="UNSPECIFIED" column-ref="COL117" name="acad_group" physicalName="acad_group" />
+     <index-column id="IDC141" populated="true" UUID="b5f7b6b9-04a5-4651-9e21-5a5334510290" ascendingOrDescending="UNSPECIFIED" column-ref="COL118" name="acad_org" physicalName="acad_org" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB142" populated="true" UUID="4d6ec33b-a9fe-48d7-923b-d5c71539eaa1" name="OSU_USER_ROLE" objectType="TABLE" physicalName="OSU_USER_ROLE" >
+   <remarks></remarks>
+   <folder id="FOLTAB1421" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL143" populated="true" UUID="70a1530b-b8b3-4d4d-a64e-b6206272e6ab" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL144" populated="true" UUID="f3fdf76a-1eb3-4ad8-bfa3-52759cef25c9" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_targetSystemId_seq" defaultValue="" name="targetSystemId" nullable="0" physicalName="targetSystemId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL145" populated="true" UUID="4ed16503-1401-4c85-b7b0-efbca462df2f" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_roleName_seq" defaultValue="" name="roleName" nullable="0" physicalName="roleName" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL146" populated="true" UUID="3fa1db52-6268-40ce-b457-dc1d45e4b07d" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_externalSystemRoleId_seq" defaultValue="" name="externalSystemRoleId" nullable="1" physicalName="externalSystemRoleId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL147" populated="true" UUID="4b8942b8-9aaa-40a3-9524-5a9080b0f6f8" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_defaultRole_seq" defaultValue="" name="defaultRole" nullable="0" physicalName="defaultRole" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL148" populated="true" UUID="edfcc874-471d-4277-8590-9f90c361d3d9" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_canEnroll_seq" defaultValue="" name="canEnroll" nullable="0" physicalName="canEnroll" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL149" populated="true" UUID="360bee64-bb04-425f-9c43-5a3feb519590" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL150" populated="true" UUID="7b475ea0-02b7-4b62-a0bf-b37f25f0fab7" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_modifyDate_seq" defaultValue="" name="modifyDate" nullable="1" physicalName="modifyDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL151" populated="true" UUID="5720e11e-9233-4231-b86c-443351701ccb" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_rank_seq" defaultValue="" name="rank" nullable="1" physicalName="rank" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL152" populated="true" UUID="47a229cf-e902-466a-9ee8-2af43d25f67c" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_sourceRoleName_seq" defaultValue="" name="sourceRoleName" nullable="1" physicalName="sourceRoleName" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL153" populated="true" UUID="7f5736ef-3f5c-46df-a543-f8e6d9d08663" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_sourceId_seq" defaultValue="" name="sourceId" nullable="1" physicalName="sourceId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL154" populated="true" UUID="16a4aff2-bd14-467e-bff9-e8129ba932b2" autoIncrement="false" autoIncrementSequenceName="OSU_USER_ROLE_targetSystemRoleValue_seq" defaultValue="" name="targetSystemRoleValue" nullable="1" physicalName="targetSystemRoleValue" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1423" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1422" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1424" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX155" populated="true" UUID="9a748e92-d69d-4519-8dd8-fe3e89027d53" clustered="false" name="OSU_USER_ROLE_PK" physicalName="osu_user_role_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC156" populated="true" UUID="fddc901a-2359-4347-b7a2-591ffe1eed50" ascendingOrDescending="UNSPECIFIED" column-ref="COL143" name="id" physicalName="id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB157" populated="true" UUID="332dfffd-bd8e-4f96-b932-ab554283178d" name="OSU_UNIT" objectType="TABLE" physicalName="OSU_UNIT" >
+   <remarks></remarks>
+   <folder id="FOLTAB1571" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL158" populated="true" UUID="c45946db-ca46-4e29-adce-0ae5af4be9d3" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL159" populated="true" UUID="bfb6d501-3fac-4a29-a96b-080aa941144a" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_unitTypeId_seq" defaultValue="" name="unitTypeId" nullable="0" physicalName="unitTypeId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL160" populated="true" UUID="0ea1e750-8899-440a-aa8b-43847582e493" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_sourceId_seq" defaultValue="" name="sourceId" nullable="0" physicalName="sourceId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL161" populated="true" UUID="b6383844-e0ae-4bd7-adf1-e6b252476781" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_statusId_seq" defaultValue="" name="statusId" nullable="0" physicalName="statusId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL162" populated="true" UUID="3502e204-7fba-4d47-ac0e-0ab7d8568daf" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_unitClassificationId_seq" defaultValue="" name="unitClassificationId" nullable="1" physicalName="unitClassificationId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL163" populated="true" UUID="38a03dd0-9f32-4baa-a65b-8f29a2de608b" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_sourceSystemKeys_seq" defaultValue="" name="sourceSystemKeys" nullable="0" physicalName="sourceSystemKeys" precision="800" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL164" populated="true" UUID="a8d60628-cbff-4a7b-ba1b-9328f86d58f9" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_shortTitle_seq" defaultValue="" name="shortTitle" nullable="1" physicalName="shortTitle" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL165" populated="true" UUID="c2e4d107-dc69-4000-95b9-d052120cb340" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_longTitle_seq" defaultValue="" name="longTitle" nullable="0" physicalName="longTitle" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL166" populated="true" UUID="651f82f2-1d10-4181-80d4-54ec30d1d165" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_description_seq" defaultValue="" name="description" nullable="1" physicalName="description" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL167" populated="true" UUID="16b6d77b-c6e6-46f2-bd05-4d1a946c1c03" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_cmsUnitCode_seq" defaultValue="" name="cmsUnitCode" nullable="0" physicalName="cmsUnitCode" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL168" populated="true" UUID="949f3610-3007-4996-9e46-a91f30f75ae2" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_lockId_seq" defaultValue="" name="lockId" nullable="0" physicalName="lockId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="5" userDefinedTypeUUID="69fb547f-e14c-4748-9746-4c0e9e94eb52" >
+     <remarks></remarks>
+    </column>
+    <column id="COL169" populated="true" UUID="6ab6d708-8221-4d1f-89ee-ad677a046f92" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL170" populated="true" UUID="93b5ead0-1a86-42af-9259-6b98b5edf363" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_modifyDate_seq" defaultValue="" name="modifyDate" nullable="1" physicalName="modifyDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1573" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1572" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1574" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX171" populated="true" UUID="df78a429-586b-4510-bc8d-dfa87a381f96" clustered="false" name="OSU_UNIT_PK" physicalName="osu_unit_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC172" populated="true" UUID="0386f0e5-5088-42ba-9ac2-2df568efc972" ascendingOrDescending="UNSPECIFIED" column-ref="COL158" name="id" physicalName="id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB173" populated="true" UUID="b0ddccb1-44a8-439f-857a-ba7074c96d0b" name="OSU_UNIT_ASSOCIATION" objectType="TABLE" physicalName="OSU_UNIT_ASSOCIATION" >
+   <remarks></remarks>
+   <folder id="FOLTAB1731" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL174" populated="true" UUID="cf076dcf-61d8-41dc-8157-4a00bab6fade" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL175" populated="true" UUID="7be60e72-38d6-4dee-bdf5-6f4476dc5758" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_associationTypeId_seq" defaultValue="" name="associationTypeId" nullable="0" physicalName="associationTypeId" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL176" populated="true" UUID="3aa215bb-5902-4593-ac1a-e047c7431f73" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_parentUnitId_seq" defaultValue="" name="parentUnitId" nullable="0" physicalName="parentUnitId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL177" populated="true" UUID="0d7335b6-10b7-4f4e-9b87-90e0bce2e4f2" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_childUnitId_seq" defaultValue="" name="childUnitId" nullable="0" physicalName="childUnitId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL178" populated="true" UUID="7fcb7bc0-984a-40b0-9928-d2cc83e2d593" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_parentUnitTypeId_seq" defaultValue="" name="parentUnitTypeId" nullable="0" physicalName="parentUnitTypeId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL179" populated="true" UUID="f62e6206-820d-4725-b7a7-830f799d9ac6" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_childUnitTypeId_seq" defaultValue="" name="childUnitTypeId" nullable="0" physicalName="childUnitTypeId" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL180" populated="true" UUID="f4707811-983f-4fd2-a0d7-2e5ba4ec2b93" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL181" populated="true" UUID="9d634f12-44a3-40e4-ba45-26c299f1efb5" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_modifyDate_seq" defaultValue="" name="modifyDate" nullable="1" physicalName="modifyDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1733" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1732" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1734" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX182" populated="true" UUID="cb8faaa4-e649-47f5-8aa5-b5cdf7bb3b85" clustered="false" name="OSU_UNIT_ASSOCIATION_PK" physicalName="osu_unit_association_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC183" populated="true" UUID="6dcf8f52-2c03-4f4b-b25f-4bcb99e86431" ascendingOrDescending="UNSPECIFIED" column-ref="COL174" name="id" physicalName="id" />
+     <index-column id="IDC184" populated="true" UUID="3562c589-522c-4d88-bf49-edf56f342651" ascendingOrDescending="UNSPECIFIED" column-ref="COL175" name="associationTypeId" physicalName="associationTypeId" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB185" populated="true" UUID="74087c20-2038-4bae-9fd5-9484bc18b228" name="OSU_UNIT_ASSOCIATION_TYPE" objectType="TABLE" physicalName="OSU_UNIT_ASSOCIATION_TYPE" >
+   <remarks></remarks>
+   <folder id="FOLTAB1851" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL186" populated="true" UUID="ce0d9b21-9c19-4465-b85c-e23f527a2d31" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_TYPE_parentUnitTypeId_seq" defaultValue="" name="parentUnitTypeId" nullable="0" physicalName="parentUnitTypeId" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL187" populated="true" UUID="f205ccdf-bb53-48bf-9eb7-7f36c533399d" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_TYPE_childUnitTypeId_seq" defaultValue="" name="childUnitTypeId" nullable="0" physicalName="childUnitTypeId" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL188" populated="true" UUID="4fca816b-77bb-428c-8cc4-70c0cef16b53" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_TYPE_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL189" populated="true" UUID="1f4f0b93-8363-420e-ac4c-f823d2acbdde" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_TYPE_description_seq" defaultValue="" name="description" nullable="0" physicalName="description" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL190" populated="true" UUID="462d43c2-308f-45a5-8c1c-f3821fa8654c" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_TYPE_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL191" populated="true" UUID="3395ce27-4e6a-4d09-8a8e-24ff774697fe" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_ASSOCIATION_TYPE_modifyDate_seq" defaultValue="" name="modifyDate" nullable="1" physicalName="modifyDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1853" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1852" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1854" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX192" populated="true" UUID="954dc9ef-d869-457c-8155-9f4ff779b6e8" clustered="false" name="OSU_UNIT_ASSOCIATION_TYPE_PK" physicalName="osu_unit_association_type_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC193" populated="true" UUID="f53248f0-cd94-4e15-a7b4-791a26571fde" ascendingOrDescending="UNSPECIFIED" column-ref="COL186" name="parentUnitTypeId" physicalName="parentUnitTypeId" />
+     <index-column id="IDC194" populated="true" UUID="d9c001f8-8d1b-44b8-af29-ee090b36be0b" ascendingOrDescending="UNSPECIFIED" column-ref="COL187" name="childUnitTypeId" physicalName="childUnitTypeId" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB195" populated="true" UUID="2df0173d-c08f-446b-9ab0-26547caffeee" name="OSU_UNIT_TYPE" objectType="TABLE" physicalName="OSU_UNIT_TYPE" >
+   <remarks></remarks>
+   <folder id="FOLTAB1951" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL196" populated="true" UUID="0200e90d-e22d-4dc7-85ce-3179d5ab0eb7" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_TYPE_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL197" populated="true" UUID="06c4fbdd-b5a7-4da2-99bc-fca4f28c2ab0" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_TYPE_name_seq" defaultValue="" name="name" nullable="0" physicalName="name" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL198" populated="true" UUID="788a2b8e-b8fe-4bad-83f0-131ae9fc2893" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_TYPE_description_seq" defaultValue="" name="description" nullable="0" physicalName="description" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL199" populated="true" UUID="9423d3d0-b4b9-4b73-82bf-1e841fa9c48b" autoIncrement="false" autoIncrementSequenceName="OSU_UNIT_TYPE_createDate_seq" defaultValue="" name="createDate" nullable="0" physicalName="createDate" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1953" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1952" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1954" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX200" populated="true" UUID="227e9f2f-1492-43f5-b848-6934edc09d4a" clustered="false" name="OSU_UNIT_TYPE_PK" physicalName="osu_unit_type_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC201" populated="true" UUID="294deeef-d35c-4589-a0e7-55d48fc46a10" ascendingOrDescending="UNSPECIFIED" column-ref="COL196" name="id" physicalName="id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB202" populated="true" UUID="03b2cdb3-c362-49b5-97ff-2037b283e56f" name="OSU_COLLEGE" objectType="TABLE" physicalName="OSU_COLLEGE" >
+   <remarks></remarks>
+   <folder id="FOLTAB2021" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL203" populated="true" UUID="a138006e-1d4a-41fe-9258-915d52eebe69" autoIncrement="false" autoIncrementSequenceName="OSU_COLLEGE_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL204" populated="true" UUID="7c91c91f-7db6-4177-928b-a24a60af6d89" autoIncrement="false" autoIncrementSequenceName="OSU_COLLEGE_dean_seq" defaultValue="" name="dean" nullable="0" physicalName="dean" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL205" populated="true" UUID="ce122cb9-26d5-424d-95c4-6042761905f6" autoIncrement="false" autoIncrementSequenceName="OSU_COLLEGE_mainOffice_seq" defaultValue="" name="mainOffice" nullable="0" physicalName="mainOffice" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL206" populated="true" UUID="d5e446a1-834f-478c-805b-b2c7910cc76d" autoIncrement="false" autoIncrementSequenceName="OSU_COLLEGE_abbreviation_seq" defaultValue="" name="abbreviation" nullable="0" physicalName="abbreviation" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB2023" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB2022" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB2024" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX207" populated="true" UUID="fa34377f-dc31-41f3-b962-b9ad62016b8f" clustered="false" name="OSU_COLLEGE_PK" physicalName="osu_college_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC208" populated="true" UUID="b265613a-1056-4148-8a09-d7775d59e1f9" ascendingOrDescending="UNSPECIFIED" column-ref="COL203" name="id" physicalName="id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB209" populated="true" UUID="8dffb2f8-7ce4-461b-a90b-6022aa5c7862" name="matvw_unit_association" objectType="TABLE" physicalName="matvw_unit_association" >
+   <remarks></remarks>
+   <folder id="FOLTAB2091" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL210" populated="true" UUID="a490d031-4a83-4dbc-a4dd-5d597df07ac7" autoIncrement="false" autoIncrementSequenceName="matvw_unit_association_unit_association_type_id_seq" defaultValue="" name="unit_association_type_id" nullable="0" physicalName="unit_association_type_id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL211" populated="true" UUID="b0e62efc-e68f-4d10-8bb0-59ae11535340" autoIncrement="false" autoIncrementSequenceName="matvw_unit_association_unit_association_type_name_seq" defaultValue="" name="unit_association_type_name" nullable="0" physicalName="unit_association_type_name" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL212" populated="true" UUID="042a0a42-1e0b-43ad-a3e7-e9b4b61ea320" autoIncrement="false" autoIncrementSequenceName="matvw_unit_association_parent_type_name_seq" defaultValue="" name="parent_type_name" nullable="0" physicalName="parent_type_name" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL213" populated="true" UUID="46fc2d05-778a-49c9-bbcc-1fafa0b83f55" autoIncrement="false" autoIncrementSequenceName="matvw_unit_association_parentunitid_seq" defaultValue="" name="parentunitid" nullable="0" physicalName="parentunitid" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    <column id="COL214" populated="true" UUID="652e6ca9-449d-4615-b596-f45f324281d1" autoIncrement="false" autoIncrementSequenceName="matvw_unit_association_child_type_name_seq" defaultValue="" name="child_type_name" nullable="0" physicalName="child_type_name" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL215" populated="true" UUID="3b0b4169-e062-46ba-8bb9-1fa91eb500a2" autoIncrement="false" autoIncrementSequenceName="matvw_unit_association_childunitid_seq" defaultValue="" name="childunitid" nullable="0" physicalName="childunitid" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB2093" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB2092" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB2094" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX216" populated="true" UUID="31c869ce-7689-4ef4-a2df-4f0a863ea0a8" clustered="false" name="matvw_unit_association_pk" physicalName="matvw_unit_association_pk" primaryKeyIndex="true" unique="false" >
+    </index>
+    <index id="IDX217" populated="true" UUID="97add306-d6e4-4c26-b14c-7ab6e76ac0e1" clustered="false" name="matvw_unit_association_typename_idx" physicalName="matvw_unit_association_typename_idx" primaryKeyIndex="false" unique="false" >
+     <index-column id="IDC218" populated="true" UUID="310e4df8-1273-42d0-8d4f-9240eb4e1b70" ascendingOrDescending="UNSPECIFIED" column-ref="COL211" name="unit_association_type_name" physicalName="unit_association_type_name" />
+    </index>
+    <index id="IDX219" populated="true" UUID="656f61ec-2138-4b2c-8c23-b3d8a1d4fc8e" clustered="false" name="matvw_unit_association_parentunitid_idx" physicalName="matvw_unit_association_parentunitid_idx" primaryKeyIndex="false" unique="false" >
+     <index-column id="IDC220" populated="true" UUID="5653d222-7609-4917-b409-a6d043e051b6" ascendingOrDescending="UNSPECIFIED" column-ref="COL213" name="parentunitid" physicalName="parentunitid" />
+    </index>
+    <index id="IDX221" populated="true" UUID="322ee8d9-4002-4752-828d-b997e37178d2" clustered="false" name="matvw_unit_association_childunitid_idx" physicalName="matvw_unit_association_childunitid_idx" primaryKeyIndex="false" unique="false" >
+     <index-column id="IDC222" populated="true" UUID="891f88f7-5018-4b82-ab28-aadcd7f1dfef" ascendingOrDescending="UNSPECIFIED" column-ref="COL215" name="childunitid" physicalName="childunitid" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB223" populated="true" UUID="e04cf984-92dd-4022-8d33-25868ab0198f" name="PS_SUBJECT_TBL" objectType="TABLE" physicalName="PS_SUBJECT_TBL" >
+   <remarks></remarks>
+   <folder id="FOLTAB2231" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL224" populated="true" UUID="985dbf13-4d37-4175-94b7-94008cb3dccd" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_institution_seq" defaultValue="" name="institution" nullable="1" physicalName="institution" precision="5" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL225" populated="true" UUID="96560837-5bc3-477d-bc9e-70edd3ee07a9" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_subject_seq" defaultValue="" name="subject" nullable="1" physicalName="subject" precision="25" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL226" populated="true" UUID="70f66e74-b81a-4801-b4e0-be597fbef1b1" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_effdt_seq" defaultValue="" name="effdt" nullable="1" physicalName="effdt" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL227" populated="true" UUID="42e040a4-39bd-4a9c-9bce-1b323465ed80" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_src_sys_id_seq" defaultValue="" name="src_sys_id" nullable="1" physicalName="src_sys_id" precision="5" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL228" populated="true" UUID="0549ef79-6a45-41c2-bee5-f0e90606990c" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_eff_status_seq" defaultValue="" name="eff_status" nullable="1" physicalName="eff_status" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL229" populated="true" UUID="60075f31-2533-4e4d-b037-f8bf2a81f1a4" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_descr_seq" defaultValue="" name="descr" nullable="1" physicalName="descr" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL230" populated="true" UUID="4454e7a5-dc30-4ee2-b639-c4661847d1a4" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_descrshort_seq" defaultValue="" name="descrshort" nullable="1" physicalName="descrshort" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL231" populated="true" UUID="cc9b1188-7d63-430d-a1e1-881c2b0df29e" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_acad_org_seq" defaultValue="" name="acad_org" nullable="1" physicalName="acad_org" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL232" populated="true" UUID="1616f520-a575-4d5e-8b27-77202f7c3640" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_split_owner_seq" defaultValue="" name="split_owner" nullable="1" physicalName="split_owner" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL233" populated="true" UUID="30fb98b6-f96d-4b58-bbf1-18dbf40369c4" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_ext_subject_area_seq" defaultValue="" name="ext_subject_area" nullable="1" physicalName="ext_subject_area" precision="4" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL234" populated="true" UUID="3805939a-a536-4756-974c-40ab8841caeb" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_cip_code_seq" defaultValue="" name="cip_code" nullable="1" physicalName="cip_code" precision="13" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL235" populated="true" UUID="5c3ffb96-1ef6-489d-a28e-5c737878b732" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_hegis_code_seq" defaultValue="" name="hegis_code" nullable="1" physicalName="hegis_code" precision="8" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL236" populated="true" UUID="58c4f275-2d4f-48e4-9c82-0106b3807fad" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_descrformal_seq" defaultValue="" name="descrformal" nullable="1" physicalName="descrformal" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL237" populated="true" UUID="ffb2492a-4047-4e81-9574-4b01581b86af" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_use_blind_grading_seq" defaultValue="" name="use_blind_grading" nullable="1" physicalName="use_blind_grading" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL238" populated="true" UUID="8c6ee2aa-a167-4638-aa11-fb79bf09f6c0" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_study_field_seq" defaultValue="" name="study_field" nullable="1" physicalName="study_field" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL239" populated="true" UUID="7077ae9b-71da-4722-9f15-fb8733b98ccc" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_load_error_seq" defaultValue="" name="load_error" nullable="1" physicalName="load_error" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL240" populated="true" UUID="80433641-831d-4376-b4d1-0a9cf0ab37f4" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_data_origin_seq" defaultValue="" name="data_origin" nullable="1" physicalName="data_origin" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL241" populated="true" UUID="a8275888-8573-479b-b988-a0e49f81383a" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_created_ew_dttm_seq" defaultValue="" name="created_ew_dttm" nullable="1" physicalName="created_ew_dttm" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL242" populated="true" UUID="6e519685-6a3e-44f1-8eb2-e7e93b30671e" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_lastupd_ew_dttm_seq" defaultValue="" name="lastupd_ew_dttm" nullable="1" physicalName="lastupd_ew_dttm" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL243" populated="true" UUID="b459d215-edcc-4540-b4e1-91444471e30a" autoIncrement="false" autoIncrementSequenceName="PS_SUBJECT_TBL_batch_sid_seq" defaultValue="" name="batch_sid" nullable="1" physicalName="batch_sid" precision="10" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="2" userDefinedTypeUUID="115245ce-612c-4d6a-b559-6dd903dd959a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB2233" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB2232" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB2234" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX244" populated="true" UUID="6d50d287-1c6c-424b-97a6-ad4893acc35f" clustered="false" name="PS_SUBJECT_TBL_PK" physicalName="PS_SUBJECT_TBL_PK" primaryKeyIndex="true" unique="false" >
+    </index>
+   </folder>
+  </table>
+  <relationships>
+  </relationships>
+ </target-database>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="sid"> </ddl-generator>
+ <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
+ <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
+ <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+  <table-pane table-ref="TAB1" x="85" y="78" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB26" x="351" y="72" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB34" x="352" y="207" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB41" x="351" y="316" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB55" x="358" y="474" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB79" x="626" y="81" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB88" x="357" y="677" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB101" x="616" y="235" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB142" x="842" y="81" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB157" x="85" y="461" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB173" x="85" y="693" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB185" x="886" y="661" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB195" x="637" y="751" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB202" x="876" y="325" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB209" x="881" y="479" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB223" x="1163" y="89" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+ </play-pen>
+ <critic-manager>
+  <critic-grouping platformType="Generic" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.PrimaryKeyCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.RelationshipMappingTypeCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.EmptyRelationshipCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.AlphaNumericNameCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.AlphaNumericSequenceNameCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SetDefaultOnColumnWithNoDefaultCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SetNullOnNonNullableColumnCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.DuplicateNameCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="DB2" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.DB2UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="H2" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.H2UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="HSQLDB" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.HSQLDBUnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="MySQL" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.MySQLCommentCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.MySQLReservedWordsCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.MySQLUnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="Oracle" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.OraclePhysicalNameCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.OracleReservedWordsCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.OracleUnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="PostgreSQL" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.PostgreSQLReservedWordsCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="SQL Server" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServerUnsupportedFeaturesCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServerReservedWordsCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="SQL Server 2000" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServer2000UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="SQL Server 2005" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServer2005UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+ </critic-manager>
+ <profiles topNCount="10">
+  </profiles>
+  <olap>
+  </olap>
+  <olap-gui>
+  </olap-gui>
+</architect-project>

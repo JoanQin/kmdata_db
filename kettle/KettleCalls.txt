@@ -1,0 +1,62 @@
+#!/bin/sh
+
+/opt/data-integration/pan.sh arguments
+
+/opt/data-integration/pan.sh -rep="PGSQLRepo" -trans="PeoplesoftKMDBackfeedSQLSvr" -dir="/opt/kmdatascripts/KMData-20110909-1.xml" -user=admin -pass=admin -level=Basic
+
+Linux:
+/opt/data-integration/bash pan.sh -rep="PGSQLRepo" -trans="PeoplesoftKMDBackfeedSQLSvr" -dir=/ -user=admin -pass=admin -level=Basic
+/opt/data-integration/bash kitchen.sh -rep="PGSQLRepo" -job="NightlyJobUsersUpdate" -dir=/ -user=admin -pass=admin -level=Basic
+
+Production Linux
+/opt/kettle/data-integration/bash kitchen.sh -rep="KMDataProdRepo" -job="NightlyJobUsersUpdate" -dir=/ -user=admin -pass=admin -level=Basic
+
+crontab entry
+59 23 * * 01-05 bash /opt/kettle/data-integration/kitchen.sh -rep="KMDataProdRepo" -job="NightlyJobUsersUpdate" -dir=/ -user=admin -pass=admin -level=Basic
+
+/opt/kettle/data-integration/kitchen.sh -rep="KMDataProdRepo" -job="NightlyJobUsersUpdate" -dir=/ -user=admin -pass=admin -level=Basic > /dev/null 2>&1
+
+compress:
+tar -czvf name.tar.gz dirname
+
+unzip:
+tar -xvzf name.tar.gz
+
+watch out for folders
+
+Windows:
+C:\downloads\pdi-ce-4.1.0-stable\data-integration>pan.bat /rep:"PGSQLRepo" /trans:"PeoplesoftKMDBackfeedSQLSvr" /dir:/ /user:admin /pass:admin /level:Basic
+
+
+
+
+
+echo 'export JAVA_HOME=/usr/java/jdk1.7.0'>/etc/profile.d/jdk.sh
+echo 'export PATH=$JAVA_HOME/bin:$PATH'>>/etc/profile.d/jdk.sh
+
+
+RPM uninstall
+Note: If you have RPM on your Linux box, you should first find out if Java is already installed using RPM. If Java is not installed using RPM, you should skip reading.
+
+    Open Terminal Window
+    Login as the super user
+    Try to find jre package by typing: rpm -qa
+    If RPM reports a package similar to jre-<version>-fcs, then Java is installed with RPM.
+
+    Note: Normally, you do not need to uninstall Java with RPM, because RPM is able to uninstall the old version of Java when installing a new version! You may skip reading, unless you want to remove Java permanently.
+    To uninstall Java, type: rpm -e jre-<version>-fcs
+
+
+Users Job:
+/PeoplesoftPSNames
+/PeoplesoftKMDUsersImportProc
+/PeoplesoftKMDBackfeedPG
+/PeoplesoftKMDBackfeedSQLSvr
+/PeoplesoftKMDFinalNewUsers
+/PeoplesoftKMDFinalUpdateUsers
+
+
+  WHERE inst_username = 'little.129';
+  WHERE inst_username = 'whitacre.3';
+  WHERE inst_username = 'weaver.428';
+  WHERE inst_username = 'hinshaw.25';

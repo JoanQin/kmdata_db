@@ -1,0 +1,64 @@
+add, reset columns in KMData
+
+kmdata.Outreach
+2	added columns: created_at, updated_at
+
+kmdata.advising
+2	drop not null: institution_id
+
+kmdata.user_services
+2	drop not null: institution_id
+2	alter table kmdata.user_services alter column institution_id drop not null;
+
+
+kmdata.conference
+2	change the function: researchinview.insert_conference
+   IF researchinview.get_year(p_ConferenceStartedOn) = 0 THEN
+      v_PerformanceDate := CAST(NULL AS DATE);
+      ELSE
+      v_PerformanceDate := DATE(researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1');
+   END IF;
+   
+
+kmdata.professional_activity
+2	change the column length: activity_name
+2	alter table kmdata.professional_activity alter column activity_name type varchar(1000)
+
+kmdata.courses_taught_other
+2	drop not null : institution_id
+2	alter table kmdata.courses_taught_other alter column institution_id drop not null;
+
+
+kmdata.courses_taught
+2	drop not null: institution_id
+2	change the column length: title
+2	alter table kmdata.courses_taught alter column institution_id drop not null;
+2	alter table kmdata.courses_taught alter column title type varchar(1000);
+
+
+kmdata.user_languages
+2	drop not null: writing_proficiency, reading_proficiency, speaking_proficiency
+2	alter table kmdata.user_languages alter column writing_proficiency drop not null;
+2	update the function: researchinview.insert_foreignlanguage
+2	IF v_LanguagesMatchCount = 0 AND v_LanguageID > 0 THEN
+	
+
+kmdata.degree_certifications
+2	change the column length: npi, upin, medicaid
+2	alter table kmdata.degree_certifications alter column npi type varchar(1000)
+2	alter table kmdata.degree_certifications alter column upin type varchar(1000)
+2	alter table kmdata.degree_certifications alter column medicaid type varchar(1000)
+
+kmdata.works
+2	add new column extended_author_list
+2	journal use it if  author_list over 2000 limit
+2	music use it if  artist over 255 limit 
+2	unpublished use it if submitted_to over 255 limit
+
+
+kmdata.user_preferred_names
+2	change the column length: email
+2	alter table kmdata.user_preferred_names alter column email type varchar(1000)
+
+kmdata.strategic_initiatives
+2	institution_id drop the not null constraint

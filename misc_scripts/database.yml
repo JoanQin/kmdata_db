@@ -1,0 +1,52 @@
+# SQLite version 3.x
+#   gem install sqlite3
+  
+local-vh:
+   adapter: postgresql
+   host: hsl-kmddsql-v01.osumc.edu
+   #host: localhost
+   port: 5432
+   username: kmd_app_user
+   password: km$D-0sU$gz
+   database: kmdata_dev
+   schema_search_path: kmdata
+   encoding: utf8
+   template: template0
+
+development:
+   adapter: postgresql
+   host: hsl-kmddsql-v01.osumc.edu
+   port: 5432
+   username: kmd_app_user
+   password: km$D-0sU$gz
+   database: kmdata_dev
+   schema_search_path: kmdata
+   encoding: utf8
+   template: template0
+   
+local-qin:   
+   adapter: sqlite3
+   database: db/development.sqlite3
+   pool: 5
+   timeout: 5000
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+# u_2q!4oP%X
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+   adapter: postgresql
+   host: hsl-kmddsql-v01.osumc.edu
+   port: 5432
+   username: kmd_app_user
+   password: km$D-0sU$gz
+   database: kmdata_dev
+   schema_search_path: kmdata
+   encoding: utf8
+   template: template0
