@@ -28,5 +28,5 @@ SELECT id, resource_id, title, user_id, created_at, updated_at, parent_work_id,
        last_update_dmy_single_date_id, creation_dmy_single_date_id, 
        broadcast_date, broadcast_dmy_single_date_id, disclosure_dmy_single_date_id, 
        outreach_dmy_range_date_id, city, state, country, book_title, 
-       isbn, lccn, citation_count
+       isbn, lccn, citation_count, extended_author_list
   FROM kmdata.works;
