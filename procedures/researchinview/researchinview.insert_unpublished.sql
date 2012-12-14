@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_unpublished (
+CREATE OR REPLACE FUNCTION researchinview.insert_unpublished (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -92,12 +92,12 @@ BEGIN
          (id, resource_id, user_id, title, author_list, 
           percent_authorship, submission_dmy_single_date_id, status_id,
           review_type_id, created_at, updated_at, work_type_id,
-          submitted_to, extended_author_list)
+          submitted_to, extended_author_list, status_id)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), p_Author, 
           p_PercentAuthorship, kmdata.add_dmy_single_date(NULL, v_SubmittedMonth, v_SubmittedYear), NULL,
           v_ReviewType, current_timestamp, current_timestamp, 10, -- 10 is potential publications under review (ReferenceWork)
-          v_SubmittedTo, CASE WHEN LENGTH(p_SubmittedTo) < 255 THEN NULL ELSE p_SubmittedTo END);
+          v_SubmittedTo, CASE WHEN LENGTH(p_SubmittedTo) < 255 THEN NULL ELSE p_SubmittedTo END, CAST(p_SubmissionStatus AS INTEGER);
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -120,7 +120,7 @@ BEGIN
              author_list = p_Author, 
              percent_authorship = p_PercentAuthorship, 
              --submission_dmy_single_date_id
-             --status_id = p_SubmissionStatus,
+             status_id = CAST(p_SubmissionStatus AS INTEGER),
              review_type_id = v_ReviewType,
              updated_at = current_timestamp,
              submitted_to = v_SubmittedTo,
