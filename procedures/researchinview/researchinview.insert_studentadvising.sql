@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_studentadvising (
+CREATE OR REPLACE FUNCTION researchinview.insert_studentadvising (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -88,17 +88,17 @@ BEGIN
       --p_CourseType
       INSERT INTO kmdata.advising
          (id, resource_id, user_id, level_id, first_name, last_name, 
-          end_year, end_month, end_day, 
-          start_year, start_month, start_day,
+          end_year, end_month, end_day, accomplishments, accomplishments_other,
+          start_year, start_month, start_day, advisee_advisor_codepartment, student_id,
           role_id, graduated, advisee_current_position, graduation_year, 
-          institution_id, title, 
+          institution_id, title, ongoing, major, minor, university_id, current_position_other,
           created_at, updated_at)
       VALUES
          (v_StudentAdvisingID, v_ResourceID, v_UserID, CAST(p_AcademicLevel AS INTEGER), split_part(p_AdviseeName, ' ', 1), split_part(p_AdviseeName, ' ', 2), 
-          researchinview.get_year(p_AdvisingEndedOn), researchinview.get_month(p_AdvisingEndedOn), NULL,
-          researchinview.get_year(p_AdvisingStartedOn), researchinview.get_month(p_AdvisingStartedOn), NULL, 
+          researchinview.get_year(p_AdvisingEndedOn), researchinview.get_month(p_AdvisingEndedOn), NULL, p_Accomplishments, p_AccomplishmentsOther,
+          researchinview.get_year(p_AdvisingStartedOn), researchinview.get_month(p_AdvisingStartedOn), NULL, p_AdviseeAdvisorCoDepartment, p_StudentId, 
           CAST(p_AdvisingRole AS INTEGER), v_Completed, p_CurrentPosition, researchinview.get_year(p_GraduatedOn),
-          v_InstitutionID, researchinview.strip_riv_tags(p_ThesisTitle), 
+          v_InstitutionID, researchinview.strip_riv_tags(p_ThesisTitle), p_AdvisingOngoing, p_Major, p_Minor,p_UniversityID,p_CurrentPositionOther,
           current_timestamp, current_timestamp);
 
    ELSE
@@ -117,6 +117,15 @@ BEGIN
              end_year = researchinview.get_year(p_AdvisingEndedOn), 
              end_month = researchinview.get_month(p_AdvisingEndedOn), 
              end_day = NULL, 
+             accomplishments = p_Accomplishments,
+             accomplishments_other = p_AccomplishmentsOther,
+             advisee_advisor_codepartment = p_AdviseeAdvisorCoDepartment,
+             student_id = p_StudentId,
+             ongoing = p_AdvisingOngoing,
+             major = p_Major,
+             minor = p_Minor,
+             university_id = p_UniversityID,
+             current_position_other = p_CurrentPositionOther,
              start_year = researchinview.get_year(p_AdvisingStartedOn), 
              start_month = researchinview.get_month(p_AdvisingStartedOn), 
              start_day = NULL,
