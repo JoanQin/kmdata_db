@@ -97,7 +97,7 @@ BEGIN
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), p_Author, 
           p_PercentAuthorship, kmdata.add_dmy_single_date(NULL, v_SubmittedMonth, v_SubmittedYear), NULL,
           v_ReviewType, current_timestamp, current_timestamp, 10, -- 10 is potential publications under review (ReferenceWork)
-          v_SubmittedTo, CASE WHEN LENGTH(p_SubmittedTo) < 255 THEN NULL ELSE p_SubmittedTo END, CAST(p_SubmissionStatus AS INTEGER);
+          v_SubmittedTo, CASE WHEN LENGTH(p_SubmittedTo) < 255 THEN NULL ELSE p_SubmittedTo END, CAST(p_SubmissionStatus AS INTEGER));
 
       -- add work author
       INSERT INTO kmdata.work_authors
