@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_referencework (
+CREATE OR REPLACE FUNCTION researchinview.insert_referencework (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -103,17 +103,17 @@ BEGIN
       v_WorkID := nextval('kmdata.works_id_seq');
    
       INSERT INTO kmdata.works
-         (id, resource_id, user_id, title, author_list, 
-          beginning_page, ending_page, percent_authorship, 
-          publication_dmy_single_date_id,
+         (id, resource_id, user_id, title, author_list, edition, editor_list,
+          beginning_page, ending_page, percent_authorship, publication_title, publisher, is_review,
+          publication_dmy_single_date_id, 
           review_type_id, status_id, url, volume, created_at, updated_at, work_type_id,
-          city, country, state, isbn)
+          city, country, state, isbn, status_id, sub_work_type_id)
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_EntryTitle), p_Author, 
-          v_StartPage, v_EndPage, p_PercentAuthorship, 
+         (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_EntryTitle), p_Author, p_Edition, p_Editor,
+          v_StartPage, v_EndPage, p_PercentAuthorship, p_PublicationTitle, p_Publisher, p_Reviewed,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedDate), researchinview.get_year(p_PublishedDate)), 
           v_ReviewType, NULL, p_URL, p_Volume, current_timestamp, current_timestamp, 5, -- 5 is abstracts (ReferenceWork)
-          p_City, p_Country, v_State, p_ISBN);
+          p_City, p_Country, v_State, p_ISBN, CAST(p_Status AS INTEGER), CAST(p_WorkType AT INTEGER));
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -142,9 +142,15 @@ BEGIN
          SET user_id = v_UserID,
              title = researchinview.strip_riv_tags(p_EntryTitle), 
              author_list = p_Author, 
+             edition = p_Edition,
+             editor_list = p_Editor,
              beginning_page = v_StartPage, 
              ending_page = v_EndPage, 
              percent_authorship = p_PercentAuthorship, 
+             publisher = p_Publisher,
+             is_review = p_Reviewed,
+             status_id = CAST(p_Status AS INTEGER), 
+             sub_work_type_id = CAST(p_WorkType AS INTEGER),
              review_type_id = v_ReviewType,
              url = p_URL, 
              volume = p_Volume,
