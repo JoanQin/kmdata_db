@@ -106,13 +106,13 @@ BEGIN
          (id, resource_id, user_id, title, author_list, edition, editor_list,
           beginning_page, ending_page, percent_authorship, publication_title, publisher, is_review,
           publication_dmy_single_date_id, 
-          review_type_id, status_id, url, volume, created_at, updated_at, work_type_id,
+          review_type_id,  url, volume, created_at, updated_at, work_type_id,
           city, country, state, isbn, status_id, sub_work_type_id)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_EntryTitle), p_Author, p_Edition, p_Editor,
           v_StartPage, v_EndPage, p_PercentAuthorship, p_PublicationTitle, p_Publisher, p_Reviewed,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedDate), researchinview.get_year(p_PublishedDate)), 
-          v_ReviewType, NULL, p_URL, p_Volume, current_timestamp, current_timestamp, 5, -- 5 is abstracts (ReferenceWork)
+          v_ReviewType,  p_URL, p_Volume, current_timestamp, current_timestamp, 5, -- 5 is abstracts (ReferenceWork)
           p_City, p_Country, v_State, p_ISBN, CAST(p_Status AS INTEGER), CAST(p_WorkType AT INTEGER));
 
       -- add work author
