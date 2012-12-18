@@ -177,6 +177,7 @@ BEGIN
              frequency_of_publication = p_PublicationFrequency,
              frequency_of_publication_other = p_PublicationFrequencyOther,
              publication_title = researchinview.strip_riv_tags(p_PublicationName),
+             publication_type_id = cast(p_PublicationType as integer),
              -- publication_dmy_single_date_id
              publisher = p_Publisher,
              peer_reviewed_ind = cast(p_Reviewed as integer),
