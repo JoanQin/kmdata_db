@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION researchinview.insert_referencework (
+﻿CREATE OR REPLACE FUNCTION researchinview.insert_referencework (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -113,7 +113,7 @@ BEGIN
           v_StartPage, v_EndPage, p_PercentAuthorship, p_PublicationTitle, p_Publisher, p_Reviewed,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedDate), researchinview.get_year(p_PublishedDate)), 
           v_ReviewType,  p_URL, p_Volume, current_timestamp, current_timestamp, 5, -- 5 is abstracts (ReferenceWork)
-          p_City, p_Country, v_State, p_ISBN, CAST(p_Status AS INTEGER), CAST(p_WorkType AT INTEGER));
+          p_City, p_Country, v_State, p_ISBN, CAST(p_Status AS INTEGER), CAST(p_WorkType AS INTEGER));
 
       -- add work author
       INSERT INTO kmdata.work_authors
