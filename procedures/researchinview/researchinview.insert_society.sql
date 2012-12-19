@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_society (
+CREATE OR REPLACE FUNCTION researchinview.insert_society (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -84,13 +84,13 @@ BEGIN
       INSERT INTO kmdata.membership
          (id, resource_id, user_id, organization_city, organization_country, notes, group_name, 
           organization_name, membership_role_id, membership_role_modifier_id, organization_state, organization_website, 
-          start_year, start_month, start_day,
+          start_year, start_month, start_day, ongoing, organization_id,
           end_year, end_month, end_day,
           created_at, updated_at)
       VALUES
          (v_MembershipID, v_ResourceID, v_UserID, p_City, p_Country, researchinview.strip_riv_tags(p_DescriptionOfEffort), p_GroupSection, 
           p_InstitutionCommonNameID, v_Role, v_RoleModifier, v_State, p_URL, 
-          researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL,
+          researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL, p_Ongoing, p_OrganizationID,
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn), NULL,
           current_timestamp, current_timestamp);
    
@@ -116,6 +116,8 @@ BEGIN
              start_year = researchinview.get_year(p_StartedOn), 
              start_month = researchinview.get_month(p_StartedOn), 
              start_day = NULL,
+             ongoing = p_Ongoing,
+             organization_id = p_OrganizationID,
              end_year = researchinview.get_year(p_EndedOn), 
              end_month = researchinview.get_month(p_EndedOn), 
              end_day = NULL,
