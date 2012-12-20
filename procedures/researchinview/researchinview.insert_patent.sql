@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_patent (
+CREATE OR REPLACE FUNCTION researchinview.insert_patent (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -73,8 +73,8 @@ BEGIN
    -- ****************************************
 
    -- update information specific to Patent
-   --p_ApplicationFiledOn, p_ApplicationNumber, p_AttorneyAgent, p_IssuingOrganization, p_PatentAssignee, p_PatentClass
-   -- p_DocumentNumber (THIS IS NOT IN THE DATA MAPPING SPREADSHEET), p_PatentGranted, p_PatentGrantedOn, p_ExtendedAttribute1 (Disclosure Date)
+   -- p_ApplicationNumber, p_AttorneyAgent, p_IssuingOrganization, p_PatentAssignee, p_PatentClass
+   -- p_DocumentNumber (THIS IS NOT IN THE DATA MAPPING SPREADSHEET)
 
    -- check to see if there is a record in works with this resource id
    SELECT COUNT(*) INTO v_WorksMatchCount
@@ -89,13 +89,14 @@ BEGIN
       INSERT INTO kmdata.works
          (id, resource_id, user_id, inventor, manufacturer, patent_number, percent_authorship, 
           role_designator, sponsor, title, url, created_at, updated_at, work_type_id,
-          filed_date,
-          issued_date)
+          filed_date, 
+          issued_date, issuing_organization, application_number, attorney_agent, patent_assignee, patent_class, document_number )
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_Inventor, p_Manufacturer, p_PatentNumber, p_PercentAuthorship, 
           p_Role, p_Sponsor, researchinview.strip_riv_tags(p_Title), p_URL, current_timestamp, current_timestamp, v_WorkTypeID,
           date (researchinview.get_year(p_ApplicationFiledOn) || '-' || researchinview.get_month(p_ApplicationFiledOn) || '-1'),
-          date (researchinview.get_year(p_PatentGrantedOn) || '-' || researchinview.get_month(p_PatentGrantedOn) || '-1'));
+          date (researchinview.get_year(p_PatentGrantedOn) || '-' || researchinview.get_month(p_PatentGrantedOn) || '-1'),
+          p_IssuingOrganization, p_ApplicationNumber, p_AttorneyAgent, p_PatentAssignee, p_PatentClass, p_DocumentNumber);
       
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -126,6 +127,12 @@ BEGIN
              patent_number = p_PatentNumber, 
              percent_authorship = p_PercentAuthorship, 
              role_designator = p_Role, 
+             issuing_organization = p_IssuingOrganization,
+             application_number = p_ApplicationNumber,
+             attorney_agent = p_AttorneyAgent,
+             patent_assignee = p_PatentAssignee, 
+             patent_class = p_PatentClass,
+             document_number = p_DocumentNumber,
              sponsor = p_Sponsor, 
              title = researchinview.strip_riv_tags(p_Title), 
              url = p_URL,
