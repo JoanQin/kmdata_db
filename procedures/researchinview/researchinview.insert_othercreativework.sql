@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_othercreativework (
+CREATE OR REPLACE FUNCTION researchinview.insert_othercreativework (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -94,13 +94,13 @@ BEGIN
    
       INSERT INTO kmdata.works
          (id, resource_id, user_id, author_list, format, forthcoming_id, percent_authorship, 
-          role_designator, sponsor, title, url, 
+          role_designator, sponsor, title, url, sub_work_type_id,
           creation_dmy_single_date_id, -- broadcasted on
           presentation_dmy_range_date_id, -- started on / ended on
           created_at, updated_at, work_type_id)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_AuthorNames, p_Format, v_Forthcoming, p_PercentContribution, 
-          p_Role, p_SponsoredBy, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, 
+          p_Role, p_SponsoredBy, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, CAST(p_TypeOfWork AS INTEGER),
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_BroadcastedOn), researchinview.get_year(p_BroadcastedOn)),
           kmdata.add_dmy_range_date(NULL, researchinview.get_month(p_StartedOn), researchinview.get_year(p_StartedOn),
                                     NULL, researchinview.get_month(p_EndedOn), researchinview.get_year(p_EndedOn)),
@@ -139,6 +139,7 @@ BEGIN
              sponsor = p_SponsoredBy, 
              title = researchinview.strip_riv_tags(p_TitleOfWork), 
              url = p_URL,
+             sub_work_type_id = CAST(p_TypeOfWork AS INTEGER),
              updated_at = current_timestamp,
              work_type_id = v_WorkTypeID
        WHERE id = v_WorkID;

@@ -99,7 +99,7 @@ BEGIN
       VALUES
          (v_PersonalID, v_ResourceID, v_UserID, p_Address1, p_Address2, p_City, p_Country, p_EmailAddress, p_FaxNumber, 
           p_FirstName, p_LastName, p_MiddleName, p_PhoneNumber, p_Prefix, p_PublishingName, 
-          v_State, p_Suffix, p_URL, p_ZIPCode, p_AdditionalCitizenship, p_Citizenship, p_Gender, p_NihEraCommonsName.
+          v_State, p_Suffix, p_URL, p_ZIPCode, p_AdditionalCitizenship, p_Citizenship, p_Gender, p_NihEraCommonsName,
           current_timestamp, current_timestamp, p_OptedOutOfResearcherIDSetup, p_PreviouslyUsedEmailAddresses,
           p_ResearcherID, p_ResearcherIDEmailAddress, p_SyncWithResearcherID );
 
