@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_journal (
+CREATE OR REPLACE FUNCTION researchinview.insert_journal (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -117,14 +117,14 @@ BEGIN
       INSERT INTO kmdata.works
          (id, resource_id, user_id, article_title, journal_article_type_id, author_list, 
           issn, impact_factor, issue, journal_title, beginning_page, ending_page, percent_authorship, 
-          publication_dmy_single_date_id, extended_author_list,
+          publication_dmy_single_date_id, extended_author_list, is_review,
           review_type_id, status_id, url, volume, created_at, updated_at, work_type_id,
           citation_count)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_ArticleTitle), v_JournalArticleTypeID, v_AuthorStr, p_ISSN, p_ImpactFactor, p_Issue, researchinview.strip_riv_tags(p_JournalTitle),
           v_StartPage, v_EndPage, p_PercentAuthorship, 
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedDate), researchinview.get_year(p_PublishedDate)), 
-          CASE when length(p_Author) > 1999 THEN p_Author ELSE NULL END,
+          CASE when length(p_Author) > 1999 THEN p_Author ELSE NULL END, p_Reviewed,
           v_ReviewType, v_Status, p_URL, p_Volume, current_timestamp, current_timestamp, 4, -- 4 is journal article
           p_NumberOfCitations);
 
@@ -153,6 +153,7 @@ BEGIN
       -- update the works table
       UPDATE kmdata.works
          SET user_id = v_UserID,
+             is_review = p_Reviewed,
              article_title = researchinview.strip_riv_tags(p_ArticleTitle), 
              journal_article_type_id = v_JournalArticleTypeID, 
              author_list = v_AuthorStr, 
