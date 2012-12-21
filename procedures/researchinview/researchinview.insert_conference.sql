@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_conference (
+CREATE OR REPLACE FUNCTION researchinview.insert_conference (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -134,7 +134,8 @@ BEGIN
           CAST(p_ReviewType AS INTEGER), NULL, p_URL, p_Volume, current_timestamp, current_timestamp, 13,  -- 13 is paper in proceeding
           researchinview.strip_riv_tags(p_BookTitle), p_City, v_State, p_Country, p_ConferenceName, p_Edition, p_Publisher, researchinview.strip_riv_tags(p_SeriesTitle),
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
-          date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1'), 
+          case when researchinview.get_year(p_ConferenceStartedOn) = 0 then cast (null as timestamp) 
+          else date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1') end, 
           CAST(p_PublicationDocumentType AS INTEGER), CAST(p_PublicationType AS BIGINT));
 
       -- add work author
@@ -186,7 +187,8 @@ BEGIN
              edition = p_Edition,
              publisher = p_Publisher,
              series = researchinview.strip_riv_tags(p_SeriesTitle),
-             performance_start_date = date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1'),
+             performance_start_date = case when researchinview.get_year(p_ConferenceStartedOn) = 0 then cast(null as timestamp) 
+             				else date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1') end,
              publication_media_type_id = CAST(p_PublicationDocumentType AS INTEGER),
              publication_type_id = CAST(p_PublicationType AS BIGINT)
        WHERE id = v_WorkID;
