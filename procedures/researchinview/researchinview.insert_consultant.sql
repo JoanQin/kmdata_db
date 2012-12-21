@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_consultant (
+CREATE OR REPLACE FUNCTION researchinview.insert_consultant (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -101,13 +101,13 @@ BEGIN
       INSERT INTO kmdata.professional_activity
          (id, resource_id, user_id, activity_type_id, activity_name, city, country, key_achievements, 
           for_fee_ind, one_day_event_ind, org_name, state, activity_sub_type_id, url, 
-          created_at, updated_at,
+          created_at, updated_at, activity_category_other, type_of_activity_other,
           start_year, start_month, start_day,
           end_year, end_month, end_day)
       VALUES
          (v_ConsultantID, v_ResourceID, v_UserID, v_ActivityCategory, p_ActivityName, p_City, p_Country, researchinview.strip_riv_tags(p_DescriptionOfEffort), 
           v_Fee, v_OneTime, p_Organization, v_State, v_TypeOfActivity, p_URL, 
-          current_timestamp, current_timestamp,
+          current_timestamp, current_timestamp, p_ActivityCategoryOther, p_TypeOfActivityOther,
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL,
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn), NULL);
    
@@ -124,6 +124,8 @@ BEGIN
              activity_type_id = v_ActivityCategory, 
              activity_name = p_ActivityName, 
              city = p_City, 
+             activity_category_other = p_ActivityCategoryOther,
+             type_of_activity_other = p_TypeOfActivityOther,
              country = p_Country, 
              key_achievements = researchinview.strip_riv_tags(p_DescriptionOfEffort), 
              for_fee_ind = v_Fee, 
