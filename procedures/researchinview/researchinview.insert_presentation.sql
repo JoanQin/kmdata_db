@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_presentation (
+CREATE OR REPLACE FUNCTION researchinview.insert_presentation (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -94,18 +94,18 @@ BEGIN
       v_WorkID := nextval('kmdata.works_id_seq');
    
       INSERT INTO kmdata.works
-         (id, resource_id, user_id, title, event_title, presentation_role_id,
-          percent_authorship, 
+         (id, resource_id, user_id, title, event_title, 
+          percent_authorship, audience_name, invited_talk, review_type_id,
           presentation_dmy_single_date_id, 
-          audience_name,
-          review_type_id, url, created_at, updated_at, work_type_id,
+           presentation_role_id, reach_of_conference, session_name, speaker_name,
+           url, created_at, updated_at, work_type_id,
           city, state, country, presentation_location_descr)
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), researchinview.strip_riv_tags(p_ConferenceName), NULL,
-          p_PercentAuthorship, 
+         (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), researchinview.strip_riv_tags(p_ConferenceName), 
+          p_PercentAuthorship, p_Audience, CAST(p_InvitedSpeaker AS INTEGER), CAST(p_ReviewType AS INTEGER),
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_ConferenceStartedOn), researchinview.get_year(p_ConferenceStartedOn)), 
-          NULL,
-          NULL, p_URL, current_timestamp, current_timestamp, 11,  -- 11 is presentation (Unpublished Scholarly Presentation)
+           CAST(p_Role AS INTEGER), p_ReachOfConference, p_SessionName, p_SpeakerName,
+           p_URL, current_timestamp, current_timestamp, 11,  -- 11 is presentation (Unpublished Scholarly Presentation)
           p_City, v_State, p_Country, p_ConferenceLocation);
 
       -- add work author
@@ -136,9 +136,14 @@ BEGIN
              title = researchinview.strip_riv_tags(p_Title), 
              event_title = researchinview.strip_riv_tags(p_ConferenceName),
              percent_authorship = p_PercentAuthorship, 
-             --audience_name = ,
-             --review_type_id = ,
+             reach_of_conference = p_ReachOfConference,
+             session_name = p_SessionName,
+             speaker_name = p_SpeakerName,
+             audience_name = p_Audience,
+             invited_talk = CAST(p_InvitedSpeaker AS INTEGER),
+             review_type_id = CAST(p_ReviewType AS INTEGER),
              url = p_URL, 
+             presentation_role_id = CAST(p_Role AS INTEGER),
              updated_at = current_timestamp,
              city = p_City,
              state = v_State,

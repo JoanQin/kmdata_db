@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_courseundergraduate (
+CREATE OR REPLACE FUNCTION researchinview.insert_courseundergraduate (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -104,12 +104,14 @@ BEGIN
          (id, resource_id, user_id, course_taught_type_id, "number", professional_type_id, credit_hour, description, "role", 
           enrollment, institution_id, instructional_method_id, length, evaluation, formal_peer_evaluation_ind, 
           percent_taught, period_offered_id, formal_student_evaluation_ind, title, year_offered, 
-          created_at, updated_at)
+          created_at, updated_at, academic_calendar, academic_calendar_other, frequency, institution_group_other,
+          integration_group_id, number_of_times, period_offered_other, subject_area, ended_on )
       VALUES
          (v_CourseTaughtID, v_ResourceID, v_UserID, 1, p_CourseNumber, CAST(split_part(p_CourseType, ',', 1) AS INTEGER), p_CreditHours, researchinview.strip_riv_tags(p_Description), researchinview.strip_riv_tags(p_DescriptionOfRole), 
           p_Enrollment, v_InstitutionID, CAST(split_part(p_InstructionMethod, ',', 1) AS INTEGER), p_LengthOfClass, p_OtherEvaluationInfo, v_PeerEvaluated, 
           p_PercentTaught, CAST(split_part(p_PeriodOffered, ',', 1) AS INTEGER), v_StudentEvaluated, researchinview.strip_riv_tags(p_Title), researchinview.get_year(p_StartedOn),
-          current_timestamp, current_timestamp);
+          current_timestamp, current_timestamp, p_AcademicCalendar, p_AcademicCalendarOther, p_Frequencey, p_InstitutionGroupOther,
+          p_IntegrationGroupId, p_NumberOfTimes, p_PeriodOfferedOther, p_SubjectArea, p_EndedOn);
 
    ELSE
    
@@ -125,6 +127,15 @@ BEGIN
              "number" = p_CourseNumber, 
              professional_type_id = CAST(split_part(p_CourseType, ',', 1) AS INTEGER), 
              credit_hour = p_CreditHours, 
+             academic_calendar = p_AcademicCalendar,
+             academic_calendar_other = p_AcademicCalendarOther,
+             frequency = p_Frequencey,  
+             institution_group_other = p_InstitutionGroupOther,
+             integration_group_id = p_IntegrationGroupId, 
+             number_of_times = p_NumberOfTimes, 
+             period_offered_other = p_PeriodOfferedOther, 
+             subject_area = p_SubjectArea,
+             ended_on = p_EndedOn,
              description = researchinview.strip_riv_tags(p_Description), 
              "role" = researchinview.strip_riv_tags(p_DescriptionOfRole), 
              enrollment = p_Enrollment, 

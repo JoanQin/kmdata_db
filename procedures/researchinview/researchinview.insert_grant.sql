@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_grant (
+CREATE OR REPLACE FUNCTION researchinview.insert_grant (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -138,7 +138,7 @@ BEGIN
       INSERT INTO kmdata.grant_data
          (id, resource_id, source, co_investigator, description, explanation_of_role, agency, 
           amount_funded, goal, grant_number, direct_cost, other_contributors, percent_effort, principal_investigator,
-          priority_score, role_id, status_id, title, grant_type_id, 
+          priority_score, role_id, status_id, title, grant_type_id, appl_id, ongoing,
           start_year, start_month, start_day,
           end_year, end_month, end_day,
           submitted_year, submitted_month, submitted_day,
@@ -149,7 +149,7 @@ BEGIN
       VALUES
          (v_GrantID, v_ResourceID, v_Agency, p_CoInvestigator, researchinview.strip_riv_tags(p_DescriptionOfEffort), p_ExplanationOfRole, v_FundingAgency, 
           p_FundingAmount, p_Goal, p_GrantNumber, p_InitialDirectCost, p_OtherContributors, p_PercentAuthorship, p_PrincipalInvestigator, 
-          p_PriorityScore, v_RoleID, v_StatusID, researchinview.strip_riv_tags(p_Title), v_GrantTypeID, 
+          p_PriorityScore, v_RoleID, v_StatusID, researchinview.strip_riv_tags(p_Title), v_GrantTypeID, p_ApplId, p_OnGoing,
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL,
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn), NULL,
           researchinview.get_year(p_SubmittedOn), researchinview.get_month(p_SubmittedOn), NULL,
@@ -183,6 +183,8 @@ BEGIN
       UPDATE kmdata.grant_data
          SET source = v_Agency, 
              co_investigator = p_CoInvestigator, 
+             appl_id = p_ApplId,
+             ongoing = p_OnGoing,
              description = researchinview.strip_riv_tags(p_DescriptionOfEffort), 
              explanation_of_role = p_ExplanationOfRole, 
              agency = v_FundingAgency, 

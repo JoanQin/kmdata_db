@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_music (
+CREATE OR REPLACE FUNCTION researchinview.insert_music (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -110,20 +110,20 @@ BEGIN
       v_WorkID := nextval('kmdata.works_id_seq');
    
       INSERT INTO kmdata.works
-         (id, resource_id, user_id, artist, city, director, country, curator, 
+         (id, resource_id, user_id, artist, city, director, country, curator, sub_work_type_id,
           organizer, percent_authorship, title_in, performance_company, role_designator, 
           state, title, url, venue, created_at, updated_at, work_type_id, extended_author_list,
           presentation_dmy_single_date_id, --completed on
           performance_start_date,
-          performance_end_date)
+          performance_end_date,  producer)
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, v_ArtistStr, p_City, p_ConductorDirector, p_Country, p_Curator, 
+         (v_WorkID, v_ResourceID, v_UserID, v_ArtistStr, p_City, p_ConductorDirector, p_Country, p_Curator, CAST(p_TypeOfWork AS INTEGER),
           p_Organizer, p_PercentAuthorship, researchinview.strip_riv_tags(p_PerformanceTitle), p_PerformanceTroupe, v_Role, 
           v_State, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, p_Venue, current_timestamp, current_timestamp, v_WorkTypeID, 
           CASE WHEN length(p_ArtistComposer) > 254 THEN p_ArtistComposer ELSE NULL END,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_CompletedOn), researchinview.get_year(p_CompletedOn)),
           date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'),
-          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'));
+          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'),  p_Producer);
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -153,6 +153,7 @@ BEGIN
              artist = v_ArtistStr, 
              extended_author_list = CASE WHEN length(p_ArtistComposer) > 254 THEN p_ArtistComposer ELSE NULL END,
              city = p_City, 
+             producer = p_Producer,
              director = p_ConductorDirector, 
              country = p_Country, 
              curator = p_Curator, 
@@ -167,6 +168,7 @@ BEGIN
              venue = p_Venue, 
              updated_at = current_timestamp,
              work_type_id = v_WorkTypeID,
+             sub_work_type_id = CAST(p_TypeOfWork AS INTEGER),
              performance_start_date = date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'),
              performance_end_date = date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1')
        WHERE id = v_WorkID;

@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_coursecontinuinged (
+CREATE OR REPLACE FUNCTION researchinview.insert_coursecontinuinged (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -47,7 +47,7 @@ DECLARE
    --v_PeerEvaluated SMALLINT;
    v_StudentEvaluated SMALLINT;
    v_OneDay SMALLINT;
-   --v_State VARCHAR(255);
+   v_State VARCHAR(255);
 BEGIN
    -- select the user ID
    --v_UserID := p_IntegrationUserId;
@@ -99,10 +99,10 @@ BEGIN
       v_OneDay := 1;
    END IF;
 
-   --v_State := p_StateProvince;
-   --IF v_State IS NULL OR v_State = '' THEN
-   --   v_State := p_StateProvinceOther;
-   --END IF;
+   v_State := p_StateProvince;
+   IF v_State IS NULL OR v_State = '' THEN
+      v_State := p_StateProvinceOther;
+   END IF;
 
    -- check to see if there is a record in grant_data with this resource id
    SELECT COUNT(*) INTO v_CoursesTaughtOtherMatchCount
@@ -121,14 +121,18 @@ BEGIN
           one_day_event_ind, department, 
           start_year, start_month, start_day,
           end_year, end_month, end_day,
-          created_at, updated_at)
+          created_at, updated_at, academic_calendar, academic_calendar_other, city, country, course_type,
+          institution_group_other, integration_group_id, number_of_times, peer_evaluated, period_offered,
+          period_offered_other, state_province, subject_area)
       VALUES
          (v_CourseTaughtOtherID, v_ResourceID, v_UserID, 3, p_CourseNumber, p_CreditHours, researchinview.strip_riv_tags(p_Description), researchinview.strip_riv_tags(p_DescriptionOfRole), 
           p_Enrollment, v_InstitutionID, p_LengthOfClass, p_OtherEvaluationInfo, p_PercentTaught, v_StudentEvaluated, p_CourseTitle, 
           v_OneDay, p_Sponsor,  
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL,
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn), NULL,
-          current_timestamp, current_timestamp);
+          current_timestamp, current_timestamp, p_AcademicCalendar, p_AcademicCalendarOther, p_City, p_Country, p_CourseType,
+          p_InstitutionGroupOther, p_IntegrationGroupId, p_NumberOfTimes, p_PeerEvaluated, p_PeriodOffered,
+          p_PeriodOfferedOther, v_State, p_SubjectArea);
 
    ELSE
    
@@ -152,6 +156,19 @@ BEGIN
              percent_taught = p_PercentTaught, 
              formal_student_evaluation = v_StudentEvaluated, 
              title = p_CourseTitle, 
+             academic_calendar = p_AcademicCalendar,  
+             academic_calendar_other = p_AcademicCalendarOther,
+             city = p_City,
+             country = p_Country, 
+             course_type = p_CourseType,
+	     institution_group_other = p_InstitutionGroupOther,
+	     integration_group_id = p_IntegrationGroupId,
+	     number_of_times = p_NumberOfTimes, 
+	     peer_evaluated = p_PeerEvaluated,
+	     period_offered = p_PeriodOffered,
+             period_offered_other = p_PeriodOfferedOther,
+             state_province = v_State,
+             subject_area = p_SubjectArea,
              one_day_event_ind = v_OneDay, 
              department = p_Sponsor,
              start_year = researchinview.get_year(p_StartedOn), 

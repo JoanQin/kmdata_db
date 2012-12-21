@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_licensure (
+CREATE OR REPLACE FUNCTION researchinview.insert_licensure (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -90,13 +90,13 @@ BEGIN
       -- insert into degree_certifications, certifying_body_id, start_year, start_month, end_year, end_month, subspecialty,  npi, upin, medicaid, 
       INSERT INTO kmdata.degree_certifications
          (id, user_id, institution_id, title, abbreviation, city, 
-          country, medicaid, npi, state, upin, license_number, 
+          country, medicaid, npi, state, upin, license_number, active,
           start_year, start_month, 
           end_year, end_month,
           resource_id, created_at, updated_at)
       VALUES
          (v_DegreeCertID, v_UserID, v_InstitutionID, researchinview.strip_riv_tags(p_LicenseTitle), p_Abbreviation, p_City,
-          p_Country, p_MedicaidNumber, p_NPI, v_State, p_UPIN,  p_LicenseNumber, 
+          p_Country, p_MedicaidNumber, p_NPI, v_State, p_UPIN,  p_LicenseNumber, p_Active,
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn),
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn),
 	  v_ResourceID, current_timestamp, current_timestamp);
@@ -120,6 +120,7 @@ BEGIN
       -- update the works table
       UPDATE kmdata.degree_certifications
          SET user_id = v_UserID,
+             active = p_Active,
              institution_id = v_InstitutionID, 
              title = researchinview.strip_riv_tags(p_LicenseTitle), 
              abbreviation = p_Abbreviation, 

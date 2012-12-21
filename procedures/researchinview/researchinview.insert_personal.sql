@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_personal (
+CREATE OR REPLACE FUNCTION researchinview.insert_personal (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -79,12 +79,6 @@ BEGIN
       v_State := p_StateProvinceOther;
    END IF;
 
-   -- ******************** NOT MAPPED IN PRO/KMDATA ********************************
-   -- p_AdditionalCitizenship, p_Citizenship, p_Gender, p_NihEraCommonsName, p_OptedOutOfResearcherIDSetup, p_PreviouslyUsedEmailAddresses, 
-   -- p_ResearcherID, p_ResearcherIDEmailAddress, p_SyncWithResearcherID, 
-
-   -- SKIPPED:
-   -- 
 
    -- check to see if there is a record in user_preferred_names with this resource id
    SELECT COUNT(*) INTO v_PersonalMatchCount
@@ -99,13 +93,15 @@ BEGIN
       INSERT INTO kmdata.user_preferred_names
          (id, resource_id, user_id, address, address_2, city, country, email, fax, 
           first_name, last_name, middle_name, phone, prefix, preferred_publishing_name, 
-          state, suffix, url, zip, 
-          created_at, updated_at)
+          state, suffix, url, zip, additional_citizenship, citizenship, gender, nih_era_commons_name,
+          created_at, updated_at, opted_out_of_researcher_id_setup, previously_used_email_addressess, 
+          researcher_id, researcher_id_email_address, sync_with_researcher_id )
       VALUES
          (v_PersonalID, v_ResourceID, v_UserID, p_Address1, p_Address2, p_City, p_Country, p_EmailAddress, p_FaxNumber, 
           p_FirstName, p_LastName, p_MiddleName, p_PhoneNumber, p_Prefix, p_PublishingName, 
-          v_State, p_Suffix, p_URL, p_ZIPCode, 
-          current_timestamp, current_timestamp);
+          v_State, p_Suffix, p_URL, p_ZIPCode, p_AdditionalCitizenship, p_Citizenship, p_Gender, p_NihEraCommonsName,
+          current_timestamp, current_timestamp, p_OptedOutOfResearcherIDSetup, p_PreviouslyUsedEmailAddresses,
+          p_ResearcherID, p_ResearcherIDEmailAddress, p_SyncWithResearcherID );
 
    ELSE
    
@@ -133,6 +129,15 @@ BEGIN
              suffix = p_Suffix, 
              url = p_URL, 
              zip = p_ZIPCode, 
+             additional_citizenship = p_AdditionalCitizenship,
+             citizenship = p_Citizenship,
+             gender = p_Gender,
+             nih_era_commons_name = p_NihEraCommonsName,
+             opted_out_of_researcher_id_setup = p_OptedOutOfResearcherIDSetup,
+             previously_used_email_addressess = p_PreviouslyUsedEmailAddresses,
+             researcher_id = p_ResearcherID,
+             researcher_id_email_address = p_ResearcherIDEmailAddress,
+             sync_with_researcher_id = p_SyncWithResearcherID,
              updated_at = current_timestamp
        WHERE id = v_PersonalID;
 

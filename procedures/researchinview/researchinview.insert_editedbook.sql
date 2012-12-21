@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_editedbook (
+CREATE OR REPLACE FUNCTION researchinview.insert_editedbook (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -40,6 +40,7 @@ DECLARE
    v_PublicationDateID BIGINT;
    v_StatusID BIGINT;
    v_WorkTypeID BIGINT;
+   v_State VARCHAR(255);
 BEGIN
    -- select the user ID
    --v_UserID := p_IntegrationUserId;
@@ -62,6 +63,11 @@ BEGIN
 
    IF v_ResourceID IS NULL THEN
       v_ResourceID := add_new_resource('researchinview', 'works');
+   END IF;
+   
+   v_State := p_StateProvince;
+   IF v_State IS NULL OR v_State = '' THEN
+      v_State := p_StateProvinceOther;
    END IF;
 
    -- update activity table in the researchinview schema
@@ -100,13 +106,13 @@ BEGIN
       INSERT INTO kmdata.works
          (id, resource_id, user_id, author_list, editor_list, city, country, edition, percent_authorship, 
           publication_dmy_single_date_id,
-          publisher, review_type_id, state, title, url, volume, work_type_id,
+          publisher, review_type_id, state, title, url, volume, work_type_id, is_review,
           created_at, updated_at, isbn, lccn,
           status_id, sub_work_type_id)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_Author, p_Editor, p_City, p_Country, p_Edition, p_PercentAuthorship, 
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
-          p_Publisher, v_KMDReviewType, p_StateProvince, researchinview.strip_riv_tags(p_Title), p_URL, p_Volume, 9,
+          p_Publisher, v_KMDReviewType, v_State, researchinview.strip_riv_tags(p_Title), p_URL, p_Volume, 9, p_Reviewed,
           current_timestamp, current_timestamp, p_ISBN, p_LCCN,
           v_StatusID, v_WorkTypeID);
    
@@ -137,6 +143,7 @@ BEGIN
          SET user_id = v_UserID,
              author_list = p_Author,
              editor_list = p_Editor,
+             is_review = p_Reviewed,
              city = p_City,
              country = p_Country,
              edition = p_Edition,
@@ -144,7 +151,7 @@ BEGIN
              publisher = p_Publisher,
              --peer_reviewed_ind = p_Reviewed,
              review_type_id = v_KMDReviewType,
-             state = p_StateProvince,
+             state = v_State,
              title = researchinview.strip_riv_tags(p_Title),
              url = p_URL,
              volume = p_Volume,

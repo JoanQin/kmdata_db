@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_committee (
+CREATE OR REPLACE FUNCTION researchinview.insert_committee (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -89,12 +89,12 @@ BEGIN
       INSERT INTO kmdata.user_services
          (id, user_id, group_name, service_unit_id, institution_id, active_ind, service_role_id, 
           service_role_modifier_id, subcommittee_name, workgroup_name, 
-          start_year, end_year, 
+          start_year, end_year, percent_effort, url,
           created_at, updated_at, resource_id)
       VALUES
          (v_CommitteeID, v_UserID, p_CommitteeGroup, CAST(p_CommitteeLevel AS INTEGER), v_Inst, v_ActiveInd, v_RoleTypeID, 
           CAST(p_RoleModifier AS INTEGER), p_Subcommittee, p_Workgroup, 
-          researchinview.get_year(p_StartedOn), researchinview.get_year(p_EndedOn), 
+          researchinview.get_year(p_StartedOn), researchinview.get_year(p_EndedOn), p_PercentEffort, p_URL,
           current_timestamp, current_timestamp, v_ResourceID);
 
       -- add narrative
@@ -120,6 +120,8 @@ BEGIN
              group_name = p_CommitteeGroup, 
              service_unit_id = CAST(p_CommitteeLevel AS INTEGER), 
              institution_id = v_Inst, 
+             percent_effort = p_PercentEffort, 
+             url = p_URL,
              active_ind = v_ActiveInd, 
              service_role_id = v_RoleTypeID, 
              service_role_modifier_id = CAST(p_RoleModifier AS INTEGER), 
