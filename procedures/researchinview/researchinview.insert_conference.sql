@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_conference (
+CREATE OR REPLACE FUNCTION researchinview.insert_conference (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -124,7 +124,7 @@ BEGIN
          (id, resource_id, user_id, title, journal_article_type_id, author_list, 
           isbn, issn, impact_factor, issue, journal_title, beginning_page, ending_page, percent_authorship,
           review_type_id, status_id, url, volume, created_at, updated_at, work_type_id,
-          book_title, city, state, country, event_title, edition, publisher, series,
+          book_title, city, state, country, event_title, edition, publisher, series, is_review, status_id, number_of_citations,
           publication_dmy_single_date_id,
           performance_start_date,
           publication_media_type_id, publication_type_id)
@@ -132,7 +132,8 @@ BEGIN
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), v_JournalArticleTypeID, p_Author, 
           p_ISBN, p_ISSN, p_ImpactFactor, p_Issues, researchinview.strip_riv_tags(p_JournalTitle), v_StartPage, v_EndPage, p_PercentAuthorship, 
           CAST(p_ReviewType AS INTEGER), NULL, p_URL, p_Volume, current_timestamp, current_timestamp, 13,  -- 13 is paper in proceeding
-          researchinview.strip_riv_tags(p_BookTitle), p_City, v_State, p_Country, p_ConferenceName, p_Edition, p_Publisher, researchinview.strip_riv_tags(p_SeriesTitle),
+          researchinview.strip_riv_tags(p_BookTitle), p_City, v_State, p_Country, p_ConferenceName, p_Edition, p_Publisher, 
+          researchinview.strip_riv_tags(p_SeriesTitle), p_Reviewed, cast(p_Status as integer), p_NumberOfCitations,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
           date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1'), 
           CAST(p_PublicationDocumentType AS INTEGER), CAST(p_PublicationType AS BIGINT));
@@ -165,6 +166,9 @@ BEGIN
              title = researchinview.strip_riv_tags(p_Title), 
              journal_article_type_id = v_JournalArticleTypeID, 
              author_list = p_Author, 
+             is_review =  p_Reviewed,
+             number_of_citations = p_NumberOfCitations,
+             status_id = cast(p_Status as integer),
              issn = p_ISSN, 
              isbn = p_ISBN,
              impact_factor = p_ImpactFactor, 
