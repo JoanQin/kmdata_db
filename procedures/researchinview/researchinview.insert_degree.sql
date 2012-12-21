@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_degree (
+CREATE OR REPLACE FUNCTION researchinview.insert_degree (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -106,13 +106,13 @@ BEGIN
    
       INSERT INTO kmdata.degree_certifications
          (id, user_id, institution_id, area_of_study, terminal_ind, --cip_code_id
-          degree_type_id,
+          degree_type_id, area_of_study,
           start_year, start_month, 
           end_year, end_month, 
           resource_id, created_at, updated_at)
       VALUES
          (v_DegreeCertificationID, v_UserID, v_InstitutionID, p_FieldOfStudy, v_TerminalInd, --CIP code
-          v_DegreeTypeID,
+          v_DegreeTypeID, v_AreaOfStudy,
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn),
           researchinview.get_year(p_ConferredOn), researchinview.get_month(p_ConferredOn),
           v_ResourceID, current_timestamp, current_timestamp);
