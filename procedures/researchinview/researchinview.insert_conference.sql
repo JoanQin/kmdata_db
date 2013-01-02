@@ -136,7 +136,7 @@ BEGIN
           researchinview.strip_riv_tags(p_BookTitle), p_City, v_State, p_Country, p_ConferenceName, p_Edition, p_Publisher, 
           researchinview.strip_riv_tags(p_SeriesTitle), p_Reviewed, cast(p_Status as integer), p_NumberOfCitations,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
-          CASE WHEN get_year(p_ConferenceStartedOn) = 0 Then CAST (null as date) ELSE 
+          CASE WHEN researchinview.get_year(p_ConferenceStartedOn) = 0 Then CAST (null as date) ELSE 
           date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1')
           END, 
           CAST(p_PublicationDocumentType AS INTEGER), CAST(p_PublicationType AS BIGINT));
@@ -193,7 +193,7 @@ BEGIN
              edition = p_Edition,
              publisher = p_Publisher,
              series = researchinview.strip_riv_tags(p_SeriesTitle),
-             performance_start_date = CASE WHEN get_year(p_ConferenceStartedOn) = 0 THEN CAST(NULL AS DATE) 
+             performance_start_date = CASE WHEN researchinview.get_year(p_ConferenceStartedOn) = 0 THEN CAST(NULL AS DATE) 
              			ELSE date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1') END,
              publication_media_type_id = CAST(p_PublicationDocumentType AS INTEGER),
              publication_type_id = CAST(p_PublicationType AS BIGINT)
