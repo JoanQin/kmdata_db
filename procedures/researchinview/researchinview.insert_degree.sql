@@ -105,13 +105,13 @@ BEGIN
       v_DegreeCertificationID := nextval('kmdata.degree_certifications_id_seq');
    
       INSERT INTO kmdata.degree_certifications
-         (id, user_id, institution_id, area_of_study, terminal_ind, --cip_code_id
+         (id, user_id, institution_id,  terminal_ind, --cip_code_id
           degree_type_id, area_of_study,
           start_year, start_month, 
           end_year, end_month, 
           resource_id, created_at, updated_at)
       VALUES
-         (v_DegreeCertificationID, v_UserID, v_InstitutionID, p_FieldOfStudy, v_TerminalInd, --CIP code
+         (v_DegreeCertificationID, v_UserID, v_InstitutionID,  v_TerminalInd, --CIP code
           v_DegreeTypeID, v_AreaOfStudy,
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn),
           researchinview.get_year(p_ConferredOn), researchinview.get_month(p_ConferredOn),
