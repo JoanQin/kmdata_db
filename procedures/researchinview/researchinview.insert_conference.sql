@@ -54,6 +54,7 @@ DECLARE
    v_UserID BIGINT;
    v_State VARCHAR(2000);
    v_PublicationDateID BIGINT;
+   ---v_PerformanceDate timestap without time zone;
 BEGIN
    -- maps to Papers in Proceedings
    
@@ -100,11 +101,11 @@ BEGIN
       v_State := p_StateProvinceOther;
    END IF;
    
-   IF researchinview.get_year(p_ConferenceStartedOn) = 0 THEN
-      v_PerformanceDate := CAST(NULL AS DATE);
-   ELSE
-      v_PerformanceDate := DATE(researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1');
-   END IF;
+   --IF researchinview.get_year(p_ConferenceStartedOn) = 0 THEN
+   --   v_PerformanceDate := CAST(NULL AS DATE);
+   --ELSE
+   --    v_PerformanceDate := DATE(researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1');
+   --END IF;
    
    -- update information specific to journal articles
       --doi (Digital Object Identifier), description of effort (below), !synced w/ researcherid, #citations, pmid, repository handle,
