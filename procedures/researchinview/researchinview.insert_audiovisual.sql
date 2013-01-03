@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_audiovisual (
+CREATE OR REPLACE FUNCTION researchinview.insert_audiovisual (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -110,14 +110,16 @@ BEGIN
           artist, network, percent_authorship, role_designator, sponsor, state, 
           broadcast_dmy_single_date_id,
           presentation_dmy_range_date_id, 
-          title, url, created_at, updated_at, work_type_id)
+          title, url, created_at, updated_at, work_type_id,
+          completed, producer, sub_work_type_id, sub_work_type_other)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_City, p_Country, p_Director, substr(p_DistributedBy,1,255), substr(p_Format,1,255),
           substr(p_NameOfArtist,1,255), substr(p_NetworkName,1,255), p_PercentAuthorship, v_Role, substr(p_SponsoredBy,1,255), v_State, 
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_BroadcastedOn), researchinview.get_year(p_BroadcastedOn)),
           kmdata.add_dmy_range_date(NULL, researchinview.get_month(p_StartedOn), researchinview.get_year(p_StartedOn),
                                     NULL, researchinview.get_month(p_EndedOn), researchinview.get_year(p_EndedOn)),
-          researchinview.strip_riv_tags(p_TitleOfWork), p_URL, current_timestamp, current_timestamp, v_WorkTypeID);
+          researchinview.strip_riv_tags(p_TitleOfWork), p_URL, current_timestamp, current_timestamp, v_WorkTypeID,
+          p_Completed, p_Producer, CAST(p_TypeOfWork AS INTEGER), p_TypeOfWorkOther);
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -147,6 +149,10 @@ BEGIN
              city = p_City, 
              country = p_Country, 
              director = p_Director, 
+             completed = p_Completed, 
+             producer = p_Producer, 
+             sub_work_type_id = CAST(p_TypeOfWork AS INTEGER), 
+             sub_work_type_other = p_TypeOfWorkOther,
              distributor = substr(p_DistributedBy,1,255), 
              format = substr(p_Format,1,255),
              artist = substr(p_NameOfArtist,1,255), 
