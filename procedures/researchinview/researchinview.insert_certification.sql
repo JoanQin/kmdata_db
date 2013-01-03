@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_certification (
+CREATE OR REPLACE FUNCTION researchinview.insert_certification (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -89,13 +89,13 @@ BEGIN
       -- insert into degree_certifications, certifying_body_id, start_year, start_month, end_year, end_month, npi, upin, medicaid, 
       INSERT INTO kmdata.degree_certifications
          (id, user_id, institution_id, resource_id, title, 
-          license_number, abbreviation, subspecialty,
+          license_number, abbreviation, subspecialty, active,
           start_year, start_month,
           end_year, end_month,
           created_at, updated_at)
       VALUES
          (v_DegreeCertID, v_UserID, v_InstitutionID, v_ResourceID, researchinview.strip_riv_tags(p_CertificationTitle),
-	  p_LicenseNumber, p_Abbreviation, v_Subspecialty,
+	  p_LicenseNumber, p_Abbreviation, v_Subspecialty, p_Active,
 	  researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn),
 	  researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn),
 	  current_timestamp, current_timestamp);
@@ -122,6 +122,7 @@ BEGIN
              institution_id = v_InstitutionID,
              title = researchinview.strip_riv_tags(p_CertificationTitle),
              license_number = p_LicenseNumber,
+             active = p_Active,
              abbreviation = p_Abbreviation,
              subspecialty = v_Subspecialty,
              start_year = researchinview.get_year(p_StartedOn), 
