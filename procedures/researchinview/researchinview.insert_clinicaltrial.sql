@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_clinicaltrial (
+CREATE OR REPLACE FUNCTION researchinview.insert_clinicaltrial (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -117,19 +117,19 @@ BEGIN
       -- NOT READY: p_ProtocolId -> split into 4 fields
       INSERT INTO kmdata.clinical_trials
          (id, user_id, location_city, country, summary, principal_investigator, role_type_id, 
-          sponsor, location_state, title, url, 
+          sponsor, location_state, title, url, clinical_trials_identifier, human_subjects,
           start_year, start_month, start_day, 
           end_year, end_month, end_day, 
-          created_at, updated_at, resource_id,
+          created_at, updated_at, resource_id, ongoing, protocol_id, vertebrate_animals_used,
           approved_on, 
           condition_studied, intervention_analyzed, percent_effort,
           regulatory_approval, role_other, site_name)
       VALUES
          (v_ClinicalTrialID, v_UserID, p_City, p_Country, researchinview.strip_riv_tags(p_DescriptionOfEffort), p_Investigator, v_RoleTypeID, 
-          p_Sponsor, v_State, researchinview.strip_riv_tags(p_TitleOfTrial), p_URL, 
+          p_Sponsor, v_State, researchinview.strip_riv_tags(p_TitleOfTrial), p_URL, p_ClinicalTrialsIdentifier, p_HumanSubjects,
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL,
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn), NULL,
-          current_timestamp, current_timestamp, v_ResourceID,
+          current_timestamp, current_timestamp, v_ResourceID, p_Ongoing, p_ProtocolId, p_VertebrateAnimalsUsed,
           date (researchinview.get_year(p_ApprovedOn) || '-' || researchinview.get_month(p_ApprovedOn) || '-1'),
           p_ConditionStudied, p_InterventionAnalyzed, p_PercentEffort,
           v_RegulatoryApproval, p_RoleOther, p_SiteName);
@@ -145,6 +145,11 @@ BEGIN
       UPDATE kmdata.clinical_trials
          SET user_id = v_UserID, 
              location_city = p_City, 
+             clinical_trials_identifier = p_ClinicalTrialsIdentifier, 
+             human_subjects = p_HumanSubjects,
+             ongoing = p_Ongoing, 
+             protocol_id = p_ProtocolId, 
+             vertebrate_animals_used =p_VertebrateAnimalsUsed,
              country = p_Country, 
              summary = researchinview.strip_riv_tags(p_DescriptionOfEffort), 
              principal_investigator = p_Investigator, 
