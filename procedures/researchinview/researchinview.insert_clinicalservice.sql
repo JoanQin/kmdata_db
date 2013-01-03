@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_clinicalservice (
+CREATE OR REPLACE FUNCTION researchinview.insert_clinicalservice (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -78,14 +78,14 @@ BEGIN
 
       INSERT INTO kmdata.clinical_service
          (id, user_id, description, location, title, clinical_service_type_id, url, 
-          start_date,
-          end_date,
-          created_at, updated_at, resource_id)
+          start_date, clinical_hours_per,
+          end_date, department,
+          created_at, updated_at, resource_id, individuals_served, ongoing, role, role_other,total_hours_teaching_clinic    )
       VALUES
          (v_ClinicalServiceID, v_UserID, researchinview.strip_riv_tags(p_DescriptionOfEffort), p_Location, researchinview.strip_riv_tags(p_Title), v_TypeOfService, p_URL, 
-          date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'),
-          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'),
-          current_timestamp, current_timestamp, v_ResourceID);
+          date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'), p_ClinicalHoursPer,
+          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'), p_Department,
+          current_timestamp, current_timestamp, v_ResourceID, p_IndividualsServed, p_Ongoing, p_Role, p_RoleOther, p_TotalHoursTeachingClinic);
       
    ELSE
    
@@ -98,7 +98,14 @@ BEGIN
       UPDATE kmdata.clinical_service
          SET user_id = v_UserID, 
              description = researchinview.strip_riv_tags(p_DescriptionOfEffort), 
-             location = p_Location, 
+             location = p_Location,
+             clinical_hours_per = p_ClinicalHoursPer,
+             department = p_Department,
+             individuals_served = p_IndividualsServed, 
+             ongoing = p_Ongoing, 
+             role = p_Role, 
+             role_other = p_RoleOther,
+             total_hours_teaching_clinic = p_TotalHoursTeachingClinic,
              title = researchinview.strip_riv_tags(p_Title), 
              clinical_service_type_id = v_TypeOfService, 
              url = p_URL,

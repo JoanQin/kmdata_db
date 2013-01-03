@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_artwork (
+CREATE OR REPLACE FUNCTION researchinview.insert_artwork (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -111,14 +111,14 @@ BEGIN
           juried_ind, medium, percent_authorship, exhibition_type_id, sponsor, state, title, url, venue,
           creation_dmy_single_date_id, 
           exhibit_dmy_range_date_id,
-          created_at, updated_at, work_type_id)
+          created_at, updated_at, work_type_id, completed, ongoing, other_artist, solo, sub_work_type_id )
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_Artist, p_City, p_Country, p_Curator, p_Dimensions, researchinview.strip_riv_tags(p_ExhibitionTitle),
           v_JuriedInd, p_Medium, p_PercentAuthorship, NULL, p_Sponsor, v_State, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, p_Venue,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_CompletedOn), researchinview.get_year(p_CompletedOn)),
           kmdata.add_dmy_range_date(NULL, researchinview.get_month(p_StartedOn), researchinview.get_year(p_StartedOn),
                                     NULL, researchinview.get_month(p_EndedOn), researchinview.get_year(p_EndedOn)),
-          current_timestamp, current_timestamp, v_WorkTypeID);
+          current_timestamp, current_timestamp, v_WorkTypeID, p_Completed, p_Ongoing, p_OtherArtist, p_Solo, CAST(p_TypeOfWork AS INTEGER));
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -155,6 +155,11 @@ BEGIN
          SET user_id = v_UserID,
              artist = p_Artist, 
              city = p_City, 
+             completed = p_Completed, 
+             ongoing = p_Ongoing, 
+             other_artist = p_OtherArtist, 
+             solo = p_Solo, 
+             sub_work_type_id = CAST(p_TypeOfWork AS INTEGER),
              country = p_Country, 
              curator = p_Curator, 
              dimensions = p_Dimensions, 

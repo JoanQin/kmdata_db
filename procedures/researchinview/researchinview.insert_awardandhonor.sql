@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_awardandhonor (
+CREATE OR REPLACE FUNCTION researchinview.insert_awardandhonor (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -97,14 +97,14 @@ BEGIN
       INSERT INTO kmdata.user_honors_awards
          (id, resource_id, user_id, monetary_amount, fellow_ind, institution_id, monetary_component_ind, 
           honor_name, sponsor, subject, honor_type_id, competitiveness, selected, 
-          start_year,
-          end_year,
+          start_year, currency, eligibility_other, reach_of_award, selection_process_other,
+          end_year, type_of_award, type_of_award_other, url,
           created_at, updated_at)
       VALUES
          (v_AwardAndHonorID, v_ResourceID, v_UserID, p_AmountOfAward, v_Fellow, v_Inst, v_MonetaryComponent, 
           p_NameOfAward, p_Sponsor, p_SubjectArea, 2, p_Eligibility, p_SelectionProcess,  --CAST(p_TypeOfAward AS INTEGER), 
-          researchinview.get_year(p_AwardedOn),
-          researchinview.get_year(p_EndedOn),
+          researchinview.get_year(p_AwardedOn), p_Currency, p_EligibilityOther, p_ReachOfAward, p_SelectionProcessOther,
+          researchinview.get_year(p_EndedOn), p_TypeOfAward, p_TypeOfAwardOther, p_URL,
           current_timestamp, current_timestamp);
    
    ELSE
@@ -119,6 +119,13 @@ BEGIN
          SET user_id = v_UserID,
              monetary_amount = p_AmountOfAward, 
              fellow_ind = v_Fellow, 
+             currency = p_Currency, 
+             eligibility_other = p_EligibilityOther, 
+             reach_of_award = p_ReachOfAward, 
+             selection_process_other = p_SelectionProcessOther,
+             type_of_award = p_TypeOfAward, 
+             type_of_award_other = p_TypeOfAwardOther, 
+             url = p_URL,
              institution_id = v_Inst, 
              monetary_component_ind = v_MonetaryComponent, 
              honor_name = p_NameOfAward, 

@@ -54,6 +54,7 @@ DECLARE
    v_UserID BIGINT;
    v_State VARCHAR(2000);
    v_PublicationDateID BIGINT;
+   ---v_PerformanceDate timestap without time zone;
 BEGIN
    -- maps to Papers in Proceedings
    
@@ -100,11 +101,11 @@ BEGIN
       v_State := p_StateProvinceOther;
    END IF;
    
-   IF researchinview.get_year(p_ConferenceStartedOn) = 0 THEN
-      v_PerformanceDate := CAST(NULL AS DATE);
-   ELSE
-      v_PerformanceDate := DATE(researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1');
-   END IF;
+   --IF researchinview.get_year(p_ConferenceStartedOn) = 0 THEN
+   --   v_PerformanceDate := CAST(NULL AS DATE);
+   --ELSE
+   --    v_PerformanceDate := DATE(researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1');
+   --END IF;
    
    -- update information specific to journal articles
       --doi (Digital Object Identifier), description of effort (below), !synced w/ researcherid, #citations, pmid, repository handle,
@@ -123,7 +124,7 @@ BEGIN
       INSERT INTO kmdata.works
          (id, resource_id, user_id, title, journal_article_type_id, author_list, 
           isbn, issn, impact_factor, issue, journal_title, beginning_page, ending_page, percent_authorship,
-          review_type_id, status_id, url, volume, created_at, updated_at, work_type_id,
+          review_type_id,  url, volume, created_at, updated_at, work_type_id,
           book_title, city, state, country, event_title, edition, publisher, series, is_review, status_id, number_of_citations,
           publication_dmy_single_date_id,
           performance_start_date,
@@ -131,12 +132,18 @@ BEGIN
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), v_JournalArticleTypeID, p_Author, 
           p_ISBN, p_ISSN, p_ImpactFactor, p_Issues, researchinview.strip_riv_tags(p_JournalTitle), v_StartPage, v_EndPage, p_PercentAuthorship, 
-          CAST(p_ReviewType AS INTEGER), NULL, p_URL, p_Volume, current_timestamp, current_timestamp, 13,  -- 13 is paper in proceeding
+          CAST(p_ReviewType AS INTEGER), p_URL, p_Volume, current_timestamp, current_timestamp, 13,  -- 13 is paper in proceeding
           researchinview.strip_riv_tags(p_BookTitle), p_City, v_State, p_Country, p_ConferenceName, p_Edition, p_Publisher, 
           researchinview.strip_riv_tags(p_SeriesTitle), p_Reviewed, cast(p_Status as integer), p_NumberOfCitations,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
+<<<<<<< HEAD
           case when researchinview.get_year(p_ConferenceStartedOn) = 0 then cast (null as timestamp) 
           else date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1') end, 
+=======
+          CASE WHEN researchinview.get_year(p_ConferenceStartedOn) = 0 Then CAST (null as date) ELSE 
+          date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1')
+          END, 
+>>>>>>> 60ef8ccef4f050db9aa114544c8247a536a564ed
           CAST(p_PublicationDocumentType AS INTEGER), CAST(p_PublicationType AS BIGINT));
 
       -- add work author
@@ -191,8 +198,13 @@ BEGIN
              edition = p_Edition,
              publisher = p_Publisher,
              series = researchinview.strip_riv_tags(p_SeriesTitle),
+<<<<<<< HEAD
              performance_start_date = case when researchinview.get_year(p_ConferenceStartedOn) = 0 then cast(null as timestamp) 
              				else date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1') end,
+=======
+             performance_start_date = CASE WHEN researchinview.get_year(p_ConferenceStartedOn) = 0 THEN CAST(NULL AS DATE) 
+             			ELSE date (researchinview.get_year(p_ConferenceStartedOn) || '-' || researchinview.get_month(p_ConferenceStartedOn) || '-1') END,
+>>>>>>> 60ef8ccef4f050db9aa114544c8247a536a564ed
              publication_media_type_id = CAST(p_PublicationDocumentType AS INTEGER),
              publication_type_id = CAST(p_PublicationType AS BIGINT)
        WHERE id = v_WorkID;

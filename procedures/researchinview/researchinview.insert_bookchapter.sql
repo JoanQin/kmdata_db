@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_bookchapter (
+CREATE OR REPLACE FUNCTION researchinview.insert_bookchapter (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -43,6 +43,7 @@ DECLARE
    v_StartPage VARCHAR(200);
    v_EndPage VARCHAR(200);
    v_StatusID BIGINT;
+   v_State VARCHAR(255);
 BEGIN
    -- select the user ID
    --v_UserID := p_IntegrationUserId;
@@ -76,6 +77,11 @@ BEGIN
    SELECT COUNT(*) INTO v_WorksMatchCount
      FROM kmdata.works
     WHERE resource_id = v_ResourceID;
+    
+   v_State := p_StateProvince;
+       IF v_State IS NULL OR v_State = '' THEN
+          v_State := p_StateProvinceOther;
+   END IF;
 
    -- map review type
    v_KMDReviewType := p_ReviewType;
@@ -99,12 +105,12 @@ BEGIN
 
       INSERT INTO kmdata.works
          (id, resource_id, user_id, author_list, city, country, edition, editor_list, percent_authorship, publication_dmy_single_date_id,
-          publisher, review_type_id, state, title, title_in, url, volume, work_type_id,
+          publisher, is_review, review_type_id, state, title, title_in, url, volume, work_type_id,
           created_at, updated_at, isbn, lccn,
           beginning_page, ending_page, status_id, book_author)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_ChapterAuthor, p_City, p_Country, p_Edition, p_Editor, p_PercentAuthorship, kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
-          p_Publisher, v_KMDReviewType, p_StateProvince, researchinview.strip_riv_tags(p_ChapterTitle), researchinview.strip_riv_tags(p_BookTitle), p_URL, p_Volume, 8, -- 8 is chapter in book
+          p_Publisher, p_Reviewed, v_KMDReviewType, v_State, researchinview.strip_riv_tags(p_ChapterTitle), researchinview.strip_riv_tags(p_BookTitle), p_URL, p_Volume, 8, -- 8 is chapter in book
           current_timestamp, current_timestamp, p_ISBN, p_LCCN,
           v_StartPage, v_EndPage, v_StatusID, p_BookAuthor);
    
@@ -140,9 +146,9 @@ BEGIN
              editor_list = p_Editor,
              percent_authorship = p_PercentAuthorship,
              publisher = p_Publisher,
-             --peer_reviewed_ind = p_Reviewed,
+             is_review = p_Reviewed,
              review_type_id = v_KMDReviewType,
-             state = p_StateProvince,
+             state = v_State,
              title = researchinview.strip_riv_tags(p_ChapterTitle),
              title_in = researchinview.strip_riv_tags(p_BookTitle),
              url = p_URL,
