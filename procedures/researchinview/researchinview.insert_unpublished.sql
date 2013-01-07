@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_unpublished (
+CREATE OR REPLACE FUNCTION researchinview.insert_unpublished (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -89,12 +89,12 @@ BEGIN
       v_WorkID := nextval('kmdata.works_id_seq');
    
       INSERT INTO kmdata.works
-         (id, resource_id, user_id, title, author_list, 
+         (id, resource_id, user_id, title, author_list, completed,
           percent_authorship, submission_dmy_single_date_id, 
           review_type_id, created_at, updated_at, work_type_id,
           submitted_to, extended_author_list, status_id)
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), p_Author, 
+         (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), p_Author, p_Submitted,
           p_PercentAuthorship, kmdata.add_dmy_single_date(NULL, v_SubmittedMonth, v_SubmittedYear), 
           v_ReviewType, current_timestamp, current_timestamp, 10, -- 10 is potential publications under review (ReferenceWork)
           v_SubmittedTo, CASE WHEN LENGTH(p_SubmittedTo) < 255 THEN NULL ELSE p_SubmittedTo END, CAST(p_SubmissionStatus AS INTEGER));
@@ -118,6 +118,7 @@ BEGIN
          SET user_id = v_UserID,
              title = researchinview.strip_riv_tags(p_Title), 
              author_list = p_Author, 
+             completed = p_Submitted,
              percent_authorship = p_PercentAuthorship, 
              --submission_dmy_single_date_id
              status_id = CAST(p_SubmissionStatus AS INTEGER),
