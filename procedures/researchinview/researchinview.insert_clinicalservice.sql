@@ -83,8 +83,10 @@ BEGIN
           created_at, updated_at, resource_id, individuals_served, ongoing, role, role_other,total_hours_teaching_clinic    )
       VALUES
          (v_ClinicalServiceID, v_UserID, researchinview.strip_riv_tags(p_DescriptionOfEffort), p_Location, researchinview.strip_riv_tags(p_Title), v_TypeOfService, p_URL, 
-          date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'), p_ClinicalHoursPer,
-          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'), p_Department,
+          case when researchinview.get_year(p_StartedOn) = 0 then cast(null as date) else 
+          date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1') end, p_ClinicalHoursPer,
+          case when researchinview.get_year(p_EndedOn) = 0 then cast(null as date) else 
+          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1') end, p_Department,
           current_timestamp, current_timestamp, v_ResourceID, p_IndividualsServed, p_Ongoing, p_Role, p_RoleOther, p_TotalHoursTeachingClinic);
       
    ELSE
@@ -109,8 +111,10 @@ BEGIN
              title = researchinview.strip_riv_tags(p_Title), 
              clinical_service_type_id = v_TypeOfService, 
              url = p_URL,
-             start_date = date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'),
-             end_date = date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'),
+             start_date = case when researchinview.get_year(p_StartedOn) = 0 then cast(null as date) else 
+             		date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1') end,
+             end_date = case when researchinview.get_year(p_EndedOn) = 0 then cast(null as date) else 
+             		date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1') end,
              updated_at = current_timestamp
        WHERE id = v_ClinicalServiceID;
 

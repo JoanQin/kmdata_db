@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_technicalreport (
+CREATE OR REPLACE FUNCTION researchinview.insert_technicalreport (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -98,13 +98,13 @@ BEGIN
          (id, resource_id, user_id, title, author_list, editor_list, 
           issue, percent_authorship, publication_type_id, report_number,
           review_type_id, status_id, url, volume, created_at, updated_at, work_type_id,
-          city, state, country, edition, publisher, isbn,
+          city, state, country, edition, publisher, isbn, is_review,
           publication_dmy_single_date_id)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_Title), p_Author, p_Editor, 
           p_Issue, p_PercentAuthorship,  CAST(p_PublicationType AS INTEGER), p_ReportNumber,
           CAST(p_ReviewType AS INTEGER), CAST(p_Status AS INTEGER), p_URL, p_Volume, current_timestamp, current_timestamp, 7,  -- 7 is bulletin and technical report
-          p_City, v_State, p_Country, p_Edition, p_Publisher, p_ISBN,
+          p_City, v_State, p_Country, p_Edition, p_Publisher, p_ISBN, p_Reviewed,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)));
 
       -- add work author
@@ -136,6 +136,7 @@ BEGIN
              journal_article_type_id = v_JournalArticleTypeID, 
              author_list = p_Author, 
              editor_list = p_Editor,
+             is_review = p_Reviewed,
              issue = p_Issue, 
              percent_authorship = p_PercentAuthorship, 
              publication_type_id = CAST(p_PublicationType as INTEGER),

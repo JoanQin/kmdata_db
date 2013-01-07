@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_editorship (
+CREATE OR REPLACE FUNCTION researchinview.insert_editorship (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -89,7 +89,9 @@ BEGIN
       VALUES
          (v_EditorialActivityID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_ArticleTitle), v_EditorshipDescriptor, v_IsEditor,
           p_Issue, researchinview.strip_riv_tags(p_PublicationTitle), v_PublicationType, v_TypeOfEditorship, p_Volume, p_URL, 
-          researchinview.get_year(p_StartedOn), researchinview.get_year(p_EndedOn), date (researchinview.get_year(p_PublishedOn) || '-' || researchinview.get_month(p_PublishedOn) || '-1'),
+          researchinview.get_year(p_StartedOn), researchinview.get_year(p_EndedOn), 
+          case when researchinview.get_year(p_PublishedOn) = 0 then cast(null as date) else 
+          date (researchinview.get_year(p_PublishedOn) || '-' || researchinview.get_month(p_PublishedOn) || '-1') end,
           current_timestamp, current_timestamp);
    
    ELSE
@@ -113,7 +115,8 @@ BEGIN
              url = p_URL,
              start_year = researchinview.get_year(p_StartedOn),
              end_year = researchinview.get_year(p_EndedOn),
-             publication_date = date (researchinview.get_year(p_PublishedOn) || '-' || researchinview.get_month(p_PublishedOn) || '-1'),
+             publication_date = case when researchinview.get_year(p_PublishedOn) = 0 then cast( null as date) else 
+             			date (researchinview.get_year(p_PublishedOn) || '-' || researchinview.get_month(p_PublishedOn) || '-1') end,
              updated_at = current_timestamp
        WHERE id = v_EditorialActivityID;
 

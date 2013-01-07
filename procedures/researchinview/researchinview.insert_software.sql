@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_software (
+CREATE OR REPLACE FUNCTION researchinview.insert_software (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -106,14 +106,14 @@ BEGIN
       v_WorkID := nextval('kmdata.works_id_seq');
    
       INSERT INTO kmdata.works
-         (id, resource_id, user_id, author_list, sponsor, percent_authorship, publisher, 
+         (id, resource_id, user_id, author_list, percent_authorship, publisher, 
           role_designator, title, medium, url, edition, 
           publication_dmy_single_date_id,
           last_update_dmy_single_date_id,
           created_at, updated_at, work_type_id,
           distributor, sub_work_type_id, sub_work_type_other)
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, p_AuthorNames, p_Distributor, p_PercentContribution, p_Publisher, 
+         (v_WorkID, v_ResourceID, v_UserID, p_AuthorNames, p_PercentContribution, p_Publisher, 
           v_Role, researchinview.strip_riv_tags(p_TitleOfWork), v_TypeDescr, p_URL, p_VersionNumber, 
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedOn), researchinview.get_year(p_PublishedOn)),
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_LastUpdatedOn), researchinview.get_year(p_LastUpdatedOn)),
@@ -146,7 +146,7 @@ BEGIN
       UPDATE kmdata.works
          SET user_id = v_UserID,
              author_list = p_AuthorNames, 
-             sponsor = p_Distributor, 
+             ----sponsor = p_Distributor, 
              percent_authorship = p_PercentContribution, 
              publisher = p_Publisher, 
              role_designator = v_Role, 

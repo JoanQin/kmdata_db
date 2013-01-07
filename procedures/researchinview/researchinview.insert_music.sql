@@ -115,16 +115,19 @@ BEGIN
           state, title, url, venue, created_at, updated_at, work_type_id, extended_author_list,
           presentation_dmy_single_date_id, --completed on
           performance_start_date,
-          performance_end_date,  producer)
+          performance_end_date,  producer, completed, ongoing, performance)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, v_ArtistStr, p_City, p_ConductorDirector, p_Country, p_Curator, CAST(p_TypeOfWork AS INTEGER),
           p_Organizer, p_PercentAuthorship, researchinview.strip_riv_tags(p_PerformanceTitle), p_PerformanceTroupe, v_Role, 
           v_State, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, p_Venue, current_timestamp, current_timestamp, v_WorkTypeID, 
           CASE WHEN length(p_ArtistComposer) > 254 THEN p_ArtistComposer ELSE NULL END,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_CompletedOn), researchinview.get_year(p_CompletedOn)),
-          date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'),
-          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1'),  p_Producer);
-
+          case when researchinview.get_year(p_StartedOn) = 0 then cast( null as date) else 
+          date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1') end,
+          case when researchinview.get_year(p_endedOn) = 0 then cast (null as date) else 
+          date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1') end,  p_Producer, p_Completed, 
+          p_Ongoing, p_Performance);
+ 
       -- add work author
       INSERT INTO kmdata.work_authors
          (work_id, user_id)
@@ -153,9 +156,12 @@ BEGIN
              artist = v_ArtistStr, 
              extended_author_list = CASE WHEN length(p_ArtistComposer) > 254 THEN p_ArtistComposer ELSE NULL END,
              city = p_City, 
+             completed = p_Completed,
              producer = p_Producer,
              director = p_ConductorDirector, 
              country = p_Country, 
+             performance = p_Performance,
+             ongoing = p_Ongoing,
              curator = p_Curator, 
              organizer = p_Organizer, 
              percent_authorship = p_PercentAuthorship, 
@@ -169,8 +175,10 @@ BEGIN
              updated_at = current_timestamp,
              work_type_id = v_WorkTypeID,
              sub_work_type_id = CAST(p_TypeOfWork AS INTEGER),
-             performance_start_date = date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1'),
-             performance_end_date = date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1')
+             performance_start_date = case when researchinview.get_year(p_StartedOn) = 0 then cast( null as date) else 
+             				date (researchinview.get_year(p_StartedOn) || '-' || researchinview.get_month(p_StartedOn) || '-1') end,
+             performance_end_date = case when researchinview.get_year(p_EndedOn) = 0 then cast( null as date) else 
+             				date (researchinview.get_year(p_EndedOn) || '-' || researchinview.get_month(p_EndedOn) || '-1') end
        WHERE id = v_WorkID;
 
       -- get the narrative ID for description of effort

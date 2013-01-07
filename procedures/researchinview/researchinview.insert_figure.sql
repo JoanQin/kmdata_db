@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_figure (
+CREATE OR REPLACE FUNCTION researchinview.insert_figure (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -101,13 +101,13 @@ BEGIN
       INSERT INTO kmdata.works
          (id, resource_id, user_id, author_list, city, country, created_by, creation_dmy_single_date_id, isbn, journal_title, original_publication_type,
          beginning_page, ending_page, percent_authorship, publication_type_id, publication_dmy_single_date_id, publisher, state, title, publication_title,  url, volume, work_type_id,
-          created_at, updated_at)
+          created_at, updated_at, issuing_organization)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_Authors, p_City, p_Country, p_CreatedBy, kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_CreatedOn), researchinview.get_year(p_CreatedOn)), 
          p_ISBN, p_JournalTitle, p_OriginalPublicationType, 
          v_StartPage, v_EndPage, p_PercentAuthorship, CAST(coalesce(p_PublicationType, '0') AS integer), kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedDate), researchinview.get_year(p_PublishedDate)),
          p_Publisher, v_State, p_Title, p_TitleOfOriginalPublication,  p_URL, p_Volume, v_WorkTypeID, 
-          current_timestamp, current_timestamp);
+          current_timestamp, current_timestamp, p_IssuingOrganization);
    
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -139,6 +139,7 @@ BEGIN
              country = p_Country,
              created_by = p_CreatedBy,
              isbn = p_ISBN,
+             issuing_organization = p_IssuingOrganization,
              journal_title = p_JournalTitle,
              original_publication_type = p_OriginalPublicationType,
              beginning_page = v_StartPage,

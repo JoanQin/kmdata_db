@@ -130,7 +130,8 @@ BEGIN
           researchinview.get_year(p_StartedOn), researchinview.get_month(p_StartedOn), NULL,
           researchinview.get_year(p_EndedOn), researchinview.get_month(p_EndedOn), NULL,
           current_timestamp, current_timestamp, v_ResourceID, p_Ongoing, p_ProtocolId, p_VertebrateAnimalsUsed,
-          date (researchinview.get_year(p_ApprovedOn) || '-' || researchinview.get_month(p_ApprovedOn) || '-1'),
+          case when researchinview.get_year(p_ApprovedOn) = 0 then cast(null as date) else 
+          date (researchinview.get_year(p_ApprovedOn) || '-' || researchinview.get_month(p_ApprovedOn) || '-1') end,
           p_ConditionStudied, p_InterventionAnalyzed, p_PercentEffort,
           v_RegulatoryApproval, p_RoleOther, p_SiteName);
       
@@ -165,7 +166,8 @@ BEGIN
              end_month = researchinview.get_month(p_EndedOn), 
              end_day = NULL, 
              updated_at = current_timestamp,
-             approved_on = date (researchinview.get_year(p_ApprovedOn) || '-' || researchinview.get_month(p_ApprovedOn) || '-1'), 
+             approved_on = case when researchinview.get_year(p_ApprovedOn) = 0 then cast( null as date) else 
+             			date (researchinview.get_year(p_ApprovedOn) || '-' || researchinview.get_month(p_ApprovedOn) || '-1') end, 
              condition_studied = p_ConditionStudied, 
              intervention_analyzed = p_InterventionAnalyzed, 
              percent_effort = p_PercentEffort,
