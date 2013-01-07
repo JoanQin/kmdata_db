@@ -87,12 +87,12 @@ BEGIN
       v_WorkID := nextval('kmdata.works_id_seq');
    
       INSERT INTO kmdata.works
-         (id, resource_id, user_id, inventor, manufacturer, patent_number, percent_authorship, 
+         (id, resource_id, user_id, inventor, manufacturer, patent_number, percent_authorship, completed,
           role_designator, sponsor, title, url, created_at, updated_at, work_type_id,
           filed_date, 
           issued_date, issuing_organization, application_number, attorney_agent, patent_assignee, patent_class, document_number )
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, p_Inventor, p_Manufacturer, p_PatentNumber, p_PercentAuthorship, 
+         (v_WorkID, v_ResourceID, v_UserID, p_Inventor, p_Manufacturer, p_PatentNumber, p_PercentAuthorship, p_PatentGranted,
           p_Role, p_Sponsor, researchinview.strip_riv_tags(p_Title), p_URL, current_timestamp, current_timestamp, v_WorkTypeID,
           date (researchinview.get_year(p_ApplicationFiledOn) || '-' || researchinview.get_month(p_ApplicationFiledOn) || '-1'),
           date (researchinview.get_year(p_PatentGrantedOn) || '-' || researchinview.get_month(p_PatentGrantedOn) || '-1'),
@@ -124,6 +124,7 @@ BEGIN
          SET user_id = v_UserID,
              inventor = p_Inventor, 
              manufacturer = p_Manufacturer, 
+             completed = p_PatentGranted,
              patent_number = p_PatentNumber, 
              percent_authorship = p_PercentAuthorship, 
              role_designator = p_Role, 
