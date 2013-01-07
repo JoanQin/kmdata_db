@@ -97,14 +97,14 @@ BEGIN
           role_designator, sponsor, title, url, sub_work_type_other,
           creation_dmy_single_date_id, -- broadcasted on
           presentation_dmy_range_date_id, -- started on / ended on
-          created_at, updated_at, work_type_id)
+          created_at, updated_at, work_type_id, completed)
       VALUES
          (v_WorkID, v_ResourceID, v_UserID, p_AuthorNames, p_Format, v_Forthcoming, p_PercentContribution, 
           p_Role, p_SponsoredBy, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, p_TypeOfWork,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_BroadcastedOn), researchinview.get_year(p_BroadcastedOn)),
           kmdata.add_dmy_range_date(NULL, researchinview.get_month(p_StartedOn), researchinview.get_year(p_StartedOn),
                                     NULL, researchinview.get_month(p_EndedOn), researchinview.get_year(p_EndedOn)),
-          current_timestamp, current_timestamp, v_WorkTypeID);
+          current_timestamp, current_timestamp, v_WorkTypeID, p_Completed);
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -136,6 +136,7 @@ BEGIN
              forthcoming_id = v_Forthcoming, 
              percent_authorship = p_PercentContribution, 
              role_designator = p_Role, 
+             completed = p_Completed,
              sponsor = p_SponsoredBy, 
              title = researchinview.strip_riv_tags(p_TitleOfWork), 
              url = p_URL,
