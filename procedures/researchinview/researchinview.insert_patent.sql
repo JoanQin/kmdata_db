@@ -141,7 +141,7 @@ BEGIN
              url = p_URL,
              updated_at = current_timestamp,
              work_type_id = v_WorkTypeID,
-             filed_date = case when researchinvew.get_year(p_ApplicationFiledOn) = 0 then cast(null as date) else 
+             filed_date = case when researchinview.get_year(p_ApplicationFiledOn) = 0 then cast(null as date) else 
              		date (researchinview.get_year(p_ApplicationFiledOn) || '-' || researchinview.get_month(p_ApplicationFiledOn) || '-1') end,
              issued_date = case when researchinview.get_year(p_PatentGrantedOn) = 0 then cast(null as date) else 
              		date (researchinview.get_year(p_PatentGrantedOn) || '-' || researchinview.get_month(p_PatentGrantedOn) || '-1') end
