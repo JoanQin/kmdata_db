@@ -57,7 +57,7 @@ BEGIN
    v_DeptGroupsInserted := 0;
    v_ReturnString := '';
    
-   -- Step 1: delete current emails that are no longer here (Part A: delete groups not found; Part B: make sure these are the right category)
+   -- Step 1: delete current groups that are no longer here (Part A: delete groups not found; Part B: make sure these are the right category)
    DELETE FROM kmdata.groups bd
    WHERE NOT EXISTS (
       SELECT b.id
