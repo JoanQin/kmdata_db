@@ -46,6 +46,8 @@ DECLARE
    v_JuriedInd SMALLINT;
    v_CreationDateID BIGINT;
    v_ExhibitDateID BIGINT;
+   v_Artist VARCHAR(255);
+   v_ExhibitTitle VARCHAR(255);
 BEGIN
    -- maps to Artwork
    v_WorkTypeID := kmdata.get_or_add_work_type_id('Artwork');
@@ -59,6 +61,8 @@ BEGIN
    IF v_UserID IS NULL THEN
       RETURN 0;
    END IF;
+   
+   v_Artist := left(p_Artist, 254);
    
    -- insert activity information
    v_ActivityID := researchinview.insert_activity('Artwork', p_IntegrationActivityId, p_IntegrationUserId, p_IsPublic, p_ExtendedAttribute1,
@@ -111,14 +115,15 @@ BEGIN
           juried_ind, medium, percent_authorship, exhibition_type_id, sponsor, state, title, url, venue,
           creation_dmy_single_date_id, 
           exhibit_dmy_range_date_id,
-          created_at, updated_at, work_type_id, completed, ongoing, other_artist, solo, sub_work_type_id )
+          created_at, updated_at, work_type_id, completed, ongoing, other_artist, solo, sub_work_type_id, extended_author_list )
       VALUES
-         (v_WorkID, v_ResourceID, v_UserID, p_Artist, p_City, p_Country, p_Curator, p_Dimensions, researchinview.strip_riv_tags(p_ExhibitionTitle),
+         (v_WorkID, v_ResourceID, v_UserID, v_Artist, p_City, p_Country, p_Curator, p_Dimensions, researchinview.strip_riv_tags(p_ExhibitionTitle),
           v_JuriedInd, p_Medium, p_PercentAuthorship, NULL, p_Sponsor, v_State, researchinview.strip_riv_tags(p_TitleOfWork), p_URL, p_Venue,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_CompletedOn), researchinview.get_year(p_CompletedOn)),
           kmdata.add_dmy_range_date(NULL, researchinview.get_month(p_StartedOn), researchinview.get_year(p_StartedOn),
                                     NULL, researchinview.get_month(p_EndedOn), researchinview.get_year(p_EndedOn)),
-          current_timestamp, current_timestamp, v_WorkTypeID, p_Completed, p_Ongoing, p_OtherArtist, p_Solo, CAST(p_TypeOfWork AS INTEGER));
+          current_timestamp, current_timestamp, v_WorkTypeID, p_Completed, p_Ongoing, p_OtherArtist, p_Solo, CAST(p_TypeOfWork AS INTEGER),
+          CASE when length(p_Artist) > 254 THEN p_Artist ELSE NULL END);
 
       -- add work author
       INSERT INTO kmdata.work_authors
@@ -153,7 +158,8 @@ BEGIN
       -- update the works table
       UPDATE kmdata.works
          SET user_id = v_UserID,
-             artist = p_Artist, 
+             artist = v_Artist, 
+             extended_author_list = CASE when length(p_Artist) > 254 THEN p_Artist ELSE NULL END,
              city = p_City, 
              completed = p_Completed, 
              ongoing = p_Ongoing, 
