@@ -50,3 +50,4 @@ ALTER TABLE kmdata.user_honors_awards ALTER COLUMN url TYPE VARCHAR(2000);
 
 ALTER TABLE kmdata.works ADD COLUMN performance VARCHAR(255);
 
+ALTER TABLE kmdata.works ALTER COLUMN other_artist TYPE VARCHAR(2000);
