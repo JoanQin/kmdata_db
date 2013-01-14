@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION researchinview.insert_conference (
+﻿CREATE OR REPLACE FUNCTION researchinview.insert_conference (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,

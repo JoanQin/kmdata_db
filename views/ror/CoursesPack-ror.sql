@@ -7,7 +7,7 @@ ALTER TABLE ror.vw_Campuses
 GRANT ALL ON TABLE ror.vw_Campuses TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Campuses TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Campuses TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Campuses TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Campuses TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Colleges AS 
@@ -19,7 +19,7 @@ ALTER TABLE ror.vw_Colleges
 GRANT ALL ON TABLE ror.vw_Colleges TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Colleges TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Colleges TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Colleges TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Colleges TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_AcadDepartments AS 
@@ -31,7 +31,7 @@ ALTER TABLE ror.vw_AcadDepartments
 GRANT ALL ON TABLE ror.vw_AcadDepartments TO kmdata;
 GRANT SELECT ON TABLE ror.vw_AcadDepartments TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_AcadDepartments TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_AcadDepartments TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_AcadDepartments TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Courses AS 
@@ -43,7 +43,7 @@ ALTER TABLE ror.vw_Courses
 GRANT ALL ON TABLE ror.vw_Courses TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Courses TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Courses TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Courses TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Courses TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Offerings AS 
@@ -55,7 +55,7 @@ ALTER TABLE ror.vw_Offerings
 GRANT ALL ON TABLE ror.vw_Offerings TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Offerings TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Offerings TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Offerings TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Offerings TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Sections AS 
@@ -67,7 +67,7 @@ ALTER TABLE ror.vw_Sections
 GRANT ALL ON TABLE ror.vw_Sections TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Sections TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Sections TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Sections TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Sections TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Enrollments AS 
@@ -79,7 +79,7 @@ ALTER TABLE ror.vw_Enrollments
 GRANT ALL ON TABLE ror.vw_Enrollments TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Enrollments TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Enrollments TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Enrollments TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Enrollments TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_EnrollmentRoles AS 
@@ -91,7 +91,7 @@ ALTER TABLE ror.vw_EnrollmentRoles
 GRANT ALL ON TABLE ror.vw_EnrollmentRoles TO kmdata;
 GRANT SELECT ON TABLE ror.vw_EnrollmentRoles TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_EnrollmentRoles TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_EnrollmentRoles TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_EnrollmentRoles TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_AcademicCareers AS 
@@ -103,7 +103,7 @@ ALTER TABLE ror.vw_AcademicCareers
 GRANT ALL ON TABLE ror.vw_AcademicCareers TO kmdata;
 GRANT SELECT ON TABLE ror.vw_AcademicCareers TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_AcademicCareers TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_AcademicCareers TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_AcademicCareers TO kmd_report_user;
 
 
 
@@ -116,7 +116,7 @@ ALTER TABLE ror.vw_Subjects
 GRANT ALL ON TABLE ror.vw_Subjects TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Subjects TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Subjects TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Subjects TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Subjects TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Terms AS 
@@ -128,7 +128,7 @@ ALTER TABLE ror.vw_Terms
 GRANT ALL ON TABLE ror.vw_Terms TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Terms TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Terms TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Terms TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Terms TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_TermSessions AS 
@@ -140,7 +140,7 @@ ALTER TABLE ror.vw_TermSessions
 GRANT ALL ON TABLE ror.vw_TermSessions TO kmdata;
 GRANT SELECT ON TABLE ror.vw_TermSessions TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_TermSessions TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_TermSessions TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_TermSessions TO kmd_report_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_SectionWeeklyMtgs AS
@@ -152,7 +152,7 @@ ALTER TABLE ror.vw_SectionWeeklyMtgs
 GRANT ALL ON TABLE ror.vw_SectionWeeklyMtgs TO kmdata;
 GRANT SELECT ON TABLE ror.vw_SectionWeeklyMtgs TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_SectionWeeklyMtgs TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_SectionWeeklyMtgs TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_SectionWeeklyMtgs TO kmd_report_user;
 
 
 

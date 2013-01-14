@@ -14,5 +14,5 @@ GRANT SELECT ON TABLE vw_professionalactivity TO kmd_data_read_user;
 GRANT SELECT ON TABLE vw_professionalactivity TO ceti;
 GRANT SELECT ON TABLE vw_professionalactivity TO kmd_riv_tr_import_user;
 GRANT SELECT ON TABLE vw_professionalactivity TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE vw_professionalactivity TO kmd_report_user;
+--GRANT SELECT ON TABLE vw_professionalactivity TO kmd_report_user;
 

@@ -13,3 +13,10 @@ SELECT w.id, w.user_id AS person_id, course_taught_type_id, professional_type_id
   WHERE src.source_name != 'osupro'
     AND ail.is_active = 1;
 -- output_text, w.resource_id, 
+
+ALTER TABLE ror.vw_CoursesTaught
+  OWNER TO kmdata;
+GRANT ALL ON TABLE ror.vw_CoursesTaught TO kmdata;
+GRANT SELECT ON TABLE ror.vw_CoursesTaught TO kmd_ror_app_user;
+GRANT SELECT ON TABLE ror.vw_CoursesTaught TO kmd_dev_riv_user;
+--GRANT SELECT ON TABLE ror.vw_CoursesTaught TO kmd_report_user;

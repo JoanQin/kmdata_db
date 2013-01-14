@@ -7,4 +7,4 @@ ALTER TABLE ror.vw_Buildings
 GRANT ALL ON TABLE ror.vw_Buildings TO kmdata;
 GRANT SELECT ON TABLE ror.vw_Buildings TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_Buildings TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_Buildings TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_Buildings TO kmd_report_user;

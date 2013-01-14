@@ -25,3 +25,10 @@ SELECT id, language_id, dialect_id, user_id AS person_id, reading_proficiency, s
        writing_proficiency, resource_id, created_at, updated_at
   FROM kmdata.user_languages;
 */
+
+ALTER TABLE ror.vw_PersonLanguages
+  OWNER TO kmdata;
+GRANT ALL ON TABLE ror.vw_PersonLanguages TO kmdata;
+GRANT SELECT ON TABLE ror.vw_PersonLanguages TO kmd_ror_app_user;
+GRANT SELECT ON TABLE ror.vw_PersonLanguages TO kmd_dev_riv_user;
+--GRANT SELECT ON TABLE ror.vw_PersonLanguages TO kmd_report_user;
