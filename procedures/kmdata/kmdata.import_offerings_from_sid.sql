@@ -5,8 +5,8 @@ DECLARE
 
    v_UpdateCursor CURSOR FOR
       SELECT a.id,
-         CAST(NULL AS VARCHAR) AS offering_name,
-         a.offering_name AS curr_offering_name
+         CAST(NULL AS VARCHAR) AS offering_name, sido.units_acad_prog, sido.acad_career,
+         a.offering_name AS curr_offering_name, a.units_acad_prog AS curr_units_acad_prog, a.acad_career AS curr_acad_career
       FROM kmdata.offerings a
       INNER JOIN kmdata.term_sessions ts ON a.term_session_id = ts.id
       INNER JOIN kmdata.terms t ON ts.term_id = t.id
@@ -24,7 +24,8 @@ DECLARE
          AND sido.acad_org = ad.dept_code;
    
    v_InsertCursor CURSOR FOR
-      SELECT DISTINCT CAST(NULL AS VARCHAR) AS offering_name, c.id AS course_id, ts.id AS term_session_id, ad.id AS acad_department_id
+      SELECT DISTINCT CAST(NULL AS VARCHAR) AS offering_name, c.id AS course_id, ts.id AS term_session_id, ad.id AS acad_department_id,
+         sido.units_acad_prog, sido.acad_career
       FROM
       (
          SELECT yearQuarterCode AS term_code, campusId AS ps_location_name, departmentNumber AS subject_abbrev, 
@@ -47,7 +48,14 @@ DECLARE
       INNER JOIN kmdata.term_sessions ts ON chgoffer.session_code = ts.session_code AND t.id = ts.term_id
       INNER JOIN kmdata.colleges col ON chgoffer.acad_group = col.acad_group
       INNER JOIN kmdata.acad_departments ad ON col.id = ad.college_id AND chgoffer.acad_org = ad.dept_code AND s.acad_org = ad.dept_code AND s.subject_abbrev = ad.abbreviation
-      INNER JOIN kmdata.campuses cam ON chgoffer.ps_location_name = cam.ps_location_name AND col.campus_id = cam.id;
+      INNER JOIN kmdata.campuses cam ON chgoffer.ps_location_name = cam.ps_location_name AND col.campus_id = cam.id
+      INNER JOIN sid.osu_offering sido ON sido.yearQuarterCode = t.term_code 
+         AND sido.campusId = cam.ps_location_name 
+         AND sido.departmentNumber = s.subject_abbrev 
+         AND sido.courseNumber = c.course_number 
+         AND sido.session_code = ts.session_code 
+         AND sido.acad_group = col.acad_group
+         AND sido.acad_org = ad.dept_code;
       
    v_OfferingsUpdated INTEGER;
    v_OfferingsInserted INTEGER;
@@ -79,11 +87,15 @@ BEGIN
 
       -- if this has changed then update
       IF COALESCE(v_updOffering.offering_name,'') != COALESCE(v_updOffering.curr_offering_name,'')
+         OR COALESCE(CAST(v_updOffering.units_acad_prog AS VARCHAR),'') != COALESCE(CAST(v_updOffering.curr_units_acad_prog AS VARCHAR),'')
+         OR COALESCE(v_updOffering.acad_career,'') != COALESCE(v_updOffering.curr_acad_career)
       THEN
       
          -- update the record
          UPDATE kmdata.offerings
-            SET offering_name = v_updOffering.offering_name
+            SET offering_name = v_updOffering.offering_name,
+                units_acad_prog = v_updOffering.units_acad_prog,
+                acad_career = v_updOffering.acad_career
           WHERE id = v_updOffering.id;
 
          v_OfferingsUpdated := v_OfferingsUpdated + 1;
@@ -97,9 +109,10 @@ BEGIN
       
       -- insert if not already there
       INSERT INTO kmdata.offerings (
-	 offering_name, course_id, term_session_id, acad_department_id, resource_id)
+	 offering_name, course_id, term_session_id, acad_department_id, units_acad_prog, acad_career, resource_id)
       VALUES (
-         v_insOffering.offering_name, v_insOffering.course_id, v_insOffering.term_session_id, v_insOffering.acad_department_id, kmdata.add_new_resource('sid', 'offerings'));
+         v_insOffering.offering_name, v_insOffering.course_id, v_insOffering.term_session_id, v_insOffering.acad_department_id, 
+         v_insOffering.units_acad_prog, v_insOffering.acad_career, kmdata.add_new_resource('sid', 'offerings'));
 
       v_OfferingsInserted := v_OfferingsInserted + 1;
 

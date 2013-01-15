@@ -941,6 +941,8 @@ CREATE TABLE kmdata.offerings (
                 term_session_id BIGINT NOT NULL,
                 acad_department_id BIGINT NOT NULL,
                 resource_id BIGINT NOT NULL,
+                units_acad_prog NUMERIC(5,2),
+                acad_career VARCHAR(4),
                 CONSTRAINT offerings_pk PRIMARY KEY (id)
 );
 
@@ -957,6 +959,7 @@ CREATE TABLE kmdata.sections (
                 section_type VARCHAR(10),
                 parent_section_id BIGINT,
                 resource_id BIGINT NOT NULL,
+                enrollment_total NUMERIC(38),
                 CONSTRAINT sections_pk PRIMARY KEY (id)
 );
 
@@ -1255,7 +1258,7 @@ CREATE TABLE kmdata.advising (
                 role_other VARCHAR(255),
                 type_of_group VARCHAR(255),
                 type_of_group_other VARCHAR(255),
-                url VARCHAR(255) NOT NULL,
+                url VARCHAR(255),
                 CONSTRAINT advising_pk PRIMARY KEY (id)
 );
 
