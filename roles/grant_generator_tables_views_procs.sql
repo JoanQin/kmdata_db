@@ -1,7 +1,7 @@
 ﻿select 'GRANT EXECUTE ON FUNCTION '||routine_schema||'.'||routine_name||kmdata.get_routine_param_signature(specific_catalog, specific_schema, specific_name)||' TO kmd_riv_tr_export_user;'
 from information_schema.routines
 where routine_schema = 'researchinview'
-and routine_name = ''
+and routine_name = 'insert_outreach'
 ORDER BY routine_schema, routine_name;
 
 SELECT * FROM pg_proc WHERE proname = 'insert_biosketchnarrative' LIMIT 200;
