@@ -20,7 +20,7 @@
    p_InitiativeType VARCHAR(2000),
    p_NumberServed INTEGER,
    p_Ongoing VARCHAR(2000),
-   p_OrganizationId VARCHAR(4000),
+   p_OrganizationId INTEGER,
    p_PercentAuthorship INTEGER,
    p_StartedOn VARCHAR(2000),
    p_SuccessDefinition VARCHAR(4000),
@@ -145,3 +145,8 @@ BEGIN
    RETURN v_OutreachID;
 END;
 $$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
+ALTER FUNCTION researchinview.insert_outreach(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, character varying, integer, character varying, character varying, character varying, integer, character varying, integer, integer, character varying, character varying, character varying, character varying, character varying, integer)
+  OWNER TO kmdata;
+GRANT EXECUTE ON FUNCTION researchinview.insert_outreach(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, character varying, integer, character varying, character varying, character varying, integer, character varying, integer, integer, character varying, character varying, character varying, character varying, character varying, integer) TO public;
+GRANT EXECUTE ON FUNCTION researchinview.insert_outreach(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, character varying, integer, character varying, character varying, character varying, integer, character varying, integer, integer, character varying, character varying, character varying, character varying, character varying, integer) TO kmdata;
+GRANT EXECUTE ON FUNCTION researchinview.insert_outreach(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, character varying, integer, character varying, character varying, character varying, integer, character varying, integer, integer, character varying, character varying, character varying, character varying, character varying, integer) TO kmd_riv_tr_export_user;

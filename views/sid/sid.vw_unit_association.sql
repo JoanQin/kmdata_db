@@ -6,5 +6,5 @@ INNER JOIN sid.osu_unit_type c ON b.parentunittypeid = c.id
 INNER JOIN sid.osu_unit_type d ON b.childunittypeid = d.id;
 --WHERE a.description = 'College Departments';
 
---GRANT SELECT ON TABLE sid.vw_unit_association TO kmd_ror_app_user;
---GRANT SELECT ON TABLE sid.vw_unit_association TO kmd_dev_riv_user;
+GRANT SELECT ON TABLE sid.vw_unit_association TO kmd_ror_app_user;
+GRANT SELECT ON TABLE sid.vw_unit_association TO kmd_dev_riv_user;

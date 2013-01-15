@@ -15,3 +15,10 @@ SELECT w.id, w.user_id AS person_id, prefix, first_name, middle_name, last_name,
  WHERE src.source_name != 'osupro'
    AND ail.is_active = 1;
 -- w.resource_id, 
+
+ALTER TABLE ror.vw_PersonPreferredNames
+  OWNER TO kmdata;
+GRANT ALL ON TABLE ror.vw_PersonPreferredNames TO kmdata;
+GRANT SELECT ON TABLE ror.vw_PersonPreferredNames TO kmd_ror_app_user;
+GRANT SELECT ON TABLE ror.vw_PersonPreferredNames TO kmd_dev_riv_user;
+--GRANT SELECT ON TABLE ror.vw_PersonPreferredNames TO kmd_report_user;

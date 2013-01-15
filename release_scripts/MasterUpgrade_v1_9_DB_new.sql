@@ -1251,6 +1251,11 @@ CREATE TABLE kmdata.advising (
                 university_id VARCHAR(255),
                 current_position_other VARCHAR(255),
                 student_id BIGINT,
+                description_of_effort VARCHAR(4000),
+                role_other VARCHAR(255),
+                type_of_group VARCHAR(255),
+                type_of_group_other VARCHAR(255),
+                url VARCHAR(255) NOT NULL,
                 CONSTRAINT advising_pk PRIMARY KEY (id)
 );
 
@@ -1297,6 +1302,11 @@ CREATE TABLE kmdata.clinical_trials (
                 regulatory_approval VARCHAR(255),
                 role_other VARCHAR(255),
                 site_name VARCHAR(1000),
+                vertebrate_animals_used VARCHAR(255),
+                clinical_trials_identifier VARCHAR(255),
+                human_subjects VARCHAR(255),
+                ongoing VARCHAR(255),
+                regulatory_approval_other VARCHAR(255),
                 CONSTRAINT clinical_trials_pk PRIMARY KEY (id)
 );
 
@@ -1321,6 +1331,12 @@ CREATE TABLE kmdata.clinical_service (
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
                 url VARCHAR(500),
+                clinical_hours_per VARCHAR(255),
+                individuals_served INTEGER,
+                ongoing VARCHAR(255),
+                role VARCHAR(255),
+                role_other VARCHAR(255),
+                total_hours_teaching_clinic INTEGER,
                 CONSTRAINT clinical_service_pk PRIMARY KEY (id)
 );
 
@@ -1697,6 +1713,13 @@ CREATE TABLE kmdata.user_honors_awards (
                 output_text TEXT,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
+                currency VARCHAR(255),
+                eligibility_other VARCHAR(1000),
+                reach_of_award VARCHAR(255),
+                selection_process_other VARCHAR(1000),
+                type_of_award VARCHAR(255),
+                type_of_award_other VARCHAR(1000),
+                url VARCHAR(2000),
                 CONSTRAINT user_honors_awards_pk PRIMARY KEY (id)
 );
 
@@ -2139,6 +2162,11 @@ CREATE TABLE kmdata.works (
                 document_number VARCHAR(255),
                 producer VARCHAR(255),
                 number_of_citations INTEGER,
+                completed VARCHAR(255),
+                ongoing VARCHAR(255),
+                other_artist VARCHAR(2000),
+                solo VARCHAR(255),
+                performance VARCHAR(255),
                 CONSTRAINT works_pk PRIMARY KEY (id)
 );
 

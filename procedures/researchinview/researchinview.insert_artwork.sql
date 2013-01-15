@@ -46,6 +46,7 @@ DECLARE
    v_JuriedInd SMALLINT;
    v_CreationDateID BIGINT;
    v_ExhibitDateID BIGINT;
+
 BEGIN
    -- maps to Artwork
    v_WorkTypeID := kmdata.get_or_add_work_type_id('Artwork');
@@ -59,6 +60,7 @@ BEGIN
    IF v_UserID IS NULL THEN
       RETURN 0;
    END IF;
+   
    
    -- insert activity information
    v_ActivityID := researchinview.insert_activity('Artwork', p_IntegrationActivityId, p_IntegrationUserId, p_IsPublic, p_ExtendedAttribute1,

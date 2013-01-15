@@ -1,4 +1,4 @@
---**************************************
+﻿--**************************************
 --*  Add the following stored procedures
 --**************************************
 -- 
@@ -370,7 +370,7 @@ ALTER TABLE kmdata.enrollments ALTER COLUMN career_id DROP NOT NULL;
 
 
 
---DROP TABLE sid.OSU_UNIT_ENROLLMENT;
+DROP TABLE sid.OSU_UNIT_ENROLLMENT;
 
 
 CREATE TABLE sid.OSU_UNIT_ENROLLMENT (
@@ -568,19 +568,19 @@ GRANT ALL ON TABLE kmdata.bar_admission TO kmdata;
 GRANT SELECT ON TABLE kmdata.bar_admission TO ceti;
 GRANT SELECT ON TABLE kmdata.bar_admission TO kmd_riv_tr_import_user;
 GRANT SELECT ON TABLE kmdata.bar_admission TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE kmdata.bar_admission TO kmd_report_user;
+--GRANT SELECT ON TABLE kmdata.bar_admission TO kmd_report_user;
 
 GRANT ALL ON TABLE kmdata.community_partner TO kmdata;
 GRANT SELECT ON TABLE kmdata.community_partner TO ceti;
 GRANT SELECT ON TABLE kmdata.community_partner TO kmd_riv_tr_import_user;
 GRANT SELECT ON TABLE kmdata.community_partner TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE kmdata.community_partner TO kmd_report_user;
+--GRANT SELECT ON TABLE kmdata.community_partner TO kmd_report_user;
 
 GRANT ALL ON TABLE kmdata.university_partner TO kmdata;
 GRANT SELECT ON TABLE kmdata.university_partner TO ceti;
 GRANT SELECT ON TABLE kmdata.university_partner TO kmd_riv_tr_import_user;
 GRANT SELECT ON TABLE kmdata.university_partner TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE kmdata.university_partner TO kmd_report_user;
+--GRANT SELECT ON TABLE kmdata.university_partner TO kmd_report_user;
 
 
 
@@ -626,7 +626,7 @@ GRANT ALL ON TABLE kmdata.outreach TO kmdata;
 GRANT SELECT ON TABLE kmdata.outreach TO ceti;
 GRANT SELECT ON TABLE kmdata.outreach TO kmd_riv_tr_import_user;
 GRANT SELECT ON TABLE kmdata.outreach TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE kmdata.outreach TO kmd_report_user;
+--GRANT SELECT ON TABLE kmdata.outreach TO kmd_report_user;
 
 
 
@@ -765,4 +765,171 @@ ALTER TABLE kmdata.strategic_initiatives ALTER COLUMN institution_id DROP NOT NU
 
 
 
+-- Joan's changes per 12/17/2012
+ALTER TABLE kmdata.works ADD COLUMN report_number VARCHAR(255);
+
+ALTER TABLE kmdata.advising ADD COLUMN accomplishments VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN accomplishments_other VARCHAR(2000);
+ALTER TABLE kmdata.advising ADD COLUMN advisee_advisor_codepartment VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN ongoing VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN major VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN minor VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN university_id VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN current_position_other VARCHAR(255);
+ALTER TABLE kmdata.advising ADD COLUMN student_id BIGINT;
+
+
+-- Joan's changes per 12/18/2012
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN activity_other VARCHAR(255);
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN institution_group_other VARCHAR(255);
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN integration_group_id VARCHAR(255);
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN url VARCHAR(2000);
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN ended_on VARCHAR(255);
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN started_on VARCHAR(255);
+ALTER TABLE kmdata.strategic_initiatives ADD COLUMN role_other VARCHAR(255);
+
+
+
+-- John W's group change 12/18/2012
+ALTER TABLE kmdata.groups ADD COLUMN inst_group_code VARCHAR(255);
+
+ALTER TABLE kmdata.membership ADD COLUMN ongoing VARCHAR(255);
+ALTER TABLE kmdata.membership ADD COLUMN organization_id INTEGER;
+ALTER TABLE kmdata.works ADD COLUMN reach_of_conference VARCHAR(255);
+ALTER TABLE kmdata.works ADD COLUMN session_name VARCHAR(255);
+ALTER TABLE kmdata.works ADD COLUMN speaker_name VARCHAR(2000);
+
+-- Joan's changes 12/20/2012
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN additional_citizenship VARCHAR(255);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN citizenship VARCHAR(255);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN gender VARCHAR(255);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN nih_era_commons_name VARCHAR(255);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN opted_out_of_researcher_id_setup INTEGER;
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN previously_used_email_addressess VARCHAR(2000);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN researcher_id VARCHAR(255);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN researcher_id_email_address VARCHAR(255);
+ALTER TABLE kmdata.user_preferred_names ADD COLUMN sync_with_researcher_id VARCHAR(255);
+
+ALTER TABLE kmdata.works ADD COLUMN application_number VARCHAR(255);
+ALTER TABLE kmdata.works ADD COLUMN attorney_agent VARCHAR(255);
+ALTER TABLE kmdata.works ADD COLUMN patent_assignee VARCHAR(255);
+ALTER TABLE kmdata.works ADD COLUMN patent_class VARCHAR(255);
+ALTER TABLE kmdata.works ADD COLUMN document_number VARCHAR(255);
+
+ALTER TABLE kmdata.works ADD COLUMN producer VARCHAR(255);
+
+ALTER TABLE kmdata.degree_certifications ADD COLUMN active VARCHAR(255);
+
+
+-- Joan's changes 12/21/2012
+ALTER TABLE kmdata.grant_data ADD COLUMN appl_id INTEGER;
+ALTER TABLE kmdata.grant_data ADD COLUMN ongoing VARCHAR(255);
+
+ALTER TABLE kmdata.courses_taught ADD COLUMN academic_calendar VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN academic_calendar_other VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN frequency VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN institution_group_other VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN integration_group_id VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN number_of_times INTEGER;
+ALTER TABLE kmdata.courses_taught ADD COLUMN period_offered_other VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN subject_area VARCHAR(255);
+ALTER TABLE kmdata.courses_taught ADD COLUMN ended_on VARCHAR(255);
+
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN academic_calendar VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN academic_calendar_other VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN city VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN country VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN course_type VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN institution_group_other VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN integration_group_id VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN number_of_times INTEGER;
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN peer_evaluated VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN period_offered VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN period_offered_other VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN state_province VARCHAR(255);
+ALTER TABLE kmdata.courses_taught_other ADD COLUMN subject_area VARCHAR(1000);
+
+ALTER TABLE kmdata.professional_activity ADD COLUMN activity_category_other VARCHAR(255);
+ALTER TABLE kmdata.professional_activity ADD COLUMN type_of_activity_other VARCHAR(255);
+
+ALTER TABLE kmdata.works ADD COLUMN number_of_citations INTEGER;
+ALTER TABLE kmdata.user_services ADD COLUMN percent_effort VARCHAR(255);
+ALTER TABLE kmdata.user_services ADD COLUMN url VARCHAR(2000);
+
+
+
+
+-- *********************************************************************************
+-- NOTE:
+-- kmdata.term and kmdata.term_session were manually populated for the current terms
+-- *********************************************************************************
+
+-- Table: sid.osu_offering
+
+DROP TABLE sid.osu_offering;
+
+CREATE TABLE sid.osu_offering
+(
+  yearquartercode character varying(50) NOT NULL,
+  campusid character varying(50) NOT NULL,
+  coursenumber character varying(10) NOT NULL,
+  departmentnumber character varying(50) NOT NULL,
+  session_code character varying(3),
+  acad_group character varying(5),
+  acad_org character varying(10)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE sid.osu_offering
+  OWNER TO kmdata;
+
+
+/*
+SELECT 'UPDATE kmdata.colleges SET acad_group = '''||a.acad_group||''' WHERE abbreviation = '''||a.abbreviation||''';'
+FROM kmdata.colleges a;
+*/
+  
+UPDATE kmdata.colleges SET acad_group = 'ADM' WHERE abbreviation = 'Administra';
+UPDATE kmdata.colleges SET acad_group = 'AGR' WHERE abbreviation = 'FAES';
+UPDATE kmdata.colleges SET acad_group = 'AHR' WHERE abbreviation = 'Arch';
+UPDATE kmdata.colleges SET acad_group = 'AMP' WHERE abbreviation = 'Allied Med';
+UPDATE kmdata.colleges SET acad_group = 'ART' WHERE abbreviation = 'The Arts';
+UPDATE kmdata.colleges SET acad_group = 'ASC' WHERE abbreviation = 'Arts&Sci';
+UPDATE kmdata.colleges SET acad_group = 'ATI' WHERE abbreviation = 'AgrTchInst';
+UPDATE kmdata.colleges SET acad_group = 'BIO' WHERE abbreviation = 'Bio Sci';
+UPDATE kmdata.colleges SET acad_group = 'BUS' WHERE abbreviation = 'Business';
+UPDATE kmdata.colleges SET acad_group = 'CED' WHERE abbreviation = 'Cont Educ';
+UPDATE kmdata.colleges SET acad_group = 'CMN' WHERE abbreviation = 'Comm';
+UPDATE kmdata.colleges SET acad_group = 'DEN' WHERE abbreviation = 'Dentistry';
+UPDATE kmdata.colleges SET acad_group = 'DHY' WHERE abbreviation = 'Dental Hyg';
+UPDATE kmdata.colleges SET acad_group = 'EDU' WHERE abbreviation = 'Education';
+UPDATE kmdata.colleges SET acad_group = 'EHE' WHERE abbreviation = 'EDU & HEC';
+UPDATE kmdata.colleges SET acad_group = 'ENG' WHERE abbreviation = 'Eng';
+UPDATE kmdata.colleges SET acad_group = 'ENR' WHERE abbreviation = 'Env&NatRe';
+UPDATE kmdata.colleges SET acad_group = 'ESC' WHERE abbreviation = 'Earth Sci';
+UPDATE kmdata.colleges SET acad_group = 'EXP' WHERE abbreviation = 'Explore';
+UPDATE kmdata.colleges SET acad_group = 'GRD' WHERE abbreviation = 'Grad Schl';
+UPDATE kmdata.colleges SET acad_group = 'HEC' WHERE abbreviation = 'Human Ecol';
+UPDATE kmdata.colleges SET acad_group = 'HRS' WHERE abbreviation = 'HlthRhbtSc';
+UPDATE kmdata.colleges SET acad_group = 'HUM' WHERE abbreviation = 'Humanities';
+UPDATE kmdata.colleges SET acad_group = 'JGS' WHERE abbreviation = 'JG Pub Aff';
+UPDATE kmdata.colleges SET acad_group = 'JUR' WHERE abbreviation = 'Journalism';
+UPDATE kmdata.colleges SET acad_group = 'LAW' WHERE abbreviation = 'Law';
+UPDATE kmdata.colleges SET acad_group = 'MED' WHERE abbreviation = 'Medicine';
+UPDATE kmdata.colleges SET acad_group = 'MPS' WHERE abbreviation = 'Math&PhySc';
+UPDATE kmdata.colleges SET acad_group = 'MUS' WHERE abbreviation = 'Music';
+UPDATE kmdata.colleges SET acad_group = 'NRE' WHERE abbreviation = 'Natural Re';
+UPDATE kmdata.colleges SET acad_group = 'NUR' WHERE abbreviation = 'Nursing';
+UPDATE kmdata.colleges SET acad_group = 'OAA' WHERE abbreviation = 'Acad Affrs';
+UPDATE kmdata.colleges SET acad_group = 'OPS' WHERE abbreviation = 'OPS';
+UPDATE kmdata.colleges SET acad_group = 'OPT' WHERE abbreviation = 'Optometry';
+UPDATE kmdata.colleges SET acad_group = 'PBH' WHERE abbreviation = 'PublicHlth';
+UPDATE kmdata.colleges SET acad_group = 'PHP34' WHERE abbreviation = 'Pharm 3&4';
+UPDATE kmdata.colleges SET acad_group = 'PHR' WHERE abbreviation = 'Pharmacy';
+UPDATE kmdata.colleges SET acad_group = 'SBS' WHERE abbreviation = 'Soc&BhvSci';
+UPDATE kmdata.colleges SET acad_group = 'SWK' WHERE abbreviation = 'SocialWork';
+UPDATE kmdata.colleges SET acad_group = 'USS' WHERE abbreviation = 'UgStuAcaSv';
+UPDATE kmdata.colleges SET acad_group = 'UVC' WHERE abbreviation = 'UVC';
+UPDATE kmdata.colleges SET acad_group = 'VME' WHERE abbreviation = 'Vet Med';
 

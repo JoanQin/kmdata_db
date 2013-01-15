@@ -85,4 +85,4 @@ BEGIN
    -- return the narrative
    RETURN v_NarrativeID;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;

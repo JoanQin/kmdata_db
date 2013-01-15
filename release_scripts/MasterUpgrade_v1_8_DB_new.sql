@@ -31,7 +31,6 @@ CREATE TABLE kmdata.groups (
                 name VARCHAR(255) NOT NULL,
                 description TEXT,
                 is_public BOOLEAN,
-                inst_group_code VARCHAR(255),
                 CONSTRAINT groups_new_pk PRIMARY KEY (id)
 );
 
@@ -769,8 +768,6 @@ CREATE TABLE kmdata.grant_data (
                 funding_amount_breakdown INTEGER,
                 duration INTEGER,
                 funding_agency_type_other VARCHAR(1000),
-                appl_id INTEGER,
-                ongoing VARCHAR(255),
                 CONSTRAINT grant_data_pk PRIMARY KEY (id)
 );
 
@@ -1121,19 +1118,6 @@ CREATE TABLE kmdata.courses_taught_other (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                academic_calendar VARCHAR(255),
-                academic_calendar_other VARCHAR(255),
-                city VARCHAR(255),
-                country VARCHAR(255),
-                course_type VARCHAR(255),
-                institution_group_other VARCHAR(255),
-                integration_group_id VARCHAR(255),
-                number_of_times INTEGER,
-                peer_evaluated VARCHAR(255),
-                period_offered VARCHAR(255),
-                period_offered_other VARCHAR(255),
-                state_province VARCHAR(255),
-                subject_area VARCHAR(1000),
                 CONSTRAINT courses_taught_other_pk PRIMARY KEY (id)
 );
 
@@ -1168,15 +1152,6 @@ CREATE TABLE kmdata.courses_taught (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                academic_calendar VARCHAR(255),
-                academic_calendar_other VARCHAR(255),
-                frequency VARCHAR(255),
-                institution_group_other VARCHAR(255),
-                integration_group_id VARCHAR(255),
-                number_of_times INTEGER,
-                period_offered_other VARCHAR(255),
-                subject_area VARCHAR(255),
-                ended_on VARCHAR(255),
                 CONSTRAINT courses_taught_pk PRIMARY KEY (id)
 );
 
@@ -1199,13 +1174,6 @@ CREATE TABLE kmdata.strategic_initiatives (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                activity_other VARCHAR(255),
-                institution_group_other VARCHAR(255),
-                integration_group_id VARCHAR(255),
-                url VARCHAR(2000),
-                ended_on VARCHAR(255),
-                started_on VARCHAR(255),
-                role_other VARCHAR(255),
                 CONSTRAINT strategic_initiatives_pk PRIMARY KEY (id)
 );
 
@@ -1242,15 +1210,11 @@ CREATE TABLE kmdata.advising (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                accomplishments VARCHAR(255),
-                accomplishments_other VARCHAR(2000),
-                advisee_advisor_codepartment VARCHAR(255),
-                ongoing VARCHAR(255),
-                major VARCHAR(255),
-                minor VARCHAR(255),
-                university_id VARCHAR(255),
-                current_position_other VARCHAR(255),
-                student_id BIGINT,
+                description_of_effort VARCHAR(4000),
+                role_other VARCHAR(255),
+                type_of_group VARCHAR(255),
+                type_of_group_other VARCHAR(255),
+                url VARCHAR(255),
                 CONSTRAINT advising_pk PRIMARY KEY (id)
 );
 
@@ -1297,6 +1261,11 @@ CREATE TABLE kmdata.clinical_trials (
                 regulatory_approval VARCHAR(255),
                 role_other VARCHAR(255),
                 site_name VARCHAR(1000),
+                clinical_trials_identifier VARCHAR(255),
+                human_subjects VARCHAR(255),
+                ongoing VARCHAR(255),
+                regulatory_approval_other VARCHAR(255),
+                vertebrate_animals_used VARCHAR(255),
                 CONSTRAINT clinical_trials_pk PRIMARY KEY (id)
 );
 
@@ -1321,6 +1290,12 @@ CREATE TABLE kmdata.clinical_service (
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
                 url VARCHAR(500),
+                clinical_hours_per VARCHAR(255),
+                individuals_served INTEGER,
+                ongoing VARCHAR(255),
+                role VARCHAR(255),
+                role_other VARCHAR(255),
+                total_hours_teaching_clinic INTEGER,
                 CONSTRAINT clinical_service_pk PRIMARY KEY (id)
 );
 
@@ -1357,8 +1332,6 @@ CREATE TABLE kmdata.professional_activity (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                activity_category_other VARCHAR(255),
-                type_of_activity_other VARCHAR(255),
                 CONSTRAINT professional_activity_pk PRIMARY KEY (id)
 );
 
@@ -1391,8 +1364,6 @@ CREATE TABLE kmdata.membership (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                ongoing VARCHAR(255),
-                organization_id INTEGER,
                 CONSTRAINT membership_pk PRIMARY KEY (id)
 );
 
@@ -1697,6 +1668,13 @@ CREATE TABLE kmdata.user_honors_awards (
                 output_text TEXT,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
+                currency VARCHAR(255),
+                eligibility_other VARCHAR(1000),
+                reach_of_award VARCHAR(255),
+                selection_process_other VARCHAR(1000),
+                type_of_award VARCHAR(255),
+                type_of_award_other VARCHAR(1000),
+                url VARCHAR(2000),
                 CONSTRAINT user_honors_awards_pk PRIMARY KEY (id)
 );
 
@@ -1736,8 +1714,6 @@ CREATE TABLE kmdata.user_services (
                 student_affairs_ind SMALLINT,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                percent_effort VARCHAR(255),
-                url VARCHAR(2000),
                 CONSTRAINT user_services_pk PRIMARY KEY (id)
 );
 
@@ -1838,15 +1814,6 @@ CREATE TABLE kmdata.user_preferred_names (
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
-                additional_citizenship VARCHAR(255),
-                citizenship VARCHAR(255),
-                gender VARCHAR(255),
-                nih_era_commons_name VARCHAR(255),
-                opted_out_of_researcher_id_setup INTEGER,
-                previously_used_email_addressess VARCHAR(2000),
-                researcher_id VARCHAR(255),
-                researcher_id_email_address VARCHAR(255),
-                sync_with_researcher_id VARCHAR(255),
                 CONSTRAINT user_preferred_names_pk PRIMARY KEY (id)
 );
 
@@ -2128,17 +2095,11 @@ CREATE TABLE kmdata.works (
                 series_started_on_dmy_single_date_id BIGINT,
                 single_or_series INTEGER,
                 extended_author_list VARCHAR(4000),
-                report_number VARCHAR(255),
-                reach_of_conference VARCHAR(255),
-                session_name VARCHAR(255),
-                speaker_name VARCHAR(2000),
-                application_number VARCHAR(255),
-                attorney_agent VARCHAR(255),
-                patent_assignee VARCHAR(255),
-                patent_class VARCHAR(255),
-                document_number VARCHAR(255),
-                producer VARCHAR(255),
-                number_of_citations INTEGER,
+                completed VARCHAR(255),
+                ongoing VARCHAR(255),
+                other_artist VARCHAR(255),
+                solo VARCHAR(255),
+                performance VARCHAR(255),
                 CONSTRAINT works_pk PRIMARY KEY (id)
 );
 

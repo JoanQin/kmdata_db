@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_teachingevaluationnarrative (
+CREATE OR REPLACE FUNCTION researchinview.insert_teachingevaluationnarrative (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -23,6 +23,10 @@ BEGIN
    SELECT user_id INTO v_UserID
      FROM kmdata.user_identifiers
     WHERE emplid = p_IntegrationUserId;
+    
+   IF v_UserID IS NULL THEN
+         RETURN 0;
+   END IF;
    
    -- insert activity information
    v_ActivityID := researchinview.insert_activity('TeachingEvaluationNarrative', p_IntegrationActivityId, p_IntegrationUserId, p_IsPublic, p_ExtendedAttribute1,
@@ -85,6 +89,6 @@ BEGIN
    -- return the narrative
    RETURN v_NarrativeID;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
 
 

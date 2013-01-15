@@ -19,4 +19,4 @@ ALTER TABLE ror.vw_professionalactivity
 GRANT ALL ON TABLE ror.vw_professionalactivity TO kmdata;
 GRANT SELECT ON TABLE ror.vw_professionalactivity TO kmd_ror_app_user;
 GRANT SELECT ON TABLE ror.vw_professionalactivity TO kmd_dev_riv_user;
-GRANT SELECT ON TABLE ror.vw_professionalactivity TO kmd_report_user;
+--GRANT SELECT ON TABLE ror.vw_professionalactivity TO kmd_report_user;
