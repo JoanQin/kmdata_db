@@ -6,7 +6,7 @@ SELECT a.id, user_id,  title, "number", length,
        evaluation, output_text, conference_location, one_day_event_ind, 
        times_offered, a.resource_id, c.name as academic_calendar_name, academic_calendar_other,
        city, country, d.name as course_type, institution_group_other,  f.groupname,
-       number_of_times, state_province,  e.name as subject_area_name
+       number_of_times, state_province,  e.name as subject_area
   FROM kmdata.courses_taught_other a
   left join kmdata.institutions b on b.id = a.institution_id 
   left join researchinview.riv_academic_calendar_types c on c.id = cast(a.academic_calendar as int)
