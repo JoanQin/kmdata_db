@@ -32,11 +32,17 @@ CREATE TABLE kmdata.groups (
                 description TEXT,
                 is_public BOOLEAN,
                 inst_group_code VARCHAR(255),
+                slug VARCHAR(100) NOT NULL,
+                active BOOLEAN DEFAULT TRUE NOT NULL,
                 CONSTRAINT groups_new_pk PRIMARY KEY (id)
 );
 
 
 ALTER SEQUENCE kmdata.groups_new_id_seq OWNED BY kmdata.groups.id;
+
+CREATE UNIQUE INDEX groups_slug_idx
+ ON kmdata.groups
+ ( slug );
 
 CREATE SEQUENCE kmdata.group_nestings_id_seq;
 
