@@ -15,10 +15,12 @@ DECLARE
          CASE sids.sat WHEN 'Y' THEN '1' ELSE '0' END ||
          CASE sids.sun WHEN 'Y' THEN '1' ELSE '0' END AS days_of_week, 
          sids.start_dt AS start_date, sids.end_dt AS end_date,
+         sids.enrl_tot AS enrollment_total, 
          a.section_name AS curr_section_name, a.section_type AS curr_section_type, a.parent_section_id AS curr_parent_section_id, m.building_id AS curr_building_id, m.room_no AS curr_room_no, 
          m.start_time AS curr_start_time, m.end_time AS curr_end_time,
          m.days_of_week AS curr_days_of_week,
          m.start_date AS curr_start_date, m.end_date AS curr_end_date,
+         a.enrollment_total AS curr_enrollment_total,
          sids.mtg_pat_crse_id
       FROM kmdata.sections a
       INNER JOIN kmdata.offerings b ON a.offering_id = b.id
@@ -52,7 +54,8 @@ DECLARE
          CASE sids.fri WHEN 'Y' THEN '1' ELSE '0' END ||
          CASE sids.sat WHEN 'Y' THEN '1' ELSE '0' END ||
          CASE sids.sun WHEN 'Y' THEN '1' ELSE '0' END AS days_of_week, 
-         sids.start_dt AS start_date, sids.end_dt AS end_date
+         sids.start_dt AS start_date, sids.end_dt AS end_date,
+         sids.enrl_tot AS enrollment_total
       FROM
       (
          SELECT yearQuarterCode AS term_code, campusId AS ps_location_name, departmentNumber AS subject_abbrev, 
@@ -140,13 +143,15 @@ BEGIN
          OR COALESCE(v_updSection.days_of_week,'') != COALESCE(v_updSection.curr_days_of_week,'')
          OR COALESCE(CAST(v_updSection.start_date AS VARCHAR),'') != COALESCE(CAST(v_updSection.curr_start_date AS VARCHAR),'')
          OR COALESCE(CAST(v_updSection.end_date AS VARCHAR),'') != COALESCE(CAST(v_updSection.curr_end_date AS VARCHAR),'')
+         OR COALESCE(CAST(v_updSection.enrollment_total AS VARCHAR),'') != COALESCE(CAST(v_updSection.curr_enrollment_total AS VARCHAR),'')
       THEN
       
          -- update the record
          UPDATE kmdata.sections
             SET section_name = v_updSection.section_name,
                 section_type = v_updSection.section_type,
-                parent_section_id = v_updSection.parent_section_id
+                parent_section_id = v_updSection.parent_section_id,
+                enrollment_total = v_updSection.enrollment_total
           WHERE id = v_updSection.id;
 
          -- update the meeting where applicable
@@ -199,9 +204,10 @@ BEGIN
       
       -- insert if not already there
       INSERT INTO kmdata.sections (
-	 id, section_name, offering_id, class_number, section_type, parent_section_id, resource_id)
+	 id, section_name, offering_id, class_number, section_type, parent_section_id, enrollment_total, resource_id)
       VALUES (
-         v_SectionID, v_insSection.section_name, v_insSection.offering_id, v_insSection.class_number, v_insSection.section_type, v_insSection.parent_section_id, kmdata.add_new_resource('sid', 'sections'));
+         v_SectionID, v_insSection.section_name, v_insSection.offering_id, v_insSection.class_number, v_insSection.section_type, v_insSection.parent_section_id, 
+         v_insSection.enrollment_total, kmdata.add_new_resource('sid', 'sections'));
 
       -- insert the meeting
       IF v_insSection.mtg_pat_crse_id IS NOT NULL THEN

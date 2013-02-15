@@ -32,11 +32,17 @@ CREATE TABLE kmdata.groups (
                 description TEXT,
                 is_public BOOLEAN,
                 inst_group_code VARCHAR(255),
+                slug VARCHAR(100) NOT NULL,
+                active BOOLEAN DEFAULT TRUE NOT NULL,
                 CONSTRAINT groups_new_pk PRIMARY KEY (id)
 );
 
 
 ALTER SEQUENCE kmdata.groups_new_id_seq OWNED BY kmdata.groups.id;
+
+CREATE UNIQUE INDEX groups_slug_idx
+ ON kmdata.groups
+ ( slug );
 
 CREATE SEQUENCE kmdata.group_nestings_id_seq;
 
@@ -941,6 +947,8 @@ CREATE TABLE kmdata.offerings (
                 term_session_id BIGINT NOT NULL,
                 acad_department_id BIGINT NOT NULL,
                 resource_id BIGINT NOT NULL,
+                units_acad_prog NUMERIC(5,2),
+                acad_career VARCHAR(4),
                 CONSTRAINT offerings_pk PRIMARY KEY (id)
 );
 
@@ -957,6 +965,7 @@ CREATE TABLE kmdata.sections (
                 section_type VARCHAR(10),
                 parent_section_id BIGINT,
                 resource_id BIGINT NOT NULL,
+                enrollment_total NUMERIC(38),
                 CONSTRAINT sections_pk PRIMARY KEY (id)
 );
 
@@ -1255,7 +1264,7 @@ CREATE TABLE kmdata.advising (
                 role_other VARCHAR(255),
                 type_of_group VARCHAR(255),
                 type_of_group_other VARCHAR(255),
-                url VARCHAR(255) NOT NULL,
+                url VARCHAR(255),
                 CONSTRAINT advising_pk PRIMARY KEY (id)
 );
 
