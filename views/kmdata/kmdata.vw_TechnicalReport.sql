@@ -4,7 +4,7 @@ CREATE OR REPLACE VIEW kmdata.vw_TechnicalReport AS
         w.publication_dmy_single_date_id, sd1.day AS publication_day, sd1.month AS publication_month, sd1.year AS publication_year,
         w.title, w.author_list, w.editor_list, 
 	          w.issue, w.percent_authorship, w.publication_type_id, d.name as technical_report_type, w.report_number,
-	          w.review_type_id, f.name as review_type, w.status_id, e.name as status_type, w.url, w.volume,  w.work_type_id,
+	          w.review_type_id, f.name as review_type, w.status_id, e.name as status_type, w.url, w.volume,  w.work_type_id, a.work_type_name,
 	          w.city, w.state, w.country, w.edition, w.publisher, w.isbn, w.is_review,
           w.publication_dmy_single_date_id, sd1.year, sd1.month, sd1.day, b.narrative_text, c.is_public
    FROM kmdata.works w
@@ -14,4 +14,5 @@ CREATE OR REPLACE VIEW kmdata.vw_TechnicalReport AS
       left join researchinview.riv_publication_statuses e on e.id = w.status_id
       left join researchinview.activity_import_log c on c.resource_id = w.resource_id
    left join researchinview.riv_review_types f on f.id = w.review_type_id
+      left join kmdata.work_types a on a.id = w.work_type_id
   WHERE w.work_type_id = 7;
