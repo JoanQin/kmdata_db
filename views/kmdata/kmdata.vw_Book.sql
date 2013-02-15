@@ -4,7 +4,8 @@ CREATE OR REPLACE VIEW kmdata.vw_Book AS
         w.publication_dmy_single_date_id, sd1.day AS publication_day, sd1.month AS publication_month, sd1.year AS publication_year,
         w.created_at, w.updated_at, w.isbn, w.lccn, w.editor_list, w.status_id, w.sub_work_type_id,
         w.author_list, w.city, w.country, w.edition, w.editor_list, w.percent_authorship, 
-	w.publisher, w.is_review, w.review_type_id, d.name as review_type, w.state, w.title, w.url, w.volume, w.work_type_id, w.publication_dmy_single_date_id, 
+	w.publisher, w.is_review, w.review_type_id, d.name as review_type, w.state, w.title, w.url, w.volume, w.work_type_id, a.work_type_name,
+	w.publication_dmy_single_date_id, 
            w.isbn, w.lccn, w.status_id, e.name as publication_status, w.sub_work_type_id, f.name, sd1.year, sd1.month, sd1.day, b.narrative_text, c.is_public
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
@@ -13,4 +14,5 @@ CREATE OR REPLACE VIEW kmdata.vw_Book AS
       left join researchinview.riv_publication_statuses e on e.id = w.status_id
       left join researchinview.activity_import_log c on c.resource_id = w.resource_id
    left join researchinview.riv_conference_work_types f on f.id = w.sub_work_type_id
+   left join kmdata.work_types a on a.id = w.work_type_id
   WHERE w.work_type_id = 6;
