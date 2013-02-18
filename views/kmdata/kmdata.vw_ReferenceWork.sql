@@ -1,7 +1,8 @@
 CREATE OR REPLACE VIEW kmdata.vw_ReferenceWork AS 
- SELECT w.id, w.resource_id, w.user_id, w.title, w.author_list, w.beginning_page, w.ending_page, w.percent_authorship, 
-        w.publication_dmy_single_date_id, sd1.day AS publication_day, sd1.month AS publication_month, sd1.year AS publication_year,
-        w.review_type_id, w.status_id, w.url, w.volume, w.created_at, w.updated_at, w.work_type_id, a.work_type_name, w.city, w.country, w.state, w.isbn,
+SELECT w.id, w.resource_id, w.user_id, w.title, w.author_list, w.beginning_page, w.ending_page, w.percent_authorship,
+w.publication_dmy_single_date_id, sd1.day AS publication_day, sd1.month AS publication_month, sd1.year AS publication_year, 
+w.review_type_id, w.status_id, w.url, w.volume, w.created_at, w.updated_at, w.work_type_id, w.city, w.country, w.state, w.isbn,
+         a.work_type_name, 
          w.editor_list as editor, w.publication_title as title_of_publication, 
 	 w.sub_work_type_id as type_of_work_id, d.name as type_of_work, 
 	 e.name as publication_status,
