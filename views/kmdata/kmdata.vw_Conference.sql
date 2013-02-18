@@ -3,16 +3,12 @@ CREATE OR REPLACE VIEW kmdata.vw_Conference AS
         w.journal_title, w.beginning_page, w.ending_page, w.percent_authorship, w.review_type_id, w.status_id, w.url, w.volume, w.created_at, 
         w.updated_at, w.work_type_id, w.book_title, w.city, w.state, w.country, w.event_title, w.edition, w.publisher, w.series, 
         w.publication_dmy_single_date_id, sd1.day AS publication_day, sd1.month AS publication_month, sd1.year AS publication_year,
-        w.performance_start_date AS conference_start_date, w.publication_media_type_id, w.publication_type_id,
-        w.title, w.journal_article_type_id, w.author_list, 
-	          w.isbn, w.issn, w.impact_factor, w.issue, w.journal_title, w.beginning_page, w.ending_page, w.percent_authorship,
-	          w.review_type_id, f.name as review_type, w.url, w.volume,  w.work_type_id, a.work_type_name,
-	          w.book_title, w.city, w.state, w.country, w.event_title, w.edition, w.publisher, w.series, w.is_review, w.status_id, 
-	          e.name as publication_status, w.number_of_citations,
-	          w.publication_dmy_single_date_id,
-	          w.performance_start_date,
-	          w.publication_media_type_id, g.name as publication_document_type, w.publication_type_id, h.name as book_type,
-           sd1.year, sd1.month, sd1.day, b.narrative_text, c.is_public
+        w.performance_start_date AS conference_start_date, w.publication_media_type_id, w.publication_type_id,	         
+	           f.name as review_type,   a.work_type_name,
+	           w.is_review,  
+	          e.name as publication_status, w.number_of_citations,	          
+	          g.name as publication_document_type,  h.name as book_type,
+            b.narrative_text, c.is_public
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    left join kmdata.narratives b on w.resource_id = b.resource_id
