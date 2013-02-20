@@ -13,4 +13,5 @@ CREATE OR REPLACE VIEW kmdata.vw_Book AS
       left join researchinview.activity_import_log c on c.resource_id = w.resource_id
    left join researchinview.riv_conference_work_types f on f.id = w.sub_work_type_id
    left join kmdata.work_types a on a.id = w.work_type_id
-  WHERE w.work_type_id = 6;
+   left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
+  WHERE w.work_type_id = 6 and lo.is_active = 1;

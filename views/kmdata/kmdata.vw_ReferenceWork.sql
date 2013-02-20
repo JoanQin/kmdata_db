@@ -17,4 +17,5 @@ w.review_type_id, w.status_id, w.url, w.volume, w.created_at, w.updated_at, w.wo
    left join researchinview.activity_import_log c on c.resource_id = w.resource_id
    left join kmdata.work_types a on a.id = w.work_type_id
    left join researchinview.riv_review_types g on w.review_type_id = g.id
-  WHERE w.work_type_id = 5;
+   left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
+  WHERE w.work_type_id = 5 and lo.is_active = 1;
