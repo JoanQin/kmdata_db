@@ -8,7 +8,7 @@ w.review_type_id, w.status_id, w.url, w.volume, w.created_at, w.updated_at, w.wo
 	 e.name as publication_status,
 	w.is_review as reviewed_item,  b.narrative_text as description_of_effort,
 	  b.private_ind as privacy, c.is_public,   w.publisher, 
-	 w.edition, g.name as review_type_name
+	 w.edition, g.name as review_type_name, lo.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    left join kmdata.narratives b on w.resource_id = b.resource_id
@@ -18,4 +18,4 @@ w.review_type_id, w.status_id, w.url, w.volume, w.created_at, w.updated_at, w.wo
    left join kmdata.work_types a on a.id = w.work_type_id
    left join researchinview.riv_review_types g on w.review_type_id = g.id
    left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
-  WHERE w.work_type_id = 5 and lo.is_active = 1;
+  WHERE w.work_type_id = 5 ;
