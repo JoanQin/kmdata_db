@@ -6,7 +6,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Presentation AS
 	            g.name as prosentation_role_name, w.reach_of_conference, h.name as conference_reach_type_name, 
 	           w.session_name, w.speaker_name,
 	             a.work_type_name,	          
-           b.narrative_text, c.is_public
+           b.narrative_text, c.is_public, lo.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.presentation_dmy_single_date_id = sd1.id
    left join kmdata.narratives b on w.resource_id = b.resource_id
@@ -15,4 +15,5 @@ CREATE OR REPLACE VIEW kmdata.vw_Presentation AS
       left join researchinview.riv_review_types f on f.id = w.review_type_id
       left join researchinview.riv_presentation_roles g on g.id = w.presentation_role_id
    left join researchinview.riv_conference_reach_types h on h.id = cast(w.reach_of_conference as int)
+      left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
   WHERE w.work_type_id = 11;
