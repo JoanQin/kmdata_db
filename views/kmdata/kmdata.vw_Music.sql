@@ -5,7 +5,7 @@ w.presentation_dmy_single_date_id, sd1.day AS presentation_day, sd1.month AS pre
 w.performance_end_date, COALESCE(w.extended_author_list, w.artist) AS extended_author_list,
          a.name as music_role, 
         c.work_type_name,       
-         w.sub_work_type_id, b.name as type_of_work, w.producer, w.completed, w.ongoing, w.performance, d.narrative_text, e.is_public
+         w.sub_work_type_id, b.name as type_of_work, w.producer, w.completed, w.ongoing, w.performance, d.narrative_text, e.is_public, e.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.presentation_dmy_single_date_id = sd1.id
    left join researchinview.riv_music_roles a on a.id = cast(w.role_designator as int)
