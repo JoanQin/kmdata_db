@@ -5,7 +5,7 @@ CREATE OR REPLACE VIEW kmdata.vw_EditedBook AS
         w.status_id, w.sub_work_type_id,	       
 	          f.name as review_type_name,  a.work_type_name, w.is_review,
 	            e.name as publication_status,  h.name as edited_book_name,
-           b.narrative_text, c.is_public, lo.is_active
+           b.narrative_text, c.is_public, c.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    left join kmdata.narratives b on w.resource_id = b.resource_id
@@ -14,5 +14,4 @@ CREATE OR REPLACE VIEW kmdata.vw_EditedBook AS
       left join researchinview.riv_publication_statuses e on e.id = w.status_id   
       left join researchinview.riv_review_types f on f.id = w.review_type_id
    left join researchinview.riv_edited_book_types h on h.id = w.sub_work_type_id
-   left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
   WHERE w.work_type_id = 9;
