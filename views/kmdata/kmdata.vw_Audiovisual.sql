@@ -8,7 +8,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Audiovisual AS
         w.created_at, w.updated_at, w.work_type_id,
 	           a.work_type_name,
 	         w.completed, w.producer, w.sub_work_type_id, w.sub_work_type_other, e.name as audiovisual_work_name,
-            b.narrative_text, c.is_public, lo.is_active
+            b.narrative_text, c.is_public, c.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.broadcast_dmy_single_date_id = sd1.id
    LEFT JOIN kmdata.dmy_single_dates sd2 ON w.presentation_dmy_range_date_id = sd2.id
@@ -16,5 +16,4 @@ CREATE OR REPLACE VIEW kmdata.vw_Audiovisual AS
          left join researchinview.activity_import_log c on c.resource_id = w.resource_id
          left join kmdata.work_types a on a.id = w.work_type_id
       left join researchinview.riv_audiovisual_work_types e on e.id = w.sub_work_type_id
-      left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
   WHERE w.work_type_id = 18;
