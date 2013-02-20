@@ -7,7 +7,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Journal AS
          g.name as journal_article_type_name,  	          
 	         w.is_review,
 	         f.name as review_type_name,  e.name as publication_status,   a.work_type_name,	         
-           b.narrative_text, c.is_public, lo.is_active
+           b.narrative_text, c.is_public,  lo.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    left join kmdata.narratives b on w.resource_id = b.resource_id
