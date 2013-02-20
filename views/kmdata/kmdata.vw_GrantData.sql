@@ -13,7 +13,7 @@ grant_data.funding_agency_type, grant_data.funding_amount_breakdown, grant_data.
          a.name as agency_name,                  
                   b.name as role_name,  d.name as status_name,   e.name as grant_type_name, grant_data.appl_id, grant_data.ongoing,                                 
                  f.name as funding_agency_type_name,   g.name as funding_amount_breakdown_name, 
-       c.is_public, lo.is_active
+       c.is_public, c.is_active
   FROM kmdata.grant_data 
   left join kmdata.user_grants u on u.grant_data_id = grant_data.id
   left join researchinview.activity_import_log c on c.resource_id = grant_data.resource_id
@@ -22,5 +22,4 @@ grant_data.funding_agency_type, grant_data.funding_amount_breakdown, grant_data.
    left join researchinview.riv_grant_statuses d on d.id = grant_data.status_id
    left join researchinview.riv_grant_types e on e.id = grant_data.grant_type_id
    left join researchinview.riv_grant_funding_agency_types f on f.id = cast(grant_data.funding_agency_type as int)
-   left join researchinview.riv_grant_amount_breakdowns g on g.id = grant_data.funding_amount_breakdown
-      left join researchinview.activity_import_log lo on grant_data.resource_id = lo.resource_id;
+   left join researchinview.riv_grant_amount_breakdowns g on g.id = grant_data.funding_amount_breakdown;
