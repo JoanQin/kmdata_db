@@ -5,7 +5,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Unpublished AS
          w.completed,	          
 	           f.name as review_type_name,  a.work_type_name,
 	           w.extended_author_list,  e.name as publication_status,
-            b.narrative_text, c.is_public
+            b.narrative_text, c.is_public, lo.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.submission_dmy_single_date_id = sd1.id
    left join kmdata.narratives b on w.resource_id = b.resource_id
@@ -13,4 +13,5 @@ CREATE OR REPLACE VIEW kmdata.vw_Unpublished AS
       left join kmdata.work_types a on a.id = w.work_type_id
       left join researchinview.riv_unpublish_submission_status e on e.id = w.status_id   
    left join researchinview.riv_review_types f on f.id = w.review_type_id
+      left join researchinview.activity_import_log lo on w.resource_id = lo.resource_id
   WHERE w.work_type_id = 10;
