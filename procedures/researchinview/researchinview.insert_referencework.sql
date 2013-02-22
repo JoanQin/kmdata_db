@@ -112,7 +112,7 @@ BEGIN
          (v_WorkID, v_ResourceID, v_UserID, researchinview.strip_riv_tags(p_EntryTitle), p_Author, p_Edition, p_Editor,
           v_StartPage, v_EndPage, p_PercentAuthorship, p_PublicationTitle, p_Publisher, p_Reviewed,
           kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_PublishedDate), researchinview.get_year(p_PublishedDate)), 
-          p_ReviewType,  p_URL, p_Volume, current_timestamp, current_timestamp, 5, -- 5 is abstracts (ReferenceWork)
+          cast(p_ReviewType as integer),  p_URL, p_Volume, current_timestamp, current_timestamp, 5, -- 5 is abstracts (ReferenceWork)
           p_City, p_Country, v_State, p_ISBN, CAST(p_Status AS INTEGER), CAST(p_WorkType AS INTEGER));
 
       -- add work author
@@ -151,7 +151,7 @@ BEGIN
              is_review = p_Reviewed,
              status_id = CAST(p_Status AS INTEGER), 
              sub_work_type_id = CAST(p_WorkType AS INTEGER),
-             review_type_id = p_ReviewType,
+             review_type_id = cast(p_ReviewType as integer),
              url = p_URL, 
              volume = p_Volume,
              updated_at = current_timestamp,
