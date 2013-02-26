@@ -10,11 +10,13 @@ DECLARE
       INNER JOIN kmdata.departments b ON a.inst_group_code = b.deptid
       INNER JOIN kmdata.group_categorizations c ON a.id = c.group_id
       INNER JOIN kmdata.group_categories d ON c.group_category_id = d.id
-      WHERE d.name = 'HR Department List Faculty and Staff';
+      WHERE d.name = 'HR Department List Faculty and Staff'
+      AND a.active = TRUE;
 
    -- The join to kmdata.user_appointments eliminates departments without members
    v_InsertCursor CURSOR FOR
-      SELECT DISTINCT chgdept.inst_group_code, d.dept_name AS "name", CAST(NULL AS VARCHAR) AS description, TRUE AS is_public
+      SELECT DISTINCT chgdept.inst_group_code, d.dept_name AS "name", CAST(NULL AS VARCHAR) AS description, TRUE AS is_public,
+         TRUE AS active, NULL AS deleted_at
       FROM
       (
          SELECT ai.deptid AS inst_group_code
@@ -58,7 +60,10 @@ BEGIN
    v_ReturnString := '';
    
    -- Step 1: delete current groups that are no longer here (Part A: delete groups not found; Part B: make sure these are the right category)
-   DELETE FROM kmdata.groups bd
+   --DELETE FROM kmdata.groups bd
+   UPDATE kmdata.groups bd
+   SET active = FALSE,
+       deleted_at = current_timestamp
    WHERE NOT EXISTS (
       SELECT b.id
       FROM kmdata.departments a
@@ -106,9 +111,11 @@ BEGIN
       v_GroupID := nextval('kmdata.groups_new_id_seq');
       
       INSERT INTO kmdata.groups (
-	 id, "name", description, is_public, inst_group_code)
+	 id, "name", description, is_public, inst_group_code,
+	 slug, active, deleted_at)
       VALUES (
-         v_GroupID, v_insGroup.name, v_insGroup.description, v_insGroup.is_public, v_insGroup.inst_group_code); --kmdata.add_new_resource('kmdata', 'groups')
+         v_GroupID, v_insGroup.name, v_insGroup.description, v_insGroup.is_public, v_insGroup.inst_group_code,
+         kmdata.get_slug('system-hr-fs-'||v_insGroup.name), v_insGroup.active, NULL);--v_insGroup.deleted_at --kmdata.add_new_resource('kmdata', 'groups')
 
       -- Step 2: group_categorizations
       INSERT INTO kmdata.group_categorizations

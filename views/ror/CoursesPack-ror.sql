@@ -1,5 +1,5 @@
 ﻿CREATE OR REPLACE VIEW ror.vw_Campuses AS 
- SELECT a.id, a.campus_name, a.institution_id, a.location_id, a.resource_id, a.ps_location_name
+ SELECT a.id, a.campus_name, a.institution_id, a.location_id, a.resource_id, a.ps_location_name, a.campus_code
    FROM kmdata.campuses a;
 
 ALTER TABLE ror.vw_Campuses
@@ -11,7 +11,7 @@ GRANT SELECT ON TABLE ror.vw_Campuses TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Colleges AS 
- SELECT a.id, a.acad_group, a.college_name, a.abbreviation, a.campus_id, a.resource_id
+ SELECT a.id, a.acad_group, a.college_name, a.abbreviation, a.resource_id
    FROM kmdata.colleges a;
 
 ALTER TABLE ror.vw_Colleges
@@ -23,7 +23,7 @@ GRANT SELECT ON TABLE ror.vw_Colleges TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_AcadDepartments AS 
- SELECT a.id, a.department_name, a.college_id, a.abbreviation, a.resource_id, a.dept_code
+ SELECT a.id, a.department_name, a.college_id, a.abbreviation, a.resource_id, a.dept_code, a.ods_department_number
    FROM kmdata.acad_departments a;
 
 ALTER TABLE ror.vw_AcadDepartments
@@ -35,7 +35,8 @@ GRANT SELECT ON TABLE ror.vw_AcadDepartments TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Courses AS 
- SELECT a.id, a.subject_id, a.course_number, a.course_name, a.course_name_abbrev, a.active, a.description, a.resource_id
+ SELECT a.id, a.ps_course_id, a.course_name, a.course_name_abbrev, a.active, 
+        a.description, a.repeatable, a.grading_basis, a.units_acad_prog, a.resource_id
    FROM kmdata.courses a;
 
 ALTER TABLE ror.vw_Courses
@@ -47,7 +48,9 @@ GRANT SELECT ON TABLE ror.vw_Courses TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Offerings AS 
- SELECT a.id, a.offering_name, a.course_id, a.term_session_id, a.acad_department_id, a.resource_id
+ SELECT a.id, a.course_id, a.ps_course_offer_number, a.college_id,
+        a.subject_id, a.course_number, a.campus_id, a.department_id, a.acad_career, 
+        a.schedule_print, a.catalog_print, a.sched_print_instr, a.resource_id
    FROM kmdata.offerings a;
 
 ALTER TABLE ror.vw_Offerings
@@ -59,7 +62,9 @@ GRANT SELECT ON TABLE ror.vw_Offerings TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Sections AS 
- SELECT a.id, a.section_name, a.offering_id, a.class_number, a.section_type, a.parent_section_id, a.resource_id
+ SELECT a.id, a.offering_id, a.term_session_id, a.ps_class_section, a.class_number, 
+        a.enrollment_total, a.enrollment_capacity, a.waitlist_total, a.ssr_component,
+        a.schedule_print, a.print_topic, a.instruction_mode, a.resource_id
    FROM sections a;
 
 ALTER TABLE ror.vw_Sections
@@ -71,7 +76,8 @@ GRANT SELECT ON TABLE ror.vw_Sections TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_Enrollments AS 
- SELECT a.id, a.section_id, a.user_id AS person_id, a.role_id, a.career_id, a.created_at, a.updated_at, a.resource_id
+ SELECT a.id, a.section_weekly_mtg_id, a.ps_instr_assign_seq, a.user_id AS person_id, a.role_id, 
+        a.sched_print_instr, a.resource_id, a.created_at, a.updated_at
    FROM kmdata.enrollments a;
 
 ALTER TABLE ror.vw_Enrollments
@@ -144,7 +150,8 @@ GRANT SELECT ON TABLE ror.vw_TermSessions TO kmd_dev_riv_user;
 
 
 CREATE OR REPLACE VIEW ror.vw_SectionWeeklyMtgs AS
- SELECT a.id, a.section_id, a.start_time, a.end_time, a.building_id, a.room_no, a.days_of_week, a.start_date, a.end_date
+ SELECT a.id, a.section_id, a.ps_class_mtg_number, a.start_time, a.end_time, 
+        a.building_id, a.room_no, a.days_of_week, a.start_date, a.end_date, a.resource_id
    FROM kmdata.section_weekly_mtgs a;
 
 ALTER TABLE ror.vw_SectionWeeklyMtgs

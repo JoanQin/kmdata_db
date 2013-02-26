@@ -66,14 +66,14 @@ BEGIN
    
       -- update the users and user_identifiers table ONLY if something has changed
       -- deltas are driven from the updated_at column
-      IF v_updUser.last_name != v_updUser.curr_last_name
-         OR v_updUser.first_name != v_updUser.curr_first_name
-         OR v_updUser.middle_name != v_updUser.curr_middle_name
-         OR v_updUser.name_prefix != v_updUser.curr_name_prefix
-         OR v_updUser.name_suffix != v_updUser.curr_name_suffix
-         OR v_updUser.name_display != v_updUser.curr_name_display
-         OR v_updUser.deceased_ind != v_updUser.curr_deceased_ind
-         OR v_updUser.inst_username != v_updUser.curr_inst_username
+      IF COALESCE(v_updUser.last_name,'') != COALESCE(v_updUser.curr_last_name,'')
+         OR COALESCE(v_updUser.first_name,'') != COALESCE(v_updUser.curr_first_name,'')
+         OR COALESCE(v_updUser.middle_name,'') != COALESCE(v_updUser.curr_middle_name,'')
+         OR COALESCE(v_updUser.name_prefix,'') != COALESCE(v_updUser.curr_name_prefix,'')
+         OR COALESCE(v_updUser.name_suffix,'') != COALESCE(v_updUser.curr_name_suffix,'')
+         OR COALESCE(v_updUser.name_display,'') != COALESCE(v_updUser.curr_name_display,'')
+         OR COALESCE(CAST(v_updUser.deceased_ind AS VARCHAR),'') != COALESCE(CAST(v_updUser.curr_deceased_ind AS VARCHAR),'')
+         OR COALESCE(v_updUser.inst_username,'') != COALESCE(v_updUser.curr_inst_username,'')
       THEN
       
          UPDATE kmdata.users

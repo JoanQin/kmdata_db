@@ -34,6 +34,7 @@ CREATE TABLE kmdata.groups (
                 inst_group_code VARCHAR(255),
                 slug VARCHAR(100) NOT NULL,
                 active BOOLEAN DEFAULT TRUE NOT NULL,
+                deleted_at TIMESTAMP,
                 CONSTRAINT groups_new_pk PRIMARY KEY (id)
 );
 
@@ -166,13 +167,17 @@ CREATE SEQUENCE kmdata.terms_id_seq;
 
 CREATE TABLE kmdata.terms (
                 id BIGINT NOT NULL DEFAULT nextval('kmdata.terms_id_seq'),
-                term_code VARCHAR(10) NOT NULL,
+                term_code VARCHAR(4) NOT NULL,
                 description VARCHAR(255),
                 CONSTRAINT terms_pk PRIMARY KEY (id)
 );
 
 
 ALTER SEQUENCE kmdata.terms_id_seq OWNED BY kmdata.terms.id;
+
+CREATE INDEX terms_term_code_idx
+ ON kmdata.terms
+ ( term_code );
 
 CREATE SEQUENCE kmdata.term_sessions_id_seq;
 
@@ -185,6 +190,14 @@ CREATE TABLE kmdata.term_sessions (
 
 
 ALTER SEQUENCE kmdata.term_sessions_id_seq OWNED BY kmdata.term_sessions.id;
+
+CREATE INDEX term_sessions_session_code_idx
+ ON kmdata.term_sessions
+ ( session_code );
+
+CREATE INDEX term_sessions_term_id_idx
+ ON kmdata.term_sessions
+ ( term_id );
 
 CREATE SEQUENCE kmdata.academic_careers_id_seq;
 
@@ -205,6 +218,28 @@ CREATE TABLE kmdata.enrollment_roles (
                 CONSTRAINT enrollment_roles_pk PRIMARY KEY (id)
 );
 
+
+CREATE SEQUENCE kmdata.acad_departments_id_seq;
+
+CREATE TABLE kmdata.acad_departments (
+                id BIGINT NOT NULL DEFAULT nextval('kmdata.acad_departments_id_seq'),
+                department_name VARCHAR(1000) NOT NULL,
+                abbreviation VARCHAR(50),
+                dept_code VARCHAR(25) NOT NULL,
+                ods_department_number VARCHAR(255) NOT NULL,
+                CONSTRAINT acad_departments_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE kmdata.acad_departments_id_seq OWNED BY kmdata.acad_departments.id;
+
+CREATE INDEX acad_departments_abbreviation_idx
+ ON kmdata.acad_departments
+ ( abbreviation );
+
+CREATE INDEX acad_departments_dept_code_idx
+ ON kmdata.acad_departments
+ ( dept_code );
 
 CREATE SEQUENCE kmdata.address_types_id_seq;
 
@@ -685,18 +720,24 @@ CREATE SEQUENCE kmdata.courses_id_seq;
 
 CREATE TABLE kmdata.courses (
                 id BIGINT NOT NULL DEFAULT nextval('kmdata.courses_id_seq'),
-                subject_id BIGINT NOT NULL,
-                course_number VARCHAR(10) NOT NULL,
+                ps_course_id VARCHAR(6) NOT NULL,
                 course_name VARCHAR(500) NOT NULL,
                 course_name_abbrev VARCHAR(30),
                 active SMALLINT DEFAULT 1 NOT NULL,
                 description TEXT,
+                repeatable VARCHAR(1),
+                grading_basis VARCHAR(3),
+                units_acad_prog NUMERIC(5,2),
                 resource_id BIGINT NOT NULL,
                 CONSTRAINT courses_pk PRIMARY KEY (id)
 );
 
 
 ALTER SEQUENCE kmdata.courses_id_seq OWNED BY kmdata.courses.id;
+
+CREATE INDEX courses_ps_course_id_idx
+ ON kmdata.courses
+ ( ps_course_id );
 
 CREATE SEQUENCE kmdata.group_exclusions_id_seq;
 
@@ -797,6 +838,20 @@ CREATE TABLE kmdata.course_syllabi (
 
 ALTER SEQUENCE kmdata.course_syllabi_id_seq OWNED BY kmdata.course_syllabi.id;
 
+CREATE SEQUENCE kmdata.colleges_id_seq;
+
+CREATE TABLE kmdata.colleges (
+                id BIGINT NOT NULL DEFAULT nextval('kmdata.colleges_id_seq'),
+                acad_group VARCHAR(5) NOT NULL,
+                college_name VARCHAR(250) NOT NULL,
+                abbreviation VARCHAR(50),
+                resource_id BIGINT NOT NULL,
+                CONSTRAINT colleges_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE kmdata.colleges_id_seq OWNED BY kmdata.colleges.id;
+
 CREATE SEQUENCE kmdata.departments_id_seq;
 
 CREATE TABLE kmdata.departments (
@@ -876,12 +931,70 @@ CREATE TABLE kmdata.campuses (
                 ps_location_name VARCHAR(10),
                 institution_id BIGINT NOT NULL,
                 location_id BIGINT NOT NULL,
+                campus_code VARCHAR(5),
                 resource_id BIGINT NOT NULL,
                 CONSTRAINT campuses_pk PRIMARY KEY (id)
 );
 
 
 ALTER SEQUENCE kmdata.campuses_id_seq OWNED BY kmdata.campuses.id;
+
+CREATE SEQUENCE kmdata.offerings_id_seq;
+
+CREATE TABLE kmdata.offerings (
+                id BIGINT NOT NULL DEFAULT nextval('kmdata.offerings_id_seq'),
+                course_id BIGINT NOT NULL,
+                ps_course_offer_number BIGINT NOT NULL,
+                offering_name VARCHAR(500) NOT NULL,
+                college_id BIGINT,
+                subject_id BIGINT NOT NULL,
+                course_number VARCHAR(10) NOT NULL,
+                campus_id BIGINT NOT NULL,
+                department_id BIGINT,
+                acad_career VARCHAR(4),
+                schedule_print VARCHAR(1),
+                catalog_print VARCHAR(1),
+                sched_print_instr VARCHAR(1),
+                active SMALLINT DEFAULT 1 NOT NULL,
+                resource_id BIGINT NOT NULL,
+                CONSTRAINT offerings_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE kmdata.offerings_id_seq OWNED BY kmdata.offerings.id;
+
+CREATE INDEX offerings_ps_course_offer_number_idx
+ ON kmdata.offerings
+ ( ps_course_offer_number );
+
+CREATE SEQUENCE kmdata.sections_id_seq;
+
+CREATE TABLE kmdata.sections (
+                id BIGINT NOT NULL DEFAULT nextval('kmdata.sections_id_seq'),
+                section_name VARCHAR(500),
+                offering_id BIGINT NOT NULL,
+                term_session_id BIGINT NOT NULL,
+                ps_class_section VARCHAR(4) NOT NULL,
+                class_number VARCHAR(50) NOT NULL,
+                section_type VARCHAR(10),
+                parent_section_id BIGINT,
+                enrollment_total NUMERIC(38),
+                enrollment_capacity NUMERIC(38),
+                waitlist_total NUMERIC(38),
+                ssr_component VARCHAR(3),
+                schedule_print VARCHAR(1),
+                print_topic VARCHAR(1),
+                instruction_mode VARCHAR(2),
+                resource_id BIGINT NOT NULL,
+                CONSTRAINT sections_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE kmdata.sections_id_seq OWNED BY kmdata.sections.id;
+
+CREATE INDEX sections_ps_class_section_idx
+ ON kmdata.sections
+ ( ps_class_section );
 
 CREATE SEQUENCE kmdata.buildings_id_seq;
 
@@ -899,84 +1012,10 @@ CREATE TABLE kmdata.buildings (
 
 ALTER SEQUENCE kmdata.buildings_id_seq OWNED BY kmdata.buildings.id;
 
-CREATE SEQUENCE kmdata.colleges_id_seq;
-
-CREATE TABLE kmdata.colleges (
-                id BIGINT NOT NULL DEFAULT nextval('kmdata.colleges_id_seq'),
-                acad_group VARCHAR(5) NOT NULL,
-                college_name VARCHAR(250) NOT NULL,
-                abbreviation VARCHAR(50),
-                campus_id BIGINT NOT NULL,
-                resource_id BIGINT NOT NULL,
-                CONSTRAINT colleges_pk PRIMARY KEY (id)
-);
-
-
-ALTER SEQUENCE kmdata.colleges_id_seq OWNED BY kmdata.colleges.id;
-
-CREATE SEQUENCE kmdata.acad_departments_id_seq;
-
-CREATE TABLE kmdata.acad_departments (
-                id BIGINT NOT NULL DEFAULT nextval('kmdata.acad_departments_id_seq'),
-                department_name VARCHAR(1000) NOT NULL,
-                college_id BIGINT NOT NULL,
-                abbreviation VARCHAR(50),
-                dept_code VARCHAR(25) NOT NULL,
-                ods_department_number VARCHAR(255) NOT NULL,
-                resource_id BIGINT NOT NULL,
-                CONSTRAINT acad_departments_pk PRIMARY KEY (id)
-);
-
-
-ALTER SEQUENCE kmdata.acad_departments_id_seq OWNED BY kmdata.acad_departments.id;
-
-CREATE INDEX acad_departments_abbreviation_idx
- ON kmdata.acad_departments
- ( abbreviation );
-
-CREATE INDEX acad_departments_dept_code_idx
- ON kmdata.acad_departments
- ( dept_code );
-
-CREATE SEQUENCE kmdata.offerings_id_seq;
-
-CREATE TABLE kmdata.offerings (
-                id BIGINT NOT NULL DEFAULT nextval('kmdata.offerings_id_seq'),
-                offering_name VARCHAR(500) NOT NULL,
-                course_id BIGINT NOT NULL,
-                term_session_id BIGINT NOT NULL,
-                acad_department_id BIGINT NOT NULL,
-                resource_id BIGINT NOT NULL,
-                units_acad_prog NUMERIC(5,2),
-                acad_career VARCHAR(4),
-                CONSTRAINT offerings_pk PRIMARY KEY (id)
-);
-
-
-ALTER SEQUENCE kmdata.offerings_id_seq OWNED BY kmdata.offerings.id;
-
-CREATE SEQUENCE kmdata.sections_id_seq;
-
-CREATE TABLE kmdata.sections (
-                id BIGINT NOT NULL DEFAULT nextval('kmdata.sections_id_seq'),
-                section_name VARCHAR(500),
-                offering_id BIGINT NOT NULL,
-                class_number VARCHAR(50) NOT NULL,
-                section_type VARCHAR(10),
-                parent_section_id BIGINT,
-                resource_id BIGINT NOT NULL,
-                enrollment_total NUMERIC(38),
-                CONSTRAINT sections_pk PRIMARY KEY (id)
-);
-
-
-ALTER SEQUENCE kmdata.sections_id_seq OWNED BY kmdata.sections.id;
-
-CREATE SEQUENCE kmdata.section_weekly_mtgs_id_seq;
-
 CREATE TABLE kmdata.section_weekly_mtgs (
-                id BIGINT NOT NULL DEFAULT nextval('kmdata.section_weekly_mtgs_id_seq'),
+                id BIGINT NOT NULL,
                 section_id BIGINT NOT NULL,
+                ps_class_mtg_number BIGINT NOT NULL,
                 start_time VARCHAR(50),
                 end_time VARCHAR(50),
                 building_id BIGINT,
@@ -984,11 +1023,18 @@ CREATE TABLE kmdata.section_weekly_mtgs (
                 days_of_week VARCHAR(7),
                 start_date TIMESTAMP,
                 end_date TIMESTAMP,
+                resource_id BIGINT NOT NULL,
                 CONSTRAINT section_weekly_mtgs_pk PRIMARY KEY (id)
 );
 
 
-ALTER SEQUENCE kmdata.section_weekly_mtgs_id_seq OWNED BY kmdata.section_weekly_mtgs.id;
+CREATE INDEX section_weekly_mtgs_ps_class_mtg_number_idx
+ ON kmdata.section_weekly_mtgs
+ ( ps_class_mtg_number );
+
+CREATE INDEX section_weekly_mtgs_section_id_idx
+ ON kmdata.section_weekly_mtgs
+ ( section_id );
 
 CREATE SEQUENCE kmdata.narratives_id_seq;
 
@@ -1520,14 +1566,14 @@ COMMENT ON COLUMN kmdata.user_positions.position_type IS 'Maps to research in vi
 
 ALTER SEQUENCE kmdata.user_positions_user_id_seq OWNED BY kmdata.user_positions.user_id;
 
-CREATE SEQUENCE kmdata.enrollments_id_seq;
-
 CREATE TABLE kmdata.enrollments (
-                id BIGINT NOT NULL DEFAULT nextval('kmdata.enrollments_id_seq'),
-                section_id BIGINT NOT NULL,
+                id BIGINT NOT NULL,
+                section_weekly_mtg_id BIGINT NOT NULL,
+                ps_instr_assign_seq BIGINT NOT NULL,
                 user_id BIGINT NOT NULL,
                 role_id BIGINT NOT NULL,
                 career_id BIGINT,
+                sched_print_instr VARCHAR(1),
                 resource_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL,
@@ -1535,11 +1581,13 @@ CREATE TABLE kmdata.enrollments (
 );
 
 
-ALTER SEQUENCE kmdata.enrollments_id_seq OWNED BY kmdata.enrollments.id;
-
 CREATE UNIQUE INDEX enrollment_unique_set_idx
  ON kmdata.enrollments
- ( section_id, user_id, role_id, career_id );
+ ( user_id, role_id, career_id );
+
+CREATE INDEX enrollments_ps_instr_assign_seq_idx
+ ON kmdata.enrollments
+ ( ps_instr_assign_seq );
 
 CREATE SEQUENCE kmdata.group_excluded_users_id_seq;
 
@@ -2444,7 +2492,7 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE kmdata.offerings ADD CONSTRAINT term_sessions_offerings_fk
+ALTER TABLE kmdata.sections ADD CONSTRAINT term_sessions_sections_fk
 FOREIGN KEY (term_session_id)
 REFERENCES kmdata.term_sessions (id)
 ON DELETE NO ACTION
@@ -2858,13 +2906,6 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE kmdata.acad_departments ADD CONSTRAINT resources_departments_fk1
-FOREIGN KEY (resource_id)
-REFERENCES kmdata.resources (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
 ALTER TABLE kmdata.offerings ADD CONSTRAINT resources_offerings_fk
 FOREIGN KEY (resource_id)
 REFERENCES kmdata.resources (id)
@@ -3061,6 +3102,13 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE kmdata.section_weekly_mtgs ADD CONSTRAINT resources_section_weekly_mtgs_fk
+FOREIGN KEY (resource_id)
+REFERENCES kmdata.resources (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE kmdata.outreach_users ADD CONSTRAINT outreach_outreach_users_fk
 FOREIGN KEY (outreach_id)
 REFERENCES kmdata.outreach (id)
@@ -3068,16 +3116,9 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE kmdata.courses ADD CONSTRAINT subjects_courses_fk
+ALTER TABLE kmdata.offerings ADD CONSTRAINT subjects_offerings_fk
 FOREIGN KEY (subject_id)
 REFERENCES kmdata.subjects (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE kmdata.offerings ADD CONSTRAINT courses_offerings_fk
-FOREIGN KEY (course_id)
-REFERENCES kmdata.courses (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -3089,9 +3130,30 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE kmdata.offerings ADD CONSTRAINT courses_offerings_fk
+FOREIGN KEY (course_id)
+REFERENCES kmdata.courses (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE kmdata.user_grants ADD CONSTRAINT grant_data_user_grants_fk
 FOREIGN KEY (grant_data_id)
 REFERENCES kmdata.grant_data (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE kmdata.offerings ADD CONSTRAINT colleges_offerings_fk
+FOREIGN KEY (college_id)
+REFERENCES kmdata.colleges (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE kmdata.offerings ADD CONSTRAINT departments_offerings_fk
+FOREIGN KEY (department_id)
+REFERENCES kmdata.departments (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -3194,13 +3256,6 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE kmdata.colleges ADD CONSTRAINT campus_colleges_fk
-FOREIGN KEY (campus_id)
-REFERENCES kmdata.campuses (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
 ALTER TABLE kmdata.buildings ADD CONSTRAINT campuses_buildings_fk
 FOREIGN KEY (campus_id)
 REFERENCES kmdata.campuses (id)
@@ -3208,23 +3263,9 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE kmdata.section_weekly_mtgs ADD CONSTRAINT buildings_section_weekly_mtgs_fk
-FOREIGN KEY (building_id)
-REFERENCES kmdata.buildings (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE kmdata.acad_departments ADD CONSTRAINT colleges_departments_fk
-FOREIGN KEY (college_id)
-REFERENCES kmdata.colleges (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE kmdata.offerings ADD CONSTRAINT acad_departments_offerings_fk
-FOREIGN KEY (acad_department_id)
-REFERENCES kmdata.acad_departments (id)
+ALTER TABLE kmdata.offerings ADD CONSTRAINT campuses_offerings_fk
+FOREIGN KEY (campus_id)
+REFERENCES kmdata.campuses (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -3232,13 +3273,6 @@ NOT DEFERRABLE;
 ALTER TABLE kmdata.sections ADD CONSTRAINT offerings_sections_fk
 FOREIGN KEY (offering_id)
 REFERENCES kmdata.offerings (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE kmdata.enrollments ADD CONSTRAINT sections_enrollment_fk
-FOREIGN KEY (section_id)
-REFERENCES kmdata.sections (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -3253,6 +3287,20 @@ NOT DEFERRABLE;
 ALTER TABLE kmdata.section_weekly_mtgs ADD CONSTRAINT sections_section_weekly_mtgs_fk
 FOREIGN KEY (section_id)
 REFERENCES kmdata.sections (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE kmdata.section_weekly_mtgs ADD CONSTRAINT buildings_section_weekly_mtgs_fk
+FOREIGN KEY (building_id)
+REFERENCES kmdata.buildings (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE kmdata.enrollments ADD CONSTRAINT section_weekly_mtgs_enrollments_fk
+FOREIGN KEY (section_weekly_mtg_id)
+REFERENCES kmdata.section_weekly_mtgs (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -3627,174 +3675,3 @@ REFERENCES kmdata.textbooks (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
-------------------------------------------
--- Start Metadata generating documentation
-------------------------------------------
-
-DROP TABLE IF EXISTS ror.entity CASCADE ;
-
-CREATE TABLE ror.entity
-(
-  entity character varying(32) NOT NULL, 
-  base_view character varying(32), 
-  CONSTRAINT entity_pk PRIMARY KEY (entity)
-)
-WITH (
-  OIDS=FALSE
-);
-
-COMMENT ON COLUMN ror.entity.entity IS 'Unique identifier for an entity';
-COMMENT ON COLUMN ror.entity.base_view IS 'Name of the base view representing this entity.';
-
-----------------------------
-
-DROP TABLE IF EXISTS ror.entity_field ;
-
-CREATE TABLE ror.entity_field
-(
-  entity character varying(32) NOT NULL,
-  entity_field character varying(32),
-  view_field character varying(32),
-  override_ordinal_position integer,
-  override_is_nullable character varying(3),
-  override_udt_name character varying,
-  override_character_maximum_length integer,
-  description text,
-  classification character varying(10),
-  sample text
-)
-WITH (
-  OIDS=FALSE
-);
-
-COMMENT ON COLUMN ror.entity_field.entity IS 'Identifier for the entity';
-COMMENT ON COLUMN ror.entity_field.entity_field IS 'Identifier for the field in the entity.  If this is NULL, it means that view_field is to be excluded.';
-COMMENT ON COLUMN ror.entity_field.view_field IS 'Identifier for the field in the view.  If this is NULL, it means there is no corresponding field in the view.';
-COMMENT ON COLUMN ror.entity_field.override_ordinal_position IS 'Override of view metadata. Note, to allow insertion, view ordinals will be multiplied by 100';
-COMMENT ON COLUMN ror.entity_field.override_is_nullable IS 'Override of view metadata';
-COMMENT ON COLUMN ror.entity_field.override_udt_name IS 'Override of view metadata';
-COMMENT ON COLUMN ror.entity_field.override_character_maximum_length IS 'Override of view metadata';
-COMMENT ON COLUMN ror.entity_field.description IS 'Description of the field';
-COMMENT ON COLUMN ror.entity_field.classification IS 'Highest level of restrictedness, must be {puiblic, limited, restricted}';
-COMMENT ON COLUMN ror.entity_field.sample IS 'Example of the type of data stored in this field';
-
----------------------------
-
-INSERT INTO ror.entity (entity, base_view) VALUES
-  -- Various
-  ('campus', 'vw_campuses'),
-  ('citation', 'vw_workcitations'),
-  ('course', 'vw_courses'),
-  ('degree_type', 'vw_degreetypes'),
-  ('department', 'vw_departments'),
-  ('language', 'vw_languages'),
-  ('narrative_type', 'vw_narrativetypes'),
-  ('strategic_initiative', 'vw_strategicinitiatives'),
-  ('subject', 'vw_subjects'),
-  ('term', 'vw_terms'),
-  ('term_session', 'vw_termsessions'),
-  
-  -- Preferred stuff (from Pro? Shouldn't be here?)
-  -- ('preferred_appointment', ''),
-  -- ('preferred_keyword', ''),
-  -- ('preferred_name', ''),
-  
-  -- Courses
-  ('offering', 'vw_offerings'),
-  ('section', 'vw_sections'),
-  ('section_meeting', 'vw_sectionweeklymtgs'),
-  
-  -- Things that shouldn't be visible
-  -- ('ability', ''),
-  -- ('enrollment', ''), -- course related?
-  -- ('enrollment_role', ''), -- course related?
-  -- ('keyword_search_result', ''),
-  -- ('kmdata_table', ''),
-  -- ('misc_course', ''),
-  -- ('resource', ''),
-  -- ('strategic_initiative', ''),
-  -- ('user', ''),
-  -- ('work', ''),
-  -- ('work_type', ''),
-  
-  -- Groups do not have a base table/view in rails so excluding for now
-  -- ('group', ''),
-  -- ('group_categorization', ''),
-  -- ('group_category', ''),
-  -- ('group_exclusion', ''),
-  -- ('group_membership', ''),
-  -- ('grop_nesting', ''),
-  -- ('group_permission', ''),
-  -- ('group_property', ''),
-  -- ('group_property_value', ''),
-  
-  -- People and people related includes
-  ('person', 'vw_people'),
-  ('address', 'vw_personaddresses'),
-  ('advisee', 'vw_advising'),
-  ('appointment', 'vw_personappointments'),
-  ('artwork', 'vw_artwork'),
-  ('audio_visual_work', 'vw_audiovisual'),
-  ('book', 'vw_book'),
-  ('chapter', 'vw_bookchapter'),
-  ('clinical_service', 'vw_clinicalservice'),
-  ('clinical_trial', 'vw_clinicaltrials'),
-  ('conference', 'vw_conference'),
-  ('degree_certification', 'vw_degreecertification'),
-  ('edited_book', 'vw_editedbook'),
-  ('editorial_activity', 'vw_editorialactivity'),
-  ('email', 'vw_personemails'),
-  ('honor', 'vw_personhonorsawards'),
-  ('identifier', 'vw_personidentifiers'),
-  ('journal_article', 'vw_journal'),
-  ('language_proficiency', 'vw_personlanguages'),
-  ('music', 'vw_music'),
-  ('other_creative_work', 'vw_othercreativework'),
-  ('narrative', 'vw_narratives'),
-  ('patent', 'vw_patent'),
-  ('phone_number', 'vw_personphones'),
-  ('position', 'vw_personpositions'),
-  ('presentation', 'vw_presentation'),
-  ('professional_activity', ''),
-  ('professional_society_membership', ''),
-  ('reference_work', 'vw_referencework'),
-  ('software', 'vw_software'),
-  ('technical_report', 'vw_technicalreport'),
-  ('unpublished_work', 'vw_unpublished')
-  ;
-
- 
--- Let's describe existing view fields without overriding (both entity_field and view_field)
-INSERT INTO ror.entity_field 
-  (entity,         entity_field,      view_field,       classification, sample,       description) VALUES
-  ('person',       'last_name',       'last_name',      'public',       'Booth',              'Last name of individual'),
-  ('person',       'first_name',      'first_name',     'public',       'John',               'First name of individual'),
-  ('person',       'middle_name',     'middle_name',    'public',       'Wilkes',             'Middle name of individual'),
-  ('person',       'name_prefix',     'name_prefix',    'public',       'Mr',                 'Mr, Dr, etc'),
-  ('person',       'name_suffix',     'name_suffix',    'public',       'Jr.',                'Something appended to a name'),
-  ('person',       'display_name',    'display_name',   'public',       'John Wilkes Booth',  'A full name'),
-  ('person',       'deceased_ind',    'deceased_ind',   'public',       '1',                  '1 if the person is deceased according to HR. If someone truly has passed, this is usually only correct if the person died while strongly affiliated.'),
-  ('appointment',  'department_id',   'department_id',  'public',       '14060',              'Department identifier at Ohio State'),
-  ('appointment',  'rcd_num',         'rcd_num',        'public',       '1',                  'The "record number" within HR.  This is the best known sort criteria but does not necessarily yield the order everyone wants.')
-  ;  
--- Let's add an API only field (no view_field)
--- INSERT INTO ror.entity_field 
---  (entity,         entity_field,      classification,   sample,                   override_ordinal_position, override_is_nullable, override_udt_name, override_character_maximum_length, description) VALUES
---  ('person',       'display_name',       'public',         'John Wilkes Booth',      1,                         'YES',                'varchar',         150,                               'Concatenation of first, middle, and last names')
---  ;  
-  
--- Let's remove fields that should be there (no entity_field)
-INSERT INTO ror.entity_field (entity, view_field) VALUES
-  ('person', 'resource_id'),
-  ('address', 'resource_id'),
-  ('advisee', 'resource_id'),
-  ('appointment', 'resource_id'),
-  ('book', 'resource_id'),
-  ('chapter', 'resource_id')
-  ;
-
-  
-------------------------------------
--- End metadata generating doc
-------------------------------------

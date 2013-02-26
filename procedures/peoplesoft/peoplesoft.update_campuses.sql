@@ -13,7 +13,7 @@ DECLARE
    v_ReturnString VARCHAR(4000);
    
    CUR_Campuses CURSOR FOR
-      SELECT campus, descr, descrshort, institution, effdt, src_sys_id, eff_status, "location", facility_conflict
+      SELECT campus, descr, descrshort, institution, effdt, src_sys_id, eff_status, "location", facility_conflict, location
         FROM peoplesoft.ps_campus_tbl;
 BEGIN
    v_CampusesUpdated := 0;
@@ -43,9 +43,9 @@ BEGIN
       IF v_MatchCount = 0 THEN
 
          INSERT INTO kmdata.campuses
-            (id, campus_name, institution_id, location_id, resource_id)
+            (id, campus_name, ps_location_name, institution_id, location_id, campus_code, resource_id)
          VALUES
-            (nextval('kmdata.campuses_id_seq'), currCampus.descr, v_InstitutionID, v_LocationID, kmdata.add_new_resource('peoplesoft', 'campuses'));
+            (nextval('kmdata.campuses_id_seq'), currCampus.descr, currCampus.location, v_InstitutionID, v_LocationID, currCampus.campus, kmdata.add_new_resource('peoplesoft', 'campuses'));
 
          v_CampusesInserted := v_CampusesInserted + 1;
       

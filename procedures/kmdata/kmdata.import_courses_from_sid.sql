@@ -1,68 +1,59 @@
 ﻿CREATE OR REPLACE FUNCTION kmdata.import_courses_from_sid (
 ) RETURNS VARCHAR AS $$
 DECLARE
-   --v_CampusID BIGINT;
 
    v_UpdateCursor CURSOR FOR
-      SELECT DISTINCT c.id, c.subject_id, c.course_number,
-         a.course_title_long AS course_name, a.descr AS course_name_abbrev, 1 AS active, NULL AS description,
-         c.course_name AS curr_course_name, c.course_name_abbrev AS curr_course_name_abbrev, c.active AS curr_active, c.description AS curr_description
+      SELECT c.id,
+         t.course_title_long AS course_name, t.descr AS course_name_abbrev, 1 AS active, t.descrlong AS description,
+         t.crse_repeatable AS repeatable, t.grading_basis, t.units_acad_prog,
+         c.course_name AS curr_course_name, c.course_name_abbrev AS curr_course_name_abbrev, c.active AS curr_active, c.description AS curr_description,
+         c.repeatable AS curr_repeatable, c.grading_basis AS curr_grading_basis, c.units_acad_prog AS curr_units_acad_prog
       FROM kmdata.courses c
-      INNER JOIN kmdata.subjects s ON c.subject_id = s.id
-      INNER JOIN sid.osu_course a ON c.course_number = a.courseNumber AND s.subject_abbrev = a.departmentNumber;
-      --INNER JOIN sid.osu_unit d ON a.id = d.id;
+      INNER JOIN sid.ps_crse_catalog t ON c.ps_course_id = t.crse_id;
    
    v_InsertCursor CURSOR FOR
-      SELECT DISTINCT s.id AS subject_id, chgcrse.course_number, a.course_title_long AS course_name, a.descr AS course_name_abbrev, --e.longTitle AS course_name,
-         1 AS active, NULL AS description
+      SELECT chgcrse.crse_id AS ps_course_id, a.course_title_long AS course_name, a.descr AS course_name_abbrev, 1 AS active, 
+         a.descrlong AS description, a.crse_repeatable AS repeatable, a.grading_basis, a.units_acad_prog
       FROM
       (
-         SELECT ai.departmentNumber AS subject_abbrev, ai.courseNumber AS course_number
-           FROM sid.osu_course ai
+         SELECT t.crse_id
+         FROM sid.ps_crse_catalog t
          EXCEPT
-         SELECT y.subject_abbrev, x.course_number
-           FROM kmdata.courses x
-           INNER JOIN kmdata.subjects y ON x.subject_id = y.id
+         SELECT x.ps_course_id AS crse_id
+         FROM kmdata.courses x
       ) chgcrse
-      INNER JOIN sid.osu_course a ON chgcrse.subject_abbrev = a.departmentNumber AND chgcrse.course_number = a.courseNumber
-      --INNER JOIN sid.matvw_unit_association b ON b.unit_association_type_name = 'Department Courses' AND a.id = b.childunitid
-      --INNER JOIN sid.osu_department c ON b.parentunitid = c.id
-      INNER JOIN kmdata.subjects s ON chgcrse.subject_abbrev = s.subject_abbrev; -- AND c.abbreviation = d.abbreviation AND c.odsDepartmentNumber = d.ods_department_number
-      --INNER JOIN sid.osu_unit e ON a.id = e.id;
+      INNER JOIN sid.ps_crse_catalog a ON chgcrse.crse_id = a.crse_id;
       
    v_CoursesUpdated INTEGER;
    v_CoursesInserted INTEGER;
    v_ReturnString VARCHAR(4000);
    
 BEGIN
-   --SELECT id
-   --INTO v_CampusID
-   --FROM kmdata.campuses
-   --WHERE campus_name = 'Columbus';
 
    v_CoursesUpdated := 0;
    v_CoursesInserted := 0;
    v_ReturnString := '';
    
-   -- Step 1: delete current emails that are no longer here
-   --DELETE FROM kmdata.courses bd
-   --WHERE NOT EXISTS (
-   --   SELECT a.departmentNumber, a.courseNumber, a.yearQuarterCode
-   --   FROM sid.osu_course a
-   --   INNER JOIN kmdata.acad_departments b ON a.departmentNumber = b.abbreviation
-   --   WHERE b.id = bd.acad_department_id
-   --   AND a.courseNumber = bd.course_number
-   --   AND a.yearQuarterCode = bd.year_term_code
-   --);
+   -- Step 1: set inactive current courses that are no longer here
+   UPDATE kmdata.courses co
+   SET active = 0
+   WHERE NOT EXISTS (
+      SELECT pcci.crse_id
+      FROM sid.ps_crse_catalog pcci
+      WHERE pcci.crse_id = co.ps_course_id
+   );
 
    -- Step 2: update
    FOR v_updCourse IN v_UpdateCursor LOOP
 
       -- if this has changed then update
-      IF v_updCourse.active != v_updCourse.active
+      IF COALESCE(CAST(v_updCourse.active AS VARCHAR),'') != COALESCE(CAST(v_updCourse.curr_active AS VARCHAR),'')
          OR COALESCE(v_updCourse.course_name,'') != COALESCE(v_updCourse.curr_course_name,'')
          OR COALESCE(v_updCourse.course_name_abbrev,'') != COALESCE(v_updCourse.curr_course_name_abbrev,'')
          OR COALESCE(v_updCourse.description,'') != COALESCE(v_updCourse.curr_description,'')
+         OR COALESCE(v_updCourse.repeatable,'') != COALESCE(v_updCourse.curr_repeatable,'')
+         OR COALESCE(v_updCourse.grading_basis,'') != COALESCE(v_updCourse.curr_grading_basis,'')
+         OR COALESCE(CAST(v_updCourse.units_acad_prog AS VARCHAR),'') != COALESCE(CAST(v_updCourse.curr_units_acad_prog AS VARCHAR),'')
       THEN
       
          -- update the record
@@ -70,7 +61,10 @@ BEGIN
             SET active = v_updCourse.active,
                 course_name = v_updCourse.course_name,
                 course_name_abbrev = v_updCourse.course_name_abbrev,
-                description = v_updCourse.description
+                description = v_updCourse.description,
+                repeatable = v_updCourse.repeatable,
+                grading_basis = v_updCourse.grading_basis,
+                units_acad_prog = v_updCourse.units_acad_prog
           WHERE id = v_updCourse.id;
 
          v_CoursesUpdated := v_CoursesUpdated + 1;
@@ -84,9 +78,11 @@ BEGIN
       
       -- insert if not already there
       INSERT INTO kmdata.courses (
-	 subject_id, course_number, course_name, course_name_abbrev, active, description, resource_id)
+         ps_course_id, course_name, course_name_abbrev, active, description, 
+         repeatable, grading_basis, units_acad_prog, resource_id)
       VALUES (
-         v_insCourse.subject_id, v_insCourse.course_number, v_insCourse.course_name, v_insCourse.course_name_abbrev, v_insCourse.active, v_insCourse.description, kmdata.add_new_resource('sid', 'courses'));
+         v_insCourse.ps_course_id, v_insCourse.course_name, v_insCourse.course_name_abbrev, v_insCourse.active, v_insCourse.description, 
+         v_insCourse.repeatable, v_insCourse.grading_basis, v_insCourse.units_acad_prog, kmdata.add_new_resource('sid', 'courses'));
 
       v_CoursesInserted := v_CoursesInserted + 1;
 

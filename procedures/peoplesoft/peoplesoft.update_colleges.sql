@@ -4,7 +4,6 @@ DECLARE
    --v_ReturnValue BIGINT;
    v_MatchCount BIGINT;
    v_ResourceID BIGINT;
-   v_CampusID BIGINT;
 
    v_CollegesUpdated INTEGER;
    v_CollegesInserted INTEGER;
@@ -14,7 +13,7 @@ DECLARE
       SELECT institution, acad_group, effdt, eff_status, descr, descrshort, stdnt_spec_perm, auto_enrl_waitlist
         FROM peoplesoft.ps_acad_group_tbl;
 
-   
+   /*
    v_UpdateCursor CURSOR FOR
       SELECT a.institution, a.acad_group, a.effdt,
          a.eff_status, a.descr, a.descrshort, a.stdnt_spec_perm, a.autho_enrl_waitlist,
@@ -34,15 +33,13 @@ DECLARE
            FROM kmdata.acad_departments x
       ) chgdept
       INNER JOIN sid.osu_department a ON chgdept.dept_code = a.fiscalnumber;
+      */
 BEGIN
    --v_ReturnValue := 0;
    v_MatchCount := 0;
    v_CollegesUpdated := 0;
    v_CollegesInserted := 0;
    v_ReturnString := '';
-
-   -- SELECT the campus id
-   SELECT id INTO v_CampusID FROM kmdata.campuses WHERE campus_name = 'Columbus';
 
    -- loop over the departments and insert and update as appropriate
    FOR currCollege IN CUR_Colleges LOOP
@@ -56,9 +53,9 @@ BEGIN
       
          -- insert a new college
          INSERT INTO kmdata.colleges
-            (id, college_name, campus_id, abbreviation, resource_id)
+            (id, acad_group, college_name, abbreviation, resource_id)
          VALUES
-            (nextval('kmdata.colleges_id_seq'), currCollege.descr, v_CampusID, 
+            (nextval('kmdata.colleges_id_seq'), currCollege.acad_group, currCollege.descr,  
             currCollege.descrshort, kmdata.add_new_resource('peoplesoft', 'colleges'));
 
          v_CollegesInserted := v_CollegesInserted + 1;
@@ -67,8 +64,7 @@ BEGIN
       
          -- update the college
          UPDATE kmdata.colleges
-            SET campus_id = v_CampusID,
-                abbreviation = currCollege.descrshort
+            SET abbreviation = currCollege.descrshort
           WHERE college_name = currCollege.descr;
 
          v_CollegesUpdated := v_CollegesUpdated + 1;
