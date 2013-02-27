@@ -11,6 +11,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Software AS
    LEFT JOIN kmdata.dmy_single_dates sd2 ON w.last_update_dmy_single_date_id = sd2.id
    left join kmdata.work_types a on a.id = w.work_type_id
    left join researchinview.riv_software_type_of_work b on b.id = w.sub_work_type_id
-   left join kmdata.narratives c on w.resource_id = c.resource_id
+   LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
+      LEFT JOIN kmdata.narratives c on wn.narrative_id = c.id
          left join researchinview.activity_import_log d on d.resource_id = w.resource_id
   WHERE w.work_type_id = 21;
