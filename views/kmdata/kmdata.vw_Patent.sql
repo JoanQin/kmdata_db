@@ -7,6 +7,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Patent AS
          b.narrative_text, c.is_public, c.is_active
    FROM kmdata.works 
    left join kmdata.work_types a on works.work_type_id = a.id
-   left join kmdata.narratives b on works.resource_id = b.resource_id
+   LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
+      LEFT JOIN kmdata.narratives b on wn.narrative_id = b.id
          left join researchinview.activity_import_log c on c.resource_id = works.resource_id          
   WHERE works.work_type_id = 19 ;
