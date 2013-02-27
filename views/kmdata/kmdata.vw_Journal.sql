@@ -10,7 +10,8 @@ CREATE OR REPLACE VIEW kmdata.vw_Journal AS
            b.narrative_text, c.is_public,  c.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
-   left join kmdata.narratives b on w.resource_id = b.resource_id
+   LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
+      LEFT JOIN kmdata.narratives b on wn.narrative_id = b.id
       left join researchinview.activity_import_log c on c.resource_id = w.resource_id
       left join kmdata.work_types a on a.id = w.work_type_id
       left join researchinview.riv_publication_statuses e on e.id = w.status_id   
