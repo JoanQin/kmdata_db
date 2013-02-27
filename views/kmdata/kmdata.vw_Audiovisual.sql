@@ -3,7 +3,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Audiovisual AS
         w.format, w.artist, w.network, w.percent_authorship, w.role_designator, w.sponsor, 
         w.state, 
         w.broadcast_dmy_single_date_id, sd1.day AS broadcast_day, sd1.month AS broadcast_month, sd1.year AS broadcast_year,
-        w.presentation_dmy_range_date_id, sd2.day AS presentation_day, sd2.month AS presentation_month, sd2.year AS presentation_year,
+        w.presentation_dmy_range_date_id, sd2.start_day, sd2.start_month, sd2.start_year, sd2.end_day, sd2.end_month, sd2.end_year,
         w.title, w.url, 
         w.created_at, w.updated_at, w.work_type_id,
 	           a.work_type_name,
@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Audiovisual AS
             b.narrative_text, c.is_public, c.is_active
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.broadcast_dmy_single_date_id = sd1.id
-   LEFT JOIN kmdata.dmy_single_dates sd2 ON w.presentation_dmy_range_date_id = sd2.id
+   LEFT JOIN kmdata.dmy_range_dates sd2 ON w.presentation_dmy_range_date_id = sd2.id
    LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
       LEFT JOIN kmdata.narratives b on wn.narrative_id = b.id
          left join researchinview.activity_import_log c on c.resource_id = w.resource_id
