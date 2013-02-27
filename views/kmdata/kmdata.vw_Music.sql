@@ -11,6 +11,7 @@ w.performance_end_date, COALESCE(w.extended_author_list, w.artist) AS extended_a
    left join researchinview.riv_music_roles a on a.id = cast(w.role_designator as int)
    left join researchinview.riv_music_work_types b on b.id = w.sub_work_type_id
    left join kmdata.work_types c on c.id = w.work_type_id
-  left join kmdata.narratives d on w.resource_id = d.resource_id
+   LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
+      LEFT JOIN kmdata.narratives d on wn.narrative_id = d.id
          left join researchinview.activity_import_log e on e.resource_id = w.resource_id
   WHERE w.work_type_id = 17;
