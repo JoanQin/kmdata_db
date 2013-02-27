@@ -12,6 +12,7 @@ rd.end_year AS presentation_end_year, w.created_at, w.updated_at, w.work_type_id
    LEFT JOIN kmdata.dmy_range_dates rd ON w.presentation_dmy_range_date_id = rd.id
    left join researchinview.riv_forthcoming a on a.id = w.forthcoming_id
    left join kmdata.work_types b on b.id = w.work_type_id
-   left join kmdata.narratives d on w.resource_id = d.resource_id
+   LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
+      LEFT JOIN kmdata.narratives d on wn.narrative_id = d.id
          left join researchinview.activity_import_log c on c.resource_id = w.resource_id
   WHERE w.work_type_id = 23;
