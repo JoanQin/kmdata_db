@@ -1,4 +1,5 @@
-﻿CREATE OR REPLACE FUNCTION researchinview.insert_baradmission (
+
+CREATE OR REPLACE FUNCTION researchinview.insert_baradmission (
    p_IntegrationActivityId VARCHAR(2000),
    p_IntegrationUserId VARCHAR(2000),
    p_IsPublic INTEGER,
@@ -20,6 +21,7 @@ DECLARE
    v_UserID BIGINT;
    v_BarAdmissionsMatchCount BIGINT;
    v_State VARCHAR(2000);
+   v_BarAdmissionDateID bigint;
 BEGIN
    -- maps to Papers in Proceedings
    
@@ -76,7 +78,7 @@ BEGIN
    ELSE
    
       -- get the work id
-      SELECT id INTO v_BarID
+      SELECT id, admitted_on_dmy_single_date_id INTO v_BarID, v_BarAdmissionDateID
         FROM kmdata.bar_admission
        WHERE resource_id = v_ResourceID;
 
@@ -87,9 +89,26 @@ BEGIN
 	     country = p_Country,
 	     state = v_State,
 	     updated_at = current_timestamp
-       WHERE id = v_BarID;    
-      
+       WHERE id = v_BarID; 
+       
+       IF v_BarAdmissionDateID IS NULL THEN
+       		v_BarAdmissionDateID := kmdata.add_dmy_single_date(NULL, researchinview.get_month(p_AdmittedOn), researchinview.get_year(p_AdmittedOn));
+       		
+       		UPDATE kmdata.bar_admission
+       			set admitted_on_dmy_single_date_id = v_BarAdmissionDateID
+       		where id = v_BarID;
+       	END IF;
+       	
+       	UPDATE kmdata.dmy_single_dates
+       		set "day" = null,
+       		    "month" = researchinview.get_month(p_AdmittedOn), 
+       		    "year" = researchinview.get_year(p_AdmittedOn)
+        where id = v_BarAdmissionDateID;
+       
+       
    END IF;
+   
+   
    
    RETURN v_BarID;
 END;
