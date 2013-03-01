@@ -16,4 +16,4 @@ SELECT a.id, a.resource_id, a.user_id, a.monetary_amount, a.fellow_ind, d.name a
   left join researchinview.riv_award_reach g on g.id = cast(a.reach_of_award as int)
   left join researchinview.riv_cip_lookup h on h.value = a.subject
   left JOIN kmdata.institutions ins ON a.institution_id = ins.id
-  left join kmdata.honor_types k on k.id = a.honor_type_id
+  left join kmdata.honor_types k on k.id = a.honor_type_id;
