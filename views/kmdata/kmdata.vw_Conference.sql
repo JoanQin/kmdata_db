@@ -8,7 +8,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Conference AS
 	           w.is_review,  
 	          e.name as publication_status, w.number_of_citations,	          
 	          g.name as publication_document_type,  h.name as book_type,
-            b.narrative_text, c.is_public, c.is_active
+            b.narrative_text, c.is_public, c.is_active, j.name as is_reveiew_val
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
@@ -19,4 +19,5 @@ CREATE OR REPLACE VIEW kmdata.vw_Conference AS
       left join researchinview.riv_review_types f on f.id = w.review_type_id
       left join researchinview.riv_publication_document_types g on g.id = w.publication_media_type_id
    left join researchinview.riv_book_types h on h.id = w.publication_type_id
+   left join researchinview.riv_yes_no j on cast(w.is_review as int) = j.value
   WHERE w.work_type_id = 13;
