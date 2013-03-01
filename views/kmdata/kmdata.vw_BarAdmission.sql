@@ -5,4 +5,4 @@ a.admitted_on_dmy_single_date_id, b.month, b.year, a.country, a.state, a.created
 al.is_public, al.is_active
    FROM kmdata.bar_admission a
    left join researchinview.activity_import_log al on al.resource_id = a.resource_id
-   left join kmdata.dmy_single_dates b on a.admitted_on_dmy_single_date_id = b.id
+   left join kmdata.dmy_single_dates b on a.admitted_on_dmy_single_date_id = b.id;
