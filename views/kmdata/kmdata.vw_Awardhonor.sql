@@ -5,8 +5,9 @@ SELECT a.id, a.resource_id, a.user_id, a.monetary_amount, a.fellow_ind, d.name a
             a.selected, e.name as selection_process,
           a.start_year, a.currency, a.eligibility_other, a.reach_of_award, g.name as award_reach, a.selection_process_other,
           a.end_year, a.type_of_award, b.name as awardType, a.type_of_award_other, a.url,
-          a.created_at, a.updated_at
+          a.created_at, a.updated_at, al.is_public, al.is_active
    FROM kmdata.user_honors_awards a
+   left join researchinview.activity_import_log al on al.resource_id = adv.resource_id
    left join researchinview.riv_award_types b on cast(a.type_of_award as int) = b.id
    left join researchinview.riv_yes_no c on a.monetary_component_ind = c.value
   left join researchinview.riv_yes_no d on a.fellow_ind = d.value
