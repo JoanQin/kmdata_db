@@ -9,4 +9,4 @@ SELECT a.id, a.user_id, a.institution_id, ins.name as institution_name, a.resour
    left join researchinview.activity_import_log al on a.resource_id = al.resource_id
   left join researchinview.riv_yes_no c on cast(a.active as int) = c.value
   left JOIN kmdata.institutions ins ON a.institution_id = ins.id
-   where al.riv_activity_name = 'Certification'
+   where al.riv_activity_name = 'Certification';
