@@ -7,7 +7,7 @@ CREATE OR REPLACE VIEW kmdata.vw_Journal AS
          g.name as journal_article_type_name,  	          
 	         w.is_review,
 	         f.name as review_type_name,  e.name as publication_status,   a.work_type_name,	         
-           b.narrative_text, c.is_public,  c.is_active
+           b.narrative_text, c.is_public,  c.is_active, k.name as is_review_val
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
@@ -17,4 +17,5 @@ CREATE OR REPLACE VIEW kmdata.vw_Journal AS
       left join researchinview.riv_publication_statuses e on e.id = w.status_id   
       left join researchinview.riv_review_types f on f.id = w.review_type_id
    left join researchinview.riv_journal_article_types g on g.id = w.journal_article_type_id
+   left join researchinview.riv_yes_no k on k.value = cast(w.is_review as int)
   WHERE w.work_type_id = 4;
