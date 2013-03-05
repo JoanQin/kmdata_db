@@ -1,5 +1,4 @@
-CREATE OR REPLACE VIEW kmdata.vw_Software AS 
- 
+CREATE OR REPLACE VIEW kmdata.vw_Software AS  
  SELECT w.id, w.resource_id, w.user_id, w.author_list, w.sponsor, w.percent_authorship, w.publisher, w.role_designator, w.title, w.medium, w.url, w.edition, 
  w.publication_dmy_single_date_id, sd1.day AS publication_day, sd1.month AS publication_month, sd1.year AS publication_year, 
  w.last_update_dmy_single_date_id, sd2.day AS last_update_day, sd2.month AS last_update_month, sd2.year AS last_update_year, 
