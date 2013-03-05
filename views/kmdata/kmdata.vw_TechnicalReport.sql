@@ -5,7 +5,7 @@ CREATE OR REPLACE VIEW kmdata.vw_TechnicalReport AS
 	            w.publication_type_id, d.name as technical_report_type, w.report_number,
 	           f.name as review_type,  e.name as status_type,    a.work_type_name,
 	               w.is_review,
-           b.narrative_text, c.is_public, c.is_active
+           b.narrative_text, c.is_public, c.is_active, yn.name as is_review_val
    FROM kmdata.works w
    LEFT JOIN kmdata.dmy_single_dates sd1 ON w.publication_dmy_single_date_id = sd1.id
    LEFT JOIN kmdata.work_narratives wn ON w.id = wn.work_id
@@ -15,4 +15,5 @@ CREATE OR REPLACE VIEW kmdata.vw_TechnicalReport AS
       left join researchinview.activity_import_log c on c.resource_id = w.resource_id
    left join researchinview.riv_review_types f on f.id = w.review_type_id
       left join kmdata.work_types a on a.id = w.work_type_id
+      left join researchinview.riv_yes_no yn on yn.value = cast(w.is_review as int)
   WHERE w.work_type_id = 7;
