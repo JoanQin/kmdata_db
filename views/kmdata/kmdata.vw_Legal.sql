@@ -1,4 +1,4 @@
-create or replay view vw_legal as 
+create or replace view vw_legal as 
 SELECT w.id, w.resource_id, w.user_id, w.enacted, c.name as enacted_val, w.enacted_on_dmy_single_date_id, 
 	sd1.month as enacted_month, sd1.year as enacted_year,
 	w.issuing_organization, w.legal_number, w.percent_authorship, w.role_id, e.name as role_val, w.role_designator, w.sponsor,
