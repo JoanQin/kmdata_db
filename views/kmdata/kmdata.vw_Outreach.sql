@@ -5,8 +5,9 @@ SELECT a.id, a.resource_id, a.academic_calendar, b.name as calendar_val, a.acade
 	 f.name as initiative_val, a.people_served, a.ongoing, c.name as ongoing_val, a.organization_id,
 	a.percent_effort, a.outreach_start_year, a.outreach_start_month, a.success, a.other_audience, d.name as audience_val, 
 	a.timeframes_offered, e.name as offered_val, a.timeframes_offered_other, a.total_hours, a.created_at, a.updated_at, 
-	al.is_public, al.is_active
-   FROM kmdata.outreach a   
+	al.is_public, al.is_active, ur.user_id
+   FROM kmdata.outreach a  
+      left join kmdata.outreach_users ur on a.id = ur.outreach_id 
    left join researchinview.activity_import_log al on al.resource_id = a.resource_id   
    left join researchinview.riv_academic_calendar_types b on b.id = cast(a.academic_calendar as int)    
    left join researchinview.riv_yes_no c on c.value = cast(a.ongoing as int)
