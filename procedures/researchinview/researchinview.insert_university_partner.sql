@@ -70,6 +70,9 @@ BEGIN
    
       -- insert activity information
       v_UniversityPartnerID := nextval('kmdata.university_partner_id_seq');
+      	   IF v_PartnerUserID IS NULL THEN
+	      v_PartnerUserID := v_UniversityPartnerID;
+	   END IF; 
    
       INSERT INTO kmdata.university_partner
          (id, resource_id, user_id, partner_user_id, description_of_role, created_at, updated_at)
