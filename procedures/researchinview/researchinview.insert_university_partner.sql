@@ -1,4 +1,4 @@
-﻿-- Function: researchinview.insert_university_partner(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer)
+-- Function: researchinview.insert_university_partner(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer)
 
 -- DROP FUNCTION researchinview.insert_university_partner(character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer);
 
@@ -23,6 +23,7 @@ DECLARE
    v_UniversityPartnerID BIGINT;
    v_UserID BIGINT;
    v_UniversityPartnerMatchCount BIGINT;
+   v_PartnerUserID BIGINT;
 BEGIN
    -- maps to Papers in Proceedings
    
@@ -33,7 +34,7 @@ BEGIN
     WHERE emplid = p_IntegrationUserId;
 
 
-    SELECT user_id INTO v_UniversityPartnerID
+    SELECT user_id INTO v_PartnerUserID
       FROM kmdata.user_identifiers
     WHERE emplid = p_PartnerIntegrationUserId;
    
@@ -73,7 +74,7 @@ BEGIN
       INSERT INTO kmdata.university_partner
          (id, resource_id, user_id, partner_user_id, description_of_role, created_at, updated_at)
       VALUES
-         (v_UniversityPartnerID, v_ResourceID, v_UserID, v_UniversityPartnerID, p_DescriptionOfRole, current_timestamp, current_timestamp);
+         (v_UniversityPartnerID, v_ResourceID, v_UserID, v_PartnerUserID, p_DescriptionOfRole, current_timestamp, current_timestamp);
    
    ELSE
    
@@ -84,7 +85,7 @@ BEGIN
 
       -- update the works table
       UPDATE kmdata.university_partner
-         SET partner_user_id = v_UniversityPartnerID,
+         SET partner_user_id = v_PartnerUserID,
 	     description_of_role = p_DescriptionOfRole,
 	     updated_at = current_timestamp
        WHERE id = v_UniversityPartnerID;    
