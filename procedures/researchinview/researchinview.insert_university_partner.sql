@@ -42,6 +42,9 @@ BEGIN
       RETURN 0;
    END IF;
    
+   IF v_PartnerUserID IS NULL THEN
+      RETURN 0;
+   END IF; 
    -- insert activity information
    v_ActivityID := researchinview.insert_activity('UniversityPartner', p_IntegrationActivityId, p_IntegrationUserId, p_IsPublic, p_ExtendedAttribute1,
 	p_ExtendedAttribute2, p_ExtendedAttribute3, p_ExtendedAttribute4, p_ExtendedAttribute5);
@@ -70,9 +73,7 @@ BEGIN
    
       -- insert activity information
       v_UniversityPartnerID := nextval('kmdata.university_partner_id_seq');
-      	   IF v_PartnerUserID IS NULL THEN
-	      v_PartnerUserID := v_UniversityPartnerID;
-	   END IF; 
+      	   
    
       INSERT INTO kmdata.university_partner
          (id, resource_id, user_id, partner_user_id, description_of_role, created_at, updated_at)
