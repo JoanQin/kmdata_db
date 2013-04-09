@@ -147,6 +147,7 @@ BEGIN
              beginning_page = v_StartPage, 
              ending_page = v_EndPage, 
              percent_authorship = p_PercentAuthorship, 
+             publication_title = p_PublicationTitle,
              publisher = p_Publisher,
              is_review = p_Reviewed,
              status_id = CAST(p_Status AS INTEGER), 
